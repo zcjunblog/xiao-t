@@ -13,7 +13,7 @@ module.exports = {
   },
   DllFolder: '',
   HotUpdateFolder: 'update',
-  UseStartupChart: true,
-  IsUseSysTitle: false,
+  UseStartupChart: false, // 启动动画
+  IsUseSysTitle: false, // 使用系统顶部栏
   BuiltInServerPort: 25565
 }

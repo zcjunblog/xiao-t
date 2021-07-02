@@ -11,7 +11,7 @@
     height: 40px;
     position: sticky;
     top: 0;
-    background-color: #FFFFFF;
+    background-color: #E7EAED;
 }
 </style>
 
@@ -20,7 +20,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
     setup() {
-        
+
     },
 })
 </script>

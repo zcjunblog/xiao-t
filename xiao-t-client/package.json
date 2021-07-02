@@ -69,7 +69,8 @@
     "extract-zip": "^2.0.1",
     "fs-extra": "^10.0.0",
     "jwt-decode": "^2.2.0",
-    "v-viewer": "^3.0.9"
+    "v-viewer": "^3.0.9",
+    "wired-elements": "^3.0.0-rc.6"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.2",

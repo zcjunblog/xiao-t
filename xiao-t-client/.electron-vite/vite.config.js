@@ -31,7 +31,13 @@ const config = defineConfig({
         port: Number(process.env.PORT),
     },
     plugins: [
-        vuePlugin()
+        vuePlugin({
+            template:{
+                compilerOptions:{
+                    isCustomElement: tag => tag.startsWith('wired-')
+                }
+            }
+        })
     ],
     optimizeDeps: {
     },

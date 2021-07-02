@@ -32,9 +32,10 @@ class MainInit {
   // 主窗口函数
   createMainWindow() {
     this.mainWindow = new BrowserWindow({
-      height: 60,
+      height: 600,
+      resizable : false,
       useContentSize: true,
-      width: 800,
+      width: 1000,
       frame: config.IsUseSysTitle,
       title: '小T',
       webPreferences: {
