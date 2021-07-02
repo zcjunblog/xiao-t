@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/views/home/components/count-paid.vue",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1625209034404,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1625209034404,
+            "name": "Commit-0",
+            "content": "<template>\n\t<div class=\"count-paid\">\n\t\t<div class=\"card\">\n\t\t\t<div class=\"card__header\">\n\t\t\t\t<span class=\"label\">支付笔数</span>\n\t\t\t\t<span class=\"value\">6560</span>\n\t\t\t</div>\n\n\t\t\t<div class=\"card__container\">\n\t\t\t\t<v-chart :option=\"chartOption\" autoresize />\n\t\t\t</div>\n\n\t\t\t<div class=\"card__footer\">\n\t\t\t\t<span class=\"label\">转化率</span>\n\t\t\t\t<span class=\"value\">60%</span>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</template>\n\n<script lang=\"ts\">\nimport { defineComponent, reactive } from \"vue\";\n\nexport default defineComponent({\n\tsetup() {\n\t\tconst chartOption = reactive({\n\t\t\tgrid: {\n\t\t\t\tleft: \"10%\",\n\t\t\t\ttop: 0,\n\t\t\t\tright: \"10%\",\n\t\t\t\tbottom: 0\n\t\t\t},\n\t\t\txAxis: {\n\t\t\t\ttype: \"category\",\n\t\t\t\tdata: [\"00:00\", \"2:00\", \"4:00\", \"6:00\", \"8:00\", \"10:00\", \"12:00\", \"14:00\"],\n\t\t\t\tboundaryGap: false\n\t\t\t},\n\t\t\tyAxis: {\n\t\t\t\ttype: \"value\",\n\t\t\t\tsplitLine: {\n\t\t\t\t\tshow: false\n\t\t\t\t},\n\t\t\t\taxisTick: {\n\t\t\t\t\tshow: false\n\t\t\t\t},\n\t\t\t\taxisLine: {\n\t\t\t\t\tshow: false\n\t\t\t\t},\n\t\t\t\taxisLabel: {\n\t\t\t\t\tshow: false\n\t\t\t\t}\n\t\t\t},\n\t\t\tseries: [\n\t\t\t\t{\n\t\t\t\t\tbarWidth: 18,\n\t\t\t\t\tname: \"付款笔数\",\n\t\t\t\t\ttype: \"bar\",\n\t\t\t\t\tdata: [81, 24, 77, 13, 87, 92, 68, 55],\n\t\t\t\t\titemStyle: {\n\t\t\t\t\t\tnormal: {\n\t\t\t\t\t\t\tcolor: \"#8595F4\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\ttype: \"bar\",\n\t\t\t\t\tbarWidth: 18,\n\t\t\t\t\txAxisIndex: 0,\n\t\t\t\t\tbarGap: \"-100%\",\n\t\t\t\t\tdata: [100, 100, 100, 100, 100, 100, 100, 100],\n\t\t\t\t\titemStyle: {\n\t\t\t\t\t\tnormal: {\n\t\t\t\t\t\t\tcolor: \"#f1f1f9\"\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\tzlevel: -1\n\t\t\t\t}\n\t\t\t]\n\t\t});\n\n\t\treturn {\n\t\t\tchartOption\n\t\t};\n\t}\n});\n</script>\n\n<style lang=\"scss\" scoped>\n.count-paid {\n\t.card {\n\t\t.echarts {\n\t\t\theight: 50px;\n\t\t\twidth: 100%;\n\t\t}\n\n\t\t&__container {\n\t\t\tpadding: 0;\n\t\t}\n\t}\n}\n</style>\n"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/cool/modules/demo/components/demo/b-v-copy.vue",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1625209916631,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1625209932650,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n \t\t\t复制到剪贴板\n \t\t</div>\n \n \t\t<div class=\"c\">\n-\t\t\t<el-button v-copy=\"'https://XIAO-T/'\" size=\"small\"> XIAO-T </el-button>\n+\t\t\t<el-button v-copy=\"'XIAO-T'\" size=\"small\"> XIAO-T </el-button>\n \t\t</div>\n \n \t\t<div class=\"f\">\n \t\t\t<span class=\"date\">2019/09/25</span>\n"
+                }
+            ],
+            "date": 1625209916631,
+            "name": "Commit-0",
+            "content": "<template>\n\t<div class=\"scope\">\n\t\t<div class=\"h\">\n\t\t\t<span>v-copy</span>\n\t\t\t复制到剪贴板\n\t\t</div>\n\n\t\t<div class=\"c\">\n\t\t\t<el-button v-copy=\"'https://XIAO-T/'\" size=\"small\"> XIAO-T </el-button>\n\t\t</div>\n\n\t\t<div class=\"f\">\n\t\t\t<span class=\"date\">2019/09/25</span>\n\t\t</div>\n\t</div>\n</template>\n"
+        }
+    ]
+}

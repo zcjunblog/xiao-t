@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/config/config.local.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1625204984815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1625204984815,
+            "name": "Commit-0",
+            "content": "import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';\n\nexport type DefaultConfig = PowerPartial<EggAppConfig>;\n\nexport default (appInfo: EggAppInfo) => {\n  const config = {} as DefaultConfig;\n\n  config.orm = {\n    type: 'mysql',\n    host: '127.0.0.1',\n    port: 3306,\n    username: 'xiao_t',\n    password: 'vvv1700',\n    database: 'xiao_t',\n    // 自动建表 注意：线上部署的时候不要使用，有可能导致数据丢失\n    synchronize: true,\n    // 打印日志\n    logging: true,\n    // 字符集\n    charset: 'utf8mb4',\n  };\n\n  config.logger = {\n    coreLogger: {\n      consoleLevel: 'INFO',\n    },\n  };\n\n  return config;\n};\n"
+        }
+    ]
+}

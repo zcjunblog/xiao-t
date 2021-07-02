@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/main.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1625209844548,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1625209844548,
+            "name": "Commit-0",
+            "content": "import { createApp } from \"vue\";\nimport App from \"./App.vue\";\n\n// cool\nimport { bootstrap } from \"./core\";\n\n// router\nimport router from \"./router\";\n\n// store\nimport store from \"./store\";\n\nimport \"./mock\";\n\n// element-plus\nimport ElementPlus from \"element-plus\";\nimport \"./assets/css/element-variables.scss\";\nimport locale from \"element-plus/lib/locale/lang/zh-cn\";\n\n// mitt\nimport mitt from \"mitt\";\n\n// echarts\nimport VueECharts from \"vue-echarts\";\n\nconst app = createApp(App);\n\nbootstrap(app)\n\t.then(() => {\n\t\t// // echarts 可视图表\n\t\tapp.component(\"v-chart\", VueECharts);\n\n\t\t// // 事件通讯\n\t\tapp.provide(\"mitt\", mitt());\n\n\t\tapp.use(store).use(router).use(ElementPlus, { locale }).mount(\"#app\");\n\t})\n\t.catch((err: string) => {\n\t\tconsole.error(`XIAO-T 启动失败`, err);\n\t});\n\nstore.dispatch(\"appLoad\");\n\n// @ts-ignore\nwindow.__app__ = app;\n"
+        }
+    ]
+}

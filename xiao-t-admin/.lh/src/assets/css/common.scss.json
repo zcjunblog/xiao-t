@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/assets/css/common.scss",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1625207496413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1625207978528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-$primary: #232a42;\n+$primary: #4165d7;\n \n $color-primary: var(--color-primary, $primary);\n $color-success: #67c23a;\n $color-danger: #f56c6c;\n"
+                },
+                {
+                    "date": 1625209008007,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-$primary: #4165d7;\n+$primary: #8595F4;\n \n $color-primary: var(--color-primary, $primary);\n $color-success: #67c23a;\n $color-danger: #f56c6c;\n"
+                }
+            ],
+            "date": 1625207496413,
+            "name": "Commit-0",
+            "content": "$primary: #232a42;\n\n$color-primary: var(--color-primary, $primary);\n$color-success: #67c23a;\n$color-danger: #f56c6c;\n$color-info: #909399;\n$color-warning: #e6a23c;\n\n:export {\n\tcolorPrimary: $primary;\n\tcolorSuccess: $color-success;\n\tcolorDanger: $color-danger;\n\tcolorInfo: $color-info;\n\tcolorWarning: $color-warning;\n}\n"
+        }
+    ]
+}

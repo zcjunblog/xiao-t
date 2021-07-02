@@ -1,0 +1,22 @@
+{
+    "sourceFile": "vite.config.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1625206627673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1625206691730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,15 +35,15 @@\n \t\t\t},\n \t\t\tproxy: {\n \t\t\t\t\"/dev\": {\n \t\t\t\t\ttarget: \"http://127.0.0.1:8001\",\n-\t\t\t\t\tchangeOrigin: false,\n+\t\t\t\t\tchangeOrigin: true,\n \t\t\t\t\trewrite: (path) => path.replace(/^\\/dev/, \"\")\n \t\t\t\t},\n \n \t\t\t\t\"/pro\": {\n \t\t\t\t\ttarget: \"https://show.cool-admin.com\",\n-\t\t\t\t\tchangeOrigin: false,\n+\t\t\t\t\tchangeOrigin: true,\n \t\t\t\t\trewrite: (path) => path.replace(/^\\/pro/, \"/api\")\n \t\t\t\t}\n \t\t\t}\n \t\t},\n"
+                }
+            ],
+            "date": 1625206627673,
+            "name": "Commit-0",
+            "content": "import path from \"path\";\nimport type { UserConfig } from \"vite\";\nimport vue from \"@vitejs/plugin-vue\";\nimport vueJsx from \"@vitejs/plugin-vue-jsx\";\nimport { svgBuilder } from \"./src/core/utils/svg\";\n\nfunction resolve(dir: string) {\n\treturn path.resolve(__dirname, \".\", dir);\n}\n\n// https://vitejs.dev/config/\n\nexport default (): UserConfig => {\n\treturn {\n\t\tbase: \"/\",\n\t\tplugins: [vue(), vueJsx(), svgBuilder(\"./src/icons/svg/\")],\n\t\tresolve: {\n\t\t\talias: {\n\t\t\t\t\"/@\": resolve(\"src\"),\n\t\t\t\t\"/#\": resolve(\"types\"),\n\t\t\t\t\"/$\": resolve(\"src/cool/modules\")\n\t\t\t}\n\t\t},\n\t\tcss: {\n\t\t\tpreprocessorOptions: {\n\t\t\t\tscss: {\n\t\t\t\t\tadditionalData: \"@import './src/assets/css/common.scss';\"\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tserver: {\n\t\t\tport: 9000,\n\t\t\thmr: {\n\t\t\t\toverlay: true\n\t\t\t},\n\t\t\tproxy: {\n\t\t\t\t\"/dev\": {\n\t\t\t\t\ttarget: \"http://127.0.0.1:8001\",\n\t\t\t\t\tchangeOrigin: false,\n\t\t\t\t\trewrite: (path) => path.replace(/^\\/dev/, \"\")\n\t\t\t\t},\n\n\t\t\t\t\"/pro\": {\n\t\t\t\t\ttarget: \"https://show.cool-admin.com\",\n\t\t\t\t\tchangeOrigin: false,\n\t\t\t\t\trewrite: (path) => path.replace(/^\\/pro/, \"/api\")\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tbuild: {\n\t\t\tsourcemap: false,\n\t\t\tpolyfillDynamicImport: false // 必须为false\n\t\t},\n\t\toptimizeDeps: {\n\t\t\texclude: [\"vue-demi\"]\n\t\t}\n\t};\n};\n"
+        }
+    ]
+}

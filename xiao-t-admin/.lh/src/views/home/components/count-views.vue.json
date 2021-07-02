@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/views/home/components/count-views.vue",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1625209034432,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1625209034432,
+            "name": "Commit-0",
+            "content": "<template>\n\t<div class=\"count-views\">\n\t\t<div class=\"card\">\n\t\t\t<div class=\"card__header\">\n\t\t\t\t<span class=\"label\">总访问量</span>\n\t\t\t\t<span class=\"value\">8846</span>\n\t\t\t</div>\n\n\t\t\t<div class=\"card__container\">\n\t\t\t\t<v-chart :option=\"chartOption\" autoresize />\n\t\t\t</div>\n\n\t\t\t<div class=\"card__footer\">\n\t\t\t\t<span class=\"label\">日访问量</span>\n\t\t\t\t<span class=\"value\">1351</span>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</template>\n\n<script lang=\"ts\">\nimport { defineComponent, reactive } from \"vue\";\nimport * as echarts from \"echarts\";\n\nexport default defineComponent({\n\tsetup() {\n\t\tconst chartOption = reactive({\n\t\t\tgrid: {\n\t\t\t\tleft: 0,\n\t\t\t\ttop: 0,\n\t\t\t\tright: 0,\n\t\t\t\tbottom: 0\n\t\t\t},\n\t\t\txAxis: {\n\t\t\t\ttype: \"category\",\n\t\t\t\tdata: [\n\t\t\t\t\t\"00:00\",\n\t\t\t\t\t\"2:00\",\n\t\t\t\t\t\"4:00\",\n\t\t\t\t\t\"6:00\",\n\t\t\t\t\t\"8:00\",\n\t\t\t\t\t\"10:00\",\n\t\t\t\t\t\"12:00\",\n\t\t\t\t\t\"14:00\",\n\t\t\t\t\t\"16:00\",\n\t\t\t\t\t\"18:00\",\n\t\t\t\t\t\"20:00\",\n\t\t\t\t\t\"22:00\"\n\t\t\t\t],\n\t\t\t\tboundaryGap: false\n\t\t\t},\n\t\t\tyAxis: {\n\t\t\t\ttype: \"value\",\n\t\t\t\tsplitLine: {\n\t\t\t\t\tshow: false\n\t\t\t\t},\n\t\t\t\taxisTick: {\n\t\t\t\t\tshow: false\n\t\t\t\t},\n\t\t\t\taxisLine: {\n\t\t\t\t\tshow: false\n\t\t\t\t},\n\t\t\t\taxisLabel: {\n\t\t\t\t\tshow: false\n\t\t\t\t}\n\t\t\t},\n\t\t\tseries: [\n\t\t\t\t{\n\t\t\t\t\tname: \"总访问量\",\n\t\t\t\t\ttype: \"line\",\n\t\t\t\t\tsmooth: true,\n\t\t\t\t\tshowSymbol: false,\n\t\t\t\t\tsymbol: \"circle\",\n\t\t\t\t\tsymbolSize: 6,\n\t\t\t\t\tdata: [\n\t\t\t\t\t\t\"1200\",\n\t\t\t\t\t\t\"1400\",\n\t\t\t\t\t\t\"1008\",\n\t\t\t\t\t\t\"1411\",\n\t\t\t\t\t\t\"1026\",\n\t\t\t\t\t\t\"1288\",\n\t\t\t\t\t\t\"1300\",\n\t\t\t\t\t\t\"800\",\n\t\t\t\t\t\t\"1100\",\n\t\t\t\t\t\t\"1000\",\n\t\t\t\t\t\t\"1118\",\n\t\t\t\t\t\t\"1322\"\n\t\t\t\t\t],\n\t\t\t\t\tareaStyle: {\n\t\t\t\t\t\tnormal: {\n\t\t\t\t\t\t\tcolor: new echarts.graphic.LinearGradient(\n\t\t\t\t\t\t\t\t0,\n\t\t\t\t\t\t\t\t0,\n\t\t\t\t\t\t\t\t0,\n\t\t\t\t\t\t\t\t1,\n\t\t\t\t\t\t\t\t[\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\toffset: 0,\n\t\t\t\t\t\t\t\t\t\tcolor: \"#D1E5FF\"\n\t\t\t\t\t\t\t\t\t},\n\t\t\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t\t\toffset: 1,\n\t\t\t\t\t\t\t\t\t\tcolor: \"#FFFFFF\"\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t],\n\t\t\t\t\t\t\t\tfalse\n\t\t\t\t\t\t\t)\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\titemStyle: {\n\t\t\t\t\t\tnormal: {\n\t\t\t\t\t\t\tcolor: \"#8595F4\"\n\t\t\t\t\t\t}\n\t\t\t\t\t},\n\t\t\t\t\tlineStyle: {\n\t\t\t\t\t\tnormal: {\n\t\t\t\t\t\t\twidth: 2\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t});\n\n\t\treturn { chartOption };\n\t}\n});\n</script>\n\n<style lang=\"scss\" scoped>\n.count-views {\n\t.card {\n\t\t.echarts {\n\t\t\theight: 50px;\n\t\t\twidth: 100%;\n\t\t}\n\n\t\t&__container {\n\t\t\tpadding: 0;\n\t\t}\n\n\t\t&__footer {\n\t\t\tborder-top: 0;\n\t\t}\n\t}\n}\n</style>\n"
+        }
+    ]
+}

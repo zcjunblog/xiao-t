@@ -1,0 +1,22 @@
+{
+    "sourceFile": "index.html",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1625209818395,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1625210288780,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n \t\t\t\tdisplay: flex;\n \t\t\t\tflex-direction: column;\n \t\t\t\theight: 100%;\n \t\t\t\tletter-spacing: 1px;\n-\t\t\t\tbackground-color: #2f3447;\n+\t\t\t\tbackground-color: #0f111c;\n \t\t\t}\n \n \t\t\t.preload .container {\n \t\t\t\tdisplay: flex;\n"
+                }
+            ],
+            "date": 1625209818395,
+            "name": "Commit-0",
+            "content": "<!DOCTYPE html>\n<html lang=\"en\">\n\t<head>\n\t\t<meta charset=\"utf-8\" />\n\t\t<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n\t\t<meta name=\"referer\" content=\"never\" />\n\t\t<meta name=\"renderer\" content=\"webkit\" />\n\t\t<meta\n\t\t\tname=\"viewport\"\n\t\t\tcontent=\"width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0\"\n\t\t/>\n\t\t<title>XIAO-T</title>\n\t\t<link rel=\"icon\" href=\"favicon.ico\" />\n\t\t<style>\n\t\t\thtml,\n\t\t\tbody,\n\t\t\t#app {\n\t\t\t\theight: 100%;\n\t\t\t\tmargin: 0;\n\t\t\t\tpadding: 0;\n\t\t\t}\n\n\t\t\t.preload {\n\t\t\t\tdisplay: flex;\n\t\t\t\tflex-direction: column;\n\t\t\t\theight: 100%;\n\t\t\t\tletter-spacing: 1px;\n\t\t\t\tbackground-color: #2f3447;\n\t\t\t}\n\n\t\t\t.preload .container {\n\t\t\t\tdisplay: flex;\n\t\t\t\tjustify-content: center;\n\t\t\t\talign-items: center;\n\t\t\t\tflex-direction: column;\n\t\t\t\twidth: 100%;\n\t\t\t\tuser-select: none;\n\t\t\t\tflex-grow: 1;\n\t\t\t}\n\n\t\t\t.preload .name {\n\t\t\t\tfont-size: 30px;\n\t\t\t\tcolor: #fff;\n\t\t\t\tletter-spacing: 5px;\n\t\t\t\tfont-weight: bold;\n\t\t\t}\n\n\t\t\t.preload .title {\n\t\t\t\tcolor: #fff;\n\t\t\t\tfont-size: 14px;\n\t\t\t\tmargin-bottom: 10px;\n\t\t\t}\n\n\t\t\t.preload .sub-title {\n\t\t\t\tcolor: #ababab;\n\t\t\t\tfont-size: 12px;\n\t\t\t}\n\n\t\t\t.preload .footer {\n\t\t\t\ttext-align: center;\n\t\t\t\tpadding: 10px 0 20px 0;\n\t\t\t}\n\n\t\t\t.preload .footer a {\n\t\t\t\tfont-size: 12px;\n\t\t\t\tcolor: #ababab;\n\t\t\t\ttext-decoration: none;\n\t\t\t}\n\t\t</style>\n\t</head>\n\t<body>\n\t\t<div id=\"app\">\n\t\t\t<div class=\"preload\">\n\t\t\t\t<div class=\"container\">\n\t\t\t\t\t<p class=\"name\">XIAO-T</p>\n\t\t\t\t\t<p class=\"title\">正在加载资源...</p>\n\t\t\t\t\t<p class=\"sub-title\">初次加载资源可能需要较多时间 请耐心等待</p>\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"footer\">\n\t\t\t\t\t<!-- <a href=\"\" target=\"_blank\">  </a> -->\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<script type=\"module\" src=\"/src/main.ts\"></script>\n\t</body>\n</html>\n"
+        }
+    ]
+}
