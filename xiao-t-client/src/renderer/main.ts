@@ -10,13 +10,13 @@ import App from './App.vue'
 import router from './router'
 import { errorHandler } from './error'
 import store from './store'
-import installMaxerStore, {Maxer} from './store/maxer.mixin'
+import installMaxVueStore from './store/maxVuex.mixin'
 import initStorePersistence from './store/store.persistence'
 
 import TitleBar from "./components/common/TitleBar.vue"
 
 const app = createApp(App)
-installMaxerStore(app) // 全局混入vuex
+installMaxVueStore(app) // 全局混入vuex
 initStorePersistence(store) // 初始化持久化vuex
 app.use(ElementPlus)
 app.use(router)

@@ -1,4 +1,4 @@
-import {Maxer} from "@renderer/store/maxer.mixin";
+import {MaxVuex} from "@renderer/store/maxVuex.mixin";
 
 /**
  * @Created By zhaozc
@@ -8,6 +8,6 @@ import {Maxer} from "@renderer/store/maxer.mixin";
 // 声明全局组件 防止需要this调用时不能识别类型
 declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
-        $m: Maxer;  // 声明全局方法
+        $m: MaxVuex;  // 声明全局方法
     }
 }

@@ -1,7 +1,7 @@
 /**
  * @创建: zhaozc
  * @时间: 2021/5/27
- * @说明: vuex数据持久化，防止F5之后数据消失
+ * @说明: vuex数据持久化
  */
 import {Store} from "vuex";
 

@@ -16,4 +16,15 @@ export default defineComponent({
 </script>
 
 <style>
+  @font-face {
+    font-family: 'iconfont';
+    src: url('//at.alicdn.com/t/font_2651202_acxwi86oxq9.ttf') format('truetype');
+  }
+  .iconfont {
+    font-family: "iconfont" !important;
+    font-size: 24px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 </style>

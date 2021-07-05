@@ -1,8 +1,9 @@
 <template>
     <div>
-        <TitleBar>项目模板</TitleBar>
+        <TitleBar>
+            项目模板
+        </TitleBar>
         <div class="main">
-            15112
             <wired-input placeholder="Enter name"></wired-input>
             <wired-button>Click Me</wired-button>
         </div>
@@ -12,19 +13,40 @@
 
 <script lang="ts">
     import "wired-elements";
-    import { defineComponent } from 'vue'
+    import { defineComponent, getCurrentInstance, toRefs, reactive, onMounted} from 'vue'
+    import { useStore } from 'vuex'
     export default defineComponent({
-        components:{
-        },
-        data: () => ({
+        setup() {
+            const { proxy }: any = getCurrentInstance()
+            const { $m } = getCurrentInstance().appContext.config.globalProperties
+            const store = useStore()
+            const state: any = reactive({
+                name: 'joker',
+                test: {
+                    param: {
+                        pageNum: 1,
+                        pageSize: 10,
+                    },
+                },
+            });
+            // 初始化表格数据
+            const test = () => {
+                console.log(state.name)
+                testFun(state.test)
+            };
+            // 测试函数
+            const testFun = (obj: object) => {
+                console.log(obj);
+            };
 
-        }),
-        created() {
-        },
-        mounted() {
-        },
-        methods: {
-
+            // 页面加载时
+            onMounted(() => {
+                test();
+            });
+            return {
+                testFun,
+                ...toRefs(state),
+            };
         },
     });
 </script>

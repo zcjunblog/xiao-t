@@ -5,6 +5,7 @@ import DownloadUpdate from './downloadFile'
 import Update from './checkupdate';
 import { app, BrowserWindow, Menu, Tray, dialog } from 'electron'
 import { winURL, loadingURL, logoURL } from '../config/StaticPath'
+const path = require("path")
 
 class MainInit {
 
@@ -39,6 +40,7 @@ class MainInit {
       frame: config.IsUseSysTitle,
       title: '小T',
       webPreferences: {
+        contextIsolation: false, // 关闭上下文隔离 开启后渲染进程无法访问electron实例
         enableRemoteModule: true, // 让 renderer 进程使用 remote 模块
         webviewTag: true,// 允许使用 webview 标签
         nodeIntegration: true,// 允许在网页中使用 node
@@ -49,6 +51,21 @@ class MainInit {
         scrollBounce: process.platform === 'darwin'
       }
     })
+
+    // 配置开机自启
+    if(process.env.NODE_ENV === 'production'){
+      const exeName = path.basename(process.execPath)
+
+      app.setLoginItemSettings({
+        openAtLogin: true,
+        openAsHidden:false,
+        path: process.execPath,
+        args: [
+          '--processStart', `"${exeName}"`,
+        ]
+      })
+    }
+
     // 赋予模板
     const menu = Menu.buildFromTemplate(menuconfig as any)
     // 加载模板
@@ -185,7 +202,7 @@ class MainInit {
       }
     }])
     // 设置托盘悬浮提示
-    this.appTray.setToolTip('I‘m 易齿君');
+    this.appTray.setToolTip('I‘m 小T');
     // 设置托盘菜单
     this.appTray.setContextMenu(contextMenu);
     // 单击托盘小图标显示应用
@@ -233,7 +250,6 @@ class MainInit {
       skipTaskbar: true,
       transparent: true,
       resizable: false,
-      webPreferences: { experimentalFeatures: true }
     })
 
     this.loadWindow.loadURL(loadingURL)
