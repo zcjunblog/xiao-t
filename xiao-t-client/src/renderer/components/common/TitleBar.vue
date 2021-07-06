@@ -5,9 +5,15 @@
             <div class="text"><slot></slot></div>
             <div class="options">
                 <div class="option" @click="optionsClickHandle('setting')"><span class="icon iconfont" style="font-size: 18px">&#xe6f4;</span></div>
-                <div class="option" @click="optionsClickHandle('zIndex')"><span class="icon iconfont">&#xe61a;</span></div>
+                <div class="option" @click="optionsClickHandle('zIndex')">
+                    <span class="icon iconfont" v-if="vuex_atTheTop">&#xe60f;</span>
+                    <span class="icon iconfont" v-else>&#xe61a;</span>
+                </div>
                 <div class="option" @click="optionsClickHandle('minimize')"><span class="icon iconfont">&#xe67c;</span></div>
-                <div class="option" @click="optionsClickHandle('maximize')"><span class="icon iconfont" style="font-size: 12px">&#xe64c;</span></div>
+                <div class="option" @click="optionsClickHandle('maximize')">
+                    <span class="icon iconfont" v-if="vuex_maximize" style="font-size: 12px">&#xe677;</span>
+                    <span class="icon iconfont" v-else style="font-size: 12px">&#xe64c;</span>
+                </div>
                 <div class="option" @click="optionsClickHandle('close')"><span class="icon iconfont" style="font-size: 14px">&#xe600;</span></div>
             </div>
         </div>
@@ -15,17 +21,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs, reactive} from 'vue'
+import { defineComponent,getCurrentInstance, toRefs, reactive, onMounted} from 'vue'
+import { useStore } from 'vuex'
 const {Menu,app} = require('electron').remote;
+const { ipcRenderer } = require("electron");
+
 export default defineComponent({
     setup() {
+        const { $m } = getCurrentInstance().appContext.config.globalProperties
+        const store = useStore()
         const state: any = reactive({
 
         });
         // 右上角功能菜单
         const optionsClickHandle = (key: string) => {
             console.log(key);
-            key === 'setting' && settingHandle()
+            key === 'setting' && settingHandle() // 弹出设置项菜单
+            if (key === 'zIndex'){ // 置顶
+                ipcRenderer.send("zIndexMessage",!store.state.vuex_atTheTop);
+            }
+            if (key === 'minimize'){ // 最小化
+                ipcRenderer.send("minimizeMessage");
+            }
+            if (key === 'maximize'){ // 最大化以及退出最大化
+                ipcRenderer.send("maximizeMessage",store.state.vuex_maximize);
+            }
+            if (key === 'close'){ // 最大化以及退出最大化
+                ipcRenderer.send("closeMessage");
+            }
         };
         const settingHandle = () =>{
             let menu = Menu.buildFromTemplate([
@@ -44,12 +67,23 @@ export default defineComponent({
                         console.log(!app.isPackaged);
                     }
                 },
-                // {type:'separator'},
-                {label:'快捷呼出',type:'checkbox',checked:true, accelerator: 'F2',},
+                {label:'快捷唤醒',type:'checkbox',checked:true, accelerator: 'F2'},
+                {label:'测试菜单',type:'checkbox'},
+                {type:'separator'},
+                {label:'测试菜单',type:'checkbox'},
+                {label:'测试菜单',type:'checkbox'},
             ]);
             // //此时窗口的菜单也会变成菜单项的内容
             menu.popup({x:760,y:40});
         }
+        onMounted(()=>{
+            ipcRenderer.on('receiveZIndexMessage', (event, atTheTop)=>{
+                $m.vuex('vuex_atTheTop',atTheTop)
+            })
+            ipcRenderer.on('receiveMaximizeMessageMessage', (event, maximize)=>{
+                $m.vuex('vuex_maximize',maximize)
+            })
+        })
         return {
             optionsClickHandle,
             ...toRefs(state),

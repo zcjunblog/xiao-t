@@ -8,7 +8,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-
 export default defineComponent({
   name: "App",
   components: {}
@@ -18,7 +17,7 @@ export default defineComponent({
 <style>
   @font-face {
     font-family: 'iconfont';
-    src: url('//at.alicdn.com/t/font_2651202_acxwi86oxq9.ttf') format('truetype');
+    src: url('//at.alicdn.com/t/font_2651202_a63whw0glce.ttf') format('truetype');
   }
   .iconfont {
     font-family: "iconfont" !important;

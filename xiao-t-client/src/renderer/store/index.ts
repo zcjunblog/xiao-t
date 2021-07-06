@@ -11,6 +11,8 @@ export default createStore({
         vuex_token: '',
         vuex_menuIndex: '0',
         vuex_version: '',
+        vuex_atTheTop: false, // 是否置顶
+        vuex_maximize: false, // 是否最大化
     },
     mutations: {
         $clearUserData(state: any){ // 清除用户登录态

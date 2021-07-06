@@ -1,50 +1,62 @@
 <template>
-    <div>
+    <div class="home">
         <TitleBar>
             项目模板
         </TitleBar>
         <div class="main">
-            <wired-input placeholder="Enter name"></wired-input>
-            <wired-button>Click Me</wired-button>
+            <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+                <el-tab-pane name="first">
+                    <template #label>
+                        <span><span class="icon iconfont">&#xe617;</span> 创建项目</span>
+                    </template>
+                    <cli-template-clone></cli-template-clone>
+                </el-tab-pane>
+                <el-tab-pane name="second">
+                    <template #label>
+                        <span><span class="icon iconfont">&#xe695;</span> 工具中心</span>
+                    </template>
+                </el-tab-pane>
+                <el-tab-pane name="third">
+                    <template #label>
+                        <span><span class="icon iconfont">&#xe694;</span> 模板仓库</span>
+                    </template>
+                </el-tab-pane>
+                <el-tab-pane name="fourth">
+                    <template #label>
+                        <span><span class="icon iconfont" style="font-size: 18px">&#xe615;</span> 代码生成器</span>
+                    </template>
+                    <code-generator></code-generator>
+                </el-tab-pane>
+            </el-tabs>
         </div>
     </div>
-
 </template>
 
 <script lang="ts">
-    import "wired-elements";
+
     import { defineComponent, getCurrentInstance, toRefs, reactive, onMounted} from 'vue'
     import { useStore } from 'vuex'
+    import cliTemplateClone from './cli-template-clone/cli-template-clone.vue'
     export default defineComponent({
+        components:{
+            cliTemplateClone
+        },
         setup() {
-            const { proxy }: any = getCurrentInstance()
             const { $m } = getCurrentInstance().appContext.config.globalProperties
             const store = useStore()
             const state: any = reactive({
-                name: 'joker',
-                test: {
-                    param: {
-                        pageNum: 1,
-                        pageSize: 10,
-                    },
-                },
+                activeName: 'first'
             });
-            // 初始化表格数据
-            const test = () => {
-                console.log(state.name)
-                testFun(state.test)
-            };
-            // 测试函数
-            const testFun = (obj: object) => {
-                console.log(obj);
+            const handleClick = (tab, event) => {
+                console.log(tab, event);
             };
 
             // 页面加载时
             onMounted(() => {
-                test();
+
             });
             return {
-                testFun,
+                handleClick,
                 ...toRefs(state),
             };
         },
@@ -53,15 +65,35 @@
 
 <style scoped lang="scss">
     .home {
+        height: 100%;
         overflow: hidden auto;
-
-        .card {
-            background-color: #fff;
-            border-radius: 5px;
-            margin-bottom: 15px;
-
-            &--last {
-                margin-bottom: 0;
+        ::v-deep(.el-tabs__item.is-top:nth-child(2)){
+            padding-left: 20px!important;
+        }
+        ::v-deep(.el-tabs--card .el-tabs__header .el-tabs__item){
+            padding: 0 15px!important;
+        }
+        ::v-deep(.el-tabs__header){
+            margin-bottom: 0!important;
+        }
+        ::v-deep(.el-tabs--card .el-tabs__header .el-tabs__item),
+        ::v-deep(.el-tabs--card .el-tabs__header),
+        ::v-deep(.el-tabs--card .el-tabs__header .el-tabs__nav){
+            border: none;
+        }
+        ::v-deep(.el-tabs--card .el-tabs__header .el-tabs__item.is-active){
+            border-bottom: 2px solid #6C9FE2;
+        }
+        ::v-deep(.el-tabs),::v-deep(.el-tab-pane),::v-deep(.el-container){
+            height: 100%;
+        }
+        ::v-deep(.el-tabs__content){
+            height: calc(100% - 40px);
+        }
+        .main{
+            height: calc(100% - 40px);
+            .iconfont{
+                font-size: 16px;
             }
         }
     }

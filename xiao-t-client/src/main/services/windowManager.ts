@@ -3,7 +3,7 @@ import config from '@config/index'
 import menuconfig from '../config/menu'
 import DownloadUpdate from './downloadFile'
 import Update from './checkupdate';
-import { app, BrowserWindow, Menu, Tray, dialog } from 'electron'
+import { app, globalShortcut, BrowserWindow, Menu, Tray, dialog, ipcMain } from 'electron'
 import { winURL, loadingURL, logoURL } from '../config/StaticPath'
 const path = require("path")
 
@@ -51,7 +51,6 @@ class MainInit {
         scrollBounce: process.platform === 'darwin'
       }
     })
-
     // 配置开机自启
     if(process.env.NODE_ENV === 'production'){
       const exeName = path.basename(process.execPath)
@@ -209,8 +208,6 @@ class MainInit {
     this.appTray.on('click', ()=>{
       // 显示主程序
       this.mainWindow.show();
-      // 关闭托盘显示
-      // this.appTray.destroy();
     });
 
     const gotTheLock = app.requestSingleInstanceLock()
@@ -239,6 +236,26 @@ class MainInit {
     this.mainWindow.on('closed', () => {
       this.mainWindow = null
     })
+
+    // 进程通信部分
+    ipcMain.on("zIndexMessage", (event, atTheTop) => {
+      this.mainWindow.setAlwaysOnTop(atTheTop)
+      this.mainWindow.webContents.send("receiveZIndexMessage", atTheTop);
+    });
+    ipcMain.on("minimizeMessage", () => {
+      this.mainWindow.minimize()
+    });
+    ipcMain.on("closeMessage", () => {
+      this.mainWindow.close()
+    });
+    ipcMain.on("maximizeMessage", (event, isMaximize) => {
+      if (isMaximize){
+        this.mainWindow.unmaximize()
+      }else {
+        this.mainWindow.maximize()
+      }
+      this.mainWindow.webContents.send("receiveMaximizeMessageMessage", !isMaximize);
+    });
   }
 
   // 加载窗口函数
