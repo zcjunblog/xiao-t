@@ -35,6 +35,13 @@ const config = defineConfig({
     ],
     optimizeDeps: {
     },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: "@import 'src/renderer/styles/mixin.scss';"
+            }
+        }
+    },
     publicDir: resolve('static')
 })
 

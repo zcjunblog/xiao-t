@@ -25,7 +25,7 @@
                     <template #label>
                         <span><span class="icon iconfont" style="font-size: 18px">&#xe615;</span> 代码生成器</span>
                     </template>
-                    <code-generator></code-generator>
+                    <!--<code-generator></code-generator>-->
                 </el-tab-pane>
             </el-tabs>
         </div>

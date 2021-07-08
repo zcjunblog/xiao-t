@@ -1,5 +1,6 @@
 @import './transition.scss';
 @import "./theme.scss";
+@import "./mixin";
 
 html, body, #app { width: 100%; height: 100%; }
 
@@ -26,6 +27,7 @@ html {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  user-select:none;
 }
 
 div:focus {
