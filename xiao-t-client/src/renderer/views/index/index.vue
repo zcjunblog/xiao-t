@@ -20,12 +20,13 @@
                     <template #label>
                         <span><span class="icon iconfont">&#xe694;</span> 模板仓库</span>
                     </template>
+                    <templateLibrary></templateLibrary>
                 </el-tab-pane>
                 <el-tab-pane name="fourth">
                     <template #label>
-                        <span><span class="icon iconfont" style="font-size: 18px">&#xe615;</span> 代码生成器</span>
+                        <span><span class="icon iconfont" style="font-size: 18px">&#xe615;</span> 表单生成器</span>
                     </template>
-                    <!--<code-generator></code-generator>-->
+                    <form-generator></form-generator>
                 </el-tab-pane>
             </el-tabs>
         </div>
@@ -37,9 +38,15 @@
     import { defineComponent, getCurrentInstance, toRefs, reactive, onMounted} from 'vue'
     import { useStore } from 'vuex'
     import cliTemplateClone from './cli-template-clone/cli-template-clone.vue'
+    import templateLibrary from './template-library/template-library.vue'
+    import toolCenter from './tool-center/tool-center.vue'
+    import formGenerator from './form-generator/form-generator.vue'
     export default defineComponent({
         components:{
-            cliTemplateClone
+            toolCenter,
+            formGenerator,
+            cliTemplateClone,
+            templateLibrary
         },
         setup() {
             const { $m } = getCurrentInstance().appContext.config.globalProperties
@@ -48,7 +55,7 @@
                 activeName: 'first'
             });
             const handleClick = (tab, event) => {
-                console.log(tab, event);
+                // console.log(tab, event);
             };
 
             // 页面加载时

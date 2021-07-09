@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        code-generator
+        <!--TODO: 目前这个项目不支持vue3 这里应该本地嵌入一个 离线也能使用-->
+        <iframe src="https://mrhj.gitee.io/form-generator/" frameborder="0" height="100%" width="100%"></iframe>
     </div>
 </template>
 
@@ -41,5 +42,7 @@
 </script>
 
 <style scoped lang="scss">
-
+    .container{
+        height: 100%;
+    }
 </style>
