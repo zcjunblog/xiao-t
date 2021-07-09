@@ -3,9 +3,8 @@
  * @date 2021/7/7
  * @Description:
  */
-// const download = require("download-git-repo");
-// console.log(download)
+const download = require('git-repo-down-for-vite')
 // git克隆
 export function gitClone(remote: string, name: string, option: object): Promise<boolean> {
-    // return new Promise((resolve, reject) => download(remote, name, option, (err: Error) => (err ? reject(err) : resolve(true))));
+    return new Promise((resolve, reject) => download(remote, name, option, (err: Error) => (err ? reject(err) : resolve(true))));
 }

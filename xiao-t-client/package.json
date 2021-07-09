@@ -68,6 +68,7 @@
     "express": "^4.17.1",
     "extract-zip": "^2.0.1",
     "fs-extra": "^10.0.0",
+    "git-repo-down-for-vite": "^1.0.3",
     "jwt-decode": "^2.2.0",
     "v-viewer": "^3.0.9"
   },
