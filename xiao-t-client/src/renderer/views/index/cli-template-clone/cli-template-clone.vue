@@ -2,8 +2,7 @@
     <div class="container"
          :element-loading-text="loadingTips"
          element-loading-spinner="el-icon-loading"
-         element-loading-background="#6C9FE2"
-         v-loading="loading"
+         v-loading.fullscreen.lock="loading"
     >
         <el-container>
             <el-aside width="160px" style="background-color: #F8FAFC">
@@ -58,8 +57,8 @@
 <script lang="ts">
     const fs = require('fs');
     const path = require('path');
-    import { ElMessage, ElMessageBox } from 'element-plus'
-    const { remote,shell } = require('electron')
+    const {remote, shell} = require('electron')
+    import {ElMessage, ElMessageBox} from 'element-plus'
     import {toRefs, reactive, computed, ref, onMounted} from 'vue';
     import empty from "@renderer/assets/empty.png";
     import {gitClone} from "@renderer/utils";
@@ -159,7 +158,6 @@
             // 提交下载表单
             const formRef = ref<null | HTMLElement>(null);
             const handleSubmit = () => {
-
                 formRef.value.validate(async (valid) => {
                     if (!valid) return
                     const data = Object.assign({},state.model)
@@ -170,6 +168,7 @@
                         let remote = state.curItemProject.remote
                         console.log(`${remote.host}:${remote.userName}/${remote.repo}#${remote.branch}`, projectPath, { clone: true })
                         await gitClone(`${remote.host}:${remote.userName}/${remote.repo}#${remote.branch}`, projectPath, { clone: true }).catch(err=>{
+                            console.log(err)
                             ElMessage.error('模板下载失败');
                         });
                     } catch (error) {
@@ -185,6 +184,7 @@
                     state.loadingTips = '';
                     state.loading = false;
                     state.downloadDialogShow = false;
+                    state.model.name = ''
                     ElMessageBox.alert('模板已下载，是否打开？', '提示', {
                         confirmButtonText: '确定',
                         callback: () => {
