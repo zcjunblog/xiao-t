@@ -61,10 +61,7 @@
     import {ElMessage, ElMessageBox} from 'element-plus'
     import {toRefs, reactive, computed, ref, onMounted} from 'vue';
     import empty from "@renderer/assets/empty.png";
-    import {gitClone} from "@renderer/utils";
-
-
-
+    import {gitClone, openBrowser} from "@renderer/utils";
 
     export default {
         setup: function () {
@@ -143,11 +140,6 @@
                 if (state.activeKey === 'all') return state.cliTemps
                 return state.cliTemps.filter(el => el.type === state.activeKey)
             })
-
-            // 浏览器打开源码仓库
-            const openBrowser = (url: string) => {
-                shell.openExternal(url);
-            };
 
             // 弹出下载框
             const handleDownload = (item: object) => {

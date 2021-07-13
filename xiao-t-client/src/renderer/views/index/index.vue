@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <TitleBar>
-            项目模板
+            XIAO-T
         </TitleBar>
         <div class="main">
             <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
@@ -15,6 +15,7 @@
                     <template #label>
                         <span><span class="icon iconfont">&#xe695;</span> 工具中心</span>
                     </template>
+                    <tool-center></tool-center>
                 </el-tab-pane>
                 <el-tab-pane name="third">
                     <template #label>
@@ -24,9 +25,10 @@
                 </el-tab-pane>
                 <el-tab-pane name="fourth">
                     <template #label>
-                        <span><span class="icon iconfont" style="font-size: 18px">&#xe615;</span> 表单生成器</span>
+                        <span><span class="icon iconfont" style="font-size: 18px">&#xe615;</span> 开发者</span>
                     </template>
-                    <form-generator></form-generator>
+                    <developer-panel></developer-panel>
+                    <!--<form-generator></form-generator>-->
                 </el-tab-pane>
             </el-tabs>
         </div>
@@ -41,12 +43,14 @@
     import templateLibrary from './template-library/template-library.vue'
     import toolCenter from './tool-center/tool-center.vue'
     import formGenerator from './form-generator/form-generator.vue'
+    import developerPanel from './developer-panel/developer-panel.vue'
     export default defineComponent({
         components:{
             toolCenter,
             formGenerator,
             cliTemplateClone,
-            templateLibrary
+            templateLibrary,
+            developerPanel
         },
         setup() {
             const { $m } = getCurrentInstance().appContext.config.globalProperties

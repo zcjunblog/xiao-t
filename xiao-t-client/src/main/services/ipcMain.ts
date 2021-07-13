@@ -68,19 +68,20 @@ export default {
     })
     ipcMain.handle('open-win', (event, arg) => {
       const ChildWin = new BrowserWindow({
-        height: 1200,
+        height: 600,
+        // resizable : false,
         useContentSize: true,
-        width: 842,
-        autoHideMenuBar: true,
-        minWidth: 842,
-        show: false,
+        width: 1000,
+        frame: config.IsUseSysTitle,
+        title: '小T',
         webPreferences: {
-          nodeIntegration: true,
-          contextIsolation: false,
-          webSecurity: false,
+          contextIsolation: false, // 关闭上下文隔离 开启后渲染进程无法访问electron实例
+          enableRemoteModule: true, // 让 renderer 进程使用 remote 模块
+          webviewTag: true,// 允许使用 webview 标签
+          nodeIntegration: true,// 允许在网页中使用 node
+          webSecurity: false, // 发起了一些跨域请求，webSecurity 可以设置成 false
           // 如果是开发模式可以使用devTools
-          devTools: process.env.NODE_ENV === 'development' ? true : !config.build.DisableF12,
-          // devTools: true,
+          devTools: process.env.NODE_ENV === 'development' ? true : !config.build.DisableF12, // 跟随禁用f12的配置
           // 在macos中启用橡皮动画
           scrollBounce: process.platform === 'darwin'
         }

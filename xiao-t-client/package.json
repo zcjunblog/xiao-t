@@ -25,8 +25,8 @@
         "url": "http://127.0.0.1"
       }
     ],
-    "productName": "electron-vite-template",
-    "appId": "org.sky.electron-vite-template",
+    "productName": "xiao-t",
+    "appId": "org.duotai.xiao-t",
     "directories": {
       "output": "build"
     },
@@ -62,15 +62,13 @@
   },
   "dependencies": {
     "axios": "0.18.1",
-    "echarts": "4.9.0",
     "electron-log": "^4.3.5",
     "electron-updater": "^4.3.9",
     "express": "^4.17.1",
     "extract-zip": "^2.0.1",
     "fs-extra": "^10.0.0",
     "git-repo-down-for-vite": "^1.0.3",
-    "jwt-decode": "^2.2.0",
-    "v-viewer": "^3.0.9"
+    "marked": "^2.1.3"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.2",
@@ -78,8 +76,7 @@
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
     "@types/fs-extra": "^9.0.11",
-    "@types/echarts": "0.0.12",
-    "@types/jwt-decode": "^2.2.0",
+    "@types/marked": "^2.0.4",
     "@types/node": "^15.0.3",
     "@vitejs/plugin-vue": "^1.2.2",
     "@vue/compiler-sfc": "^3.0.11",

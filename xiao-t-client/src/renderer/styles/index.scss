@@ -69,3 +69,35 @@ a:hover {
 .app-container {
   padding: 20px;
 }
+.markdown-body{
+  img{
+    width: 100%;
+  }
+  h1,h2,h3,h4,h5,h6{
+    color: #272727;
+    padding: 20px 0;
+  }
+  p{
+    font-size: 14px;
+    color: #555454;
+    padding: 5px 0;
+  }
+  a{
+    text-decoration: underline;
+    color: #409EFF;
+  }
+  code{
+    font-size: 14px;
+    background: #F7F7F7;
+    padding: 4px;
+  }
+  ul{
+    padding-left: 40px;
+    padding-bottom: 10px;
+    color: #555454;
+    font-size: 14px;
+  }
+  strong{
+    font-weight: bold;
+  }
+}

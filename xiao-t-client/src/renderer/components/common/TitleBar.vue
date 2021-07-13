@@ -1,5 +1,5 @@
 <template>
-    <div class="sky_titleBar">
+    <div class="titleBar" :class="{'cant-drag':vuex_maximize}">
         <div class="bar-main">
             <div class="logo"><img class="img" src="../../assets/logo.png" alt=""></div>
             <div class="text"><slot></slot></div>
@@ -35,7 +35,6 @@ export default defineComponent({
         });
         // 右上角功能菜单
         const optionsClickHandle = (key: string) => {
-            console.log(key);
             key === 'setting' && settingHandle() // 弹出设置项菜单
             if (key === 'zIndex'){ // 置顶
                 ipcRenderer.send("zIndexMessage",!store.state.vuex_atTheTop);
@@ -68,13 +67,18 @@ export default defineComponent({
                     }
                 },
                 {label:'快捷唤醒',type:'checkbox',checked:true, accelerator: 'F2'},
-                {label:'测试菜单',type:'checkbox'},
+                {label:'插件目录',click : ()=>{
+                        // 判断用户是否已选择插件目录
+                    }},
                 {type:'separator'},
-                {label:'测试菜单',type:'checkbox'},
-                {label:'测试菜单',type:'checkbox'},
+                {label:'调试模式', type:'checkbox'},
+                {label:'快速重启', accelerator: 'F5', role: 'reload'},
+                {label:'新窗口打开插件',type:'checkbox',checked:store.state.vuex_openInNewWin, click : ()=>{
+                        $m.vuex('vuex_openInNewWin',!store.state.vuex_openInNewWin)
+                    }},
             ]);
-            // //此时窗口的菜单也会变成菜单项的内容
-            menu.popup({x:760,y:40});
+            //此时窗口的菜单也会变成菜单项的内容
+            menu.popup();
         }
         onMounted(()=>{
             ipcRenderer.on('receiveZIndexMessage', (event, atTheTop)=>{
@@ -93,7 +97,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-    .sky_titleBar {
+    .titleBar {
         width: 100%;
         height: 40px;
         position: sticky;
@@ -150,6 +154,9 @@ export default defineComponent({
                 }
             }
         }
+    }
+    .cant-drag{
+        -webkit-app-region: no-drag!important;
     }
 </style>
 <style>
