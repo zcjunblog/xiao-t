@@ -24,7 +24,7 @@
 import { defineComponent,getCurrentInstance, toRefs, reactive, onMounted} from 'vue'
 import { useStore } from 'vuex'
 const {Menu,app} = require('electron').remote;
-const { ipcRenderer } = require("electron");
+const { ipcRenderer, remote } = require("electron");
 
 export default defineComponent({
     setup() {
@@ -67,15 +67,45 @@ export default defineComponent({
                     }
                 },
                 {label:'快捷唤醒',type:'checkbox',checked:true, accelerator: 'F2'},
-                {label:'插件目录',click : ()=>{
-                        // 判断用户是否已选择插件目录
-                    }},
-                {type:'separator'},
-                {label:'调试模式', type:'checkbox'},
-                {label:'快速重启', accelerator: 'F5', role: 'reload'},
                 {label:'新窗口打开插件',type:'checkbox',checked:store.state.vuex_openInNewWin, click : ()=>{
                         $m.vuex('vuex_openInNewWin',!store.state.vuex_openInNewWin)
                     }},
+                {type:'separator'},
+                {label:'调试窗口', type:'checkbox'},
+                {label:'快速重启', accelerator: 'F5', role: 'reload'},
+                {label:'插件目录',click : ()=>{
+                        // 判断用户是否已选择插件目录
+                        if (store.state.vuex_pluginDir){
+                            // 直接打开
+                            remote.dialog
+                                .showOpenDialog({
+                                    title: '更改插件目录',
+                                    defaultPath: store.state.vuex_pluginDir,
+                                    // filters:(),
+                                    properties: ['openDirectory', 'createDirectory']
+                                })
+                                .then(({filePaths}) => {
+                                    console.log('filePaths',filePaths)
+                                    if (filePaths[0]) {
+
+                                    }
+                                });
+                        }else {
+                            // 让用户选择
+                            remote.dialog
+                                .showOpenDialog({
+                                    title: '选择插件目录',
+                                    properties: ['openDirectory', 'createDirectory']
+                                })
+                                .then(({filePaths}) => {
+                                    console.log('filePaths',filePaths)
+                                    if (filePaths[0]) {
+
+                                    }
+                                });
+                        }
+                    }},
+
             ]);
             //此时窗口的菜单也会变成菜单项的内容
             menu.popup();

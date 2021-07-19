@@ -1,6 +1,6 @@
 interface ImportMeta {
     env: Record<string, unknown>;
-    glob<T = unknown>(globPath: string): Record<string, T>;
+    globEager<T = unknown>(globPath: string): Record<string, T>;
 }
 
 interface memoryInfo {
@@ -12,5 +12,7 @@ interface memoryInfo {
 interface Window {
     performance: {
         memory: memoryInfo
-    }
+    },
+    __lib: string;
+    __static: string;
 }

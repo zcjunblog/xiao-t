@@ -154,9 +154,12 @@
             const showPluginDetail = (e) => {
                 if (state.activeKey === 'my'){
                     if (store.state.vuex_openInNewWin){
-                        ipcRenderer.invoke("open-win", {url: '/plugin', query: {info: JSON.stringify(e)}});
+                        ipcRenderer.invoke("open-win", {url: '/plugin',sendData: {info: JSON.stringify(e)}});
                     }else {
-                        router.push('/plugin/?info=' + JSON.stringify(e))
+                        router.push({
+                            path: '/plugin',
+                            query: {info: JSON.stringify(e)}
+                        })
                     }
                     return
                 }

@@ -23,6 +23,7 @@ if (location.href.indexOf('targetFile') > -1) {
 } else {
     filePath = location.pathname.replace('file://', '');
 }
+filePath = filePath.substr(1)
 const {ipcRenderer, nativeImage, clipboard, remote} = require('electron');
 
 const currentWindow = remote.getCurrentWindow();
@@ -45,7 +46,7 @@ function convertImgToBase64(url, callback, outputFormat){
     img.src = url;
 }
 
-window.utools = window.rubick = {
+window.utools = window.xiao_t = {
     // 事件
     onPluginEnter(cb) {
         ipcRenderer.once('onPluginEnter', (e, message) => {
@@ -118,7 +119,7 @@ window.utools = window.rubick = {
     },
 
     showNotification(body, clickFeatureCode) {
-        const myNotification = new Notification('Rubick 通知', {
+        const myNotification = new Notification('小T 提示', {
             body
         });
         return myNotification;

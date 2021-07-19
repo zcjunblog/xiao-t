@@ -15,7 +15,8 @@ const config = defineConfig({
     root,
     define:{
         'process.env': process.env.NODE_ENV === 'production' ? userConfig.build.env : userConfig.dev.env,
-        'process.env.IS_WEB': IsWeb
+        'process.env.IS_WEB': IsWeb,
+        '__static': process.env.NODE_ENV === 'production' ? `'${resolve('static').replace(/\\/g, '\\\\')}'` : `'http://localhost:${userConfig.dev.port}/static'`,
     },
     resolve: {
         alias: {
@@ -31,7 +32,13 @@ const config = defineConfig({
         port: Number(process.env.PORT),
     },
     plugins: [
-        vuePlugin()
+        vuePlugin({
+            template:{
+                compilerOptions:{
+                    isCustomElement: tag => tag.startsWith('webview')
+                }
+            }
+        })
     ],
     optimizeDeps: {
     },
