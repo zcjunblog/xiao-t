@@ -58,13 +58,15 @@
             const state: any = reactive({
                 activeName: 'first'
             });
-            const handleClick = (tab, event) => {
-                // console.log(tab, event);
+            const handleClick = (tab) => {
+                $m.vuex('vuex_activeTabName',tab.paneName)
             };
 
             // 页面加载时
             onMounted(() => {
-
+                if (store.state.vuex_activeTabName){
+                    state.activeName = store.state.vuex_activeTabName
+                }
             });
             return {
                 handleClick,

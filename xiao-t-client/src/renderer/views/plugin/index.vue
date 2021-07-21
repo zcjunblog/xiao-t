@@ -3,7 +3,10 @@
         <div class="titleBar">
             <div class="bar-main">
                 <div class="logo"><img class="img" :src="pluginInfo.icon" alt=""></div>
-                <div class="text">{{pluginInfo.pluginName}} {{pluginInfo.version}}</div>
+                <div class="text">
+                    <!--{{pluginInfo.pluginName}} {{pluginInfo.version}}-->
+                    <el-input v-model="pluginInputValue" size="mini" :placeholder="pluginInputPlaceHolder" @keyup.enter.native="search"></el-input>
+                </div>
                 <div class="options">
                     <!--关闭-->
                     <div class="option" v-if="vuex_openInNewWin" @click="close">
@@ -35,6 +38,8 @@
             const route = useRoute()
             const router = useRouter()
             const state: any = reactive({
+                pluginInputValue: '',
+                pluginInputPlaceHolder:'',
                 path: null,
                 // 加载当前 static 目录中的 preload.js
                 preload: null,
@@ -51,9 +56,14 @@
             const close = () => {
                 window.close()
             }
+            const search = () => {
+                const webview = document.getElementById('webview')
+                webview.send('msg-back-setSubInput', state.pluginInputValue);
+            }
 
             // 页面加载时
             onMounted(() => {
+                // 插件信息
                 state.pluginInfo = JSON.parse(route.query.info)
                 state.path = state.pluginInfo.sourceFile + '\\' + state.pluginInfo.main
                 if (process.env.NODE_ENV === 'production') {
@@ -61,20 +71,32 @@
                 } else {
                     state.preload = path.join(__dirname, '../../../../../../static/preload.js')
                 }
-
-                console.log(state)
                 ipcRenderer.on('send-data', (event, data) => {
                     console.log(event)
                     console.log(data)
                 })
+                // 调用插件生命周期
                 const webview = document.getElementById('webview')
-                console.log(webview)
                 webview.addEventListener("dom-ready", function () {
                     webview.openDevTools()
+                    webview.send('onPluginReady', JSON.stringify(state.pluginInfo));
+                    webview.send('onPluginEnter', JSON.stringify(state.pluginInfo));
                 });
+                // 监听host消息
+                webview.addEventListener('ipc-message', (event) => {
+                    if (event.channel === 'setSubInput') {
+                        state.pluginInputPlaceHolder = event.args[0].placeHolder
+                    }
+
+                    if (event.channel === 'setSubInputValue') {
+                        state.pluginInputValue = event.args[0].text
+                        // webview.send('msg-back-setSubInput',  state.pluginInputValue);
+                    }
+                })
             });
             return {
                 close,
+                search,
                 backToLastPage,
                 ...toRefs(state),
             };
@@ -119,12 +141,20 @@
                     .img {
                         width: 30px;
                         height: 30px;
+                        border-radius: 50%;
                     }
                 }
 
                 .text {
                     flex: 1;
                     user-select: none;
+                    ::v-deep(.el-input__inner){
+                        width: 310px;
+                        border-radius: 40px;
+                        border: none;
+                        box-shadow: none;
+                        -webkit-app-region: no-drag;
+                    }
                 }
 
                 .options {

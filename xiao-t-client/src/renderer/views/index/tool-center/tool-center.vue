@@ -4,7 +4,7 @@
          v-loading="loading"
     >
         <el-container v-if="online">
-            <el-aside width="160px" style="background-color: #F8FAFC">
+            <el-aside width="105px" style="background-color: #F8FAFC">
                 <div class="menu">
                     <div class="item" @click="activeKey = item.key" :class="{'active': activeKey === item.key}"
                          v-for="item in menu" :key="item.key">{{item.name}}
@@ -131,19 +131,26 @@
                 //fs.readdir读取文件目录
                 fs.readdirSync(pathName).forEach((item, index) => {
                     let filePath = path.join(pathName, item)
-                    let pluginDetail = JSON.parse(fs.readFileSync(filePath + '\\plugin.json', 'utf-8'))
-                    pluginDetail.sourceFile = filePath
-                    pluginDetail.icon = path.join(filePath, pluginDetail.logo)
-                    state.myPluginNames.push(pluginDetail.pluginName)
-                    plugins.push(pluginDetail)
+                    let pluginDetail;
+                    try {
+                        pluginDetail = JSON.parse(fs.readFileSync(filePath + '\\plugin.json', 'utf-8'))
+                    }catch (e) {
+                        console.log(e)
+                        pluginDetail = null
+                    }
+                    if (pluginDetail){
+                        pluginDetail.sourceFile = filePath
+                        pluginDetail.icon = path.join(filePath, pluginDetail.logo)
+                        state.myPluginNames.push(pluginDetail.pluginName)
+                        plugins.push(pluginDetail)
+                    }
+
                 })
                 return plugins
             }
 
             const getMyPlugins = () => {
                 state.myPlugins = readDirectory(store.state.vuex_pluginDir)// 由用户选择的插件目录
-                console.log(state.myPlugins)
-                console.log(state.myPluginNames)
             }
             const getPlugins = () => {
 
@@ -254,9 +261,8 @@
 
                 .desc {
                     color: #ADADAD;
-                    font-size: 14px;
+                    font-size: 12px;
                     @include text-overflow(1);
-                    padding: 5px 0;
                     font-weight: 100;
                 }
 

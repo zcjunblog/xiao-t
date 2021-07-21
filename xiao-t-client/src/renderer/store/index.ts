@@ -15,6 +15,7 @@ export default createStore({
         vuex_maximize: false, // 是否最大化
         vuex_openInNewWin: false, // 插件在新窗口打开
         vuex_pluginDir: 'D:\\dt-plugins', // 插件目录 由用户自己选择
+        vuex_activeTabName: ''
     },
     mutations: {
         $clearUserData(state: any){ // 清除用户登录态

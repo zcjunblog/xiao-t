@@ -4,7 +4,7 @@
          v-loading="loading"
     >
         <el-container v-if="online">
-            <el-aside width="160px" style="background-color: #F8FAFC">
+            <el-aside width="105px" style="background-color: #F8FAFC">
                 <div class="menu">
                     <div class="item" @click="activeKey = item.key" :class="{'active': activeKey === item.key}"
                          v-for="item in menu" :key="item.key">{{item.name}}

@@ -36,7 +36,7 @@ class MainInit {
       height: 600,
       resizable : false,
       useContentSize: true,
-      width: 1000,
+      width: 800,
       frame: config.IsUseSysTitle,
       title: '小T',
       webPreferences: {

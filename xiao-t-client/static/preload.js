@@ -3,19 +3,37 @@
  * @date 2021/7/12
  * @Description:
  */
+const {getData, getlocalDataFile, saveData} = require("./utils");
 const marked = require("marked");
 const rendererMD = new marked.Renderer();
 const path = require('path');
+
+const appPath = path.join(getlocalDataFile());
+const dbPath = path.join(appPath, './db.json');
 
 let filePath = '';
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
     var vars = query.split("&");
-    for (var i=0;i<vars.length;i++) {
+    for (var i = 0; i < vars.length; i++) {
         var pair = vars[i].split("=");
-        if(pair[0] === variable){return pair[1];}
+        if (pair[0] === variable) {
+            return pair[1];
+        }
     }
     return false;
+}
+function Toast(msg,duration){
+    duration=isNaN(duration)?3000:duration;
+    var m = document.createElement('div');
+    m.innerHTML = msg;
+    m.style.cssText="font-size: 14px;color: rgb(255, 255, 255);background-color: rgba(0, 0, 0, 0.6);padding: 10px 15px;margin: 0 0 0 -60px;border-radius: 4px;position: fixed;    top: 50%;left: 50%;width: 130px;text-align: center;";
+    document.body.appendChild(m);
+    setTimeout(function() {
+        var d = 0.5;
+        m.style.opacity = '0';
+        setTimeout(function() { document.body.removeChild(m) }, d * 1000);
+    }, duration);
 }
 
 if (location.href.indexOf('targetFile') > -1) {
@@ -24,7 +42,7 @@ if (location.href.indexOf('targetFile') > -1) {
     filePath = location.pathname.replace('file://', '');
 }
 filePath = filePath.substr(1)
-const {ipcRenderer, nativeImage, clipboard, remote} = require('electron');
+const {ipcRenderer, nativeImage, clipboard, remote, shell} = require('electron');
 
 const currentWindow = remote.getCurrentWindow();
 const winId = currentWindow.id;
@@ -50,41 +68,32 @@ window.utools = window.xiao_t = {
     // 事件
     onPluginEnter(cb) {
         ipcRenderer.once('onPluginEnter', (e, message) => {
-            const feature = JSON.parse(message.detail)
-            console.log(feature)
-            cb({...feature, type: 'text'})
+            const info = JSON.parse(message)
+            cb({...info, type: 'text'})
         })
     },
     onPluginReady(cb) {
-        ipcRenderer.once('onPluginReady', (e, message) => {
-            const feature = JSON.parse(message.detail)
-            cb({...feature, type: 'text'})
+        ipcRenderer.once('', (e, message) => {
+            const info = JSON.parse(message)
+            cb({...info, type: 'text'})
         })
     },
     onPluginOut(cb) {
         ipcRenderer.once('onPluginOut', (e, message) => {
-            const feature = JSON.parse(message.detail)
-            cb({...feature, type: 'text'})
+            const info = JSON.parse(message)
+            cb({...info, type: 'text'})
         })
     },
 
     // 窗口交互
     hideMainWindow() {
-        ipcRenderer.send('msg-trigger', {
-            type: 'hideMainWindow',
-        });
+
     },
     showMainWindow() {
-        ipcRenderer.send('msg-trigger', {
-            type: 'showMainWindow',
-        });
+
     },
     setExpendHeight(height) {
-        ipcRenderer.send('msg-trigger', {
-            type: 'setExpendHeight',
-            height,
-            winId
-        });
+
     },
     setSubInput(onChange, placeHolder, isFocus) {
         ipcRenderer.sendToHost('setSubInput', {
@@ -96,10 +105,11 @@ window.utools = window.xiao_t = {
     },
 
     removeSubInput() {
-        ipcRenderer.sendToHost('removeSubInput');
+
     },
 
     setSubInputValue(text) {
+        // console.log('text',text)
         ipcRenderer.sendToHost('setSubInputValue', {
             text
         });
@@ -118,12 +128,11 @@ window.utools = window.xiao_t = {
         })
     },
 
-    showNotification(body, clickFeatureCode) {
-        const myNotification = new Notification('小T 提示', {
-            body
-        });
-        return myNotification;
-        // todo 实现 clickFeatureCode
+    showNotification(body) {
+        // return new Notification('小T 提示', {
+        //     body
+        // });
+        Toast(body,1000);
     },
     showOpenDialog(options) {
         ipcRenderer.send('msg-trigger', {
@@ -136,11 +145,11 @@ window.utools = window.xiao_t = {
             });
         })
     },
-
     copyImage(img) {
-        convertImgToBase64(img,function(base64Image) {
+        convertImgToBase64(img,(base64Image)=> {
             const image = nativeImage.createFromDataURL(base64Image)
             clipboard.writeImage(image)
+            Toast('图片复制成功',1000);
         })
     },
     copyText(text) {
@@ -148,60 +157,88 @@ window.utools = window.xiao_t = {
     },
     db: {
         put(data) {
-            ipcRenderer.send('msg-trigger', {
-                type: 'db.put',
-                data,
+            data._rev = '';
+            let dbData = getData(dbPath) || [];
+            let target = [];
+            dbData.some((d, i) => {
+                if (d._id === data._id) {
+                    target = [d, i]
+                    return true;
+                }
+                return false;
             });
-            return new Promise((resolve, reject) => {
-                ipcRenderer.once(`msg-back-db.put`, (e, result) => {
-                    result ? resolve(result) : reject();
-                });
-            })
+
+            // 更新
+            if (target[0]) {
+                dbData[target[1]] = data;
+            } else {
+                dbData.push(data);
+            }
+            saveData(dbPath, dbData);
+            return {
+                id: data._id,
+                ok: true,
+                rev: '',
+            }
         },
         get(key) {
-            ipcRenderer.send('msg-trigger', {
-                type: 'db.get',
-                key,
-            });
-            return new Promise((resolve, reject) => {
-                ipcRenderer.once(`msg-back-db.get`, (e, result) => {
-                    result ? resolve(result) : reject();
-                });
-            })
+            const dbData = getData(dbPath) || [];
+            return dbData.find(d => d._id === key) || '';
         },
         remove(key) {
-            ipcRenderer.send('msg-trigger', {
-                type: 'db.remove',
-                key,
+            key = typeof key === 'object' ? key._id : key;
+            let dbData = getData(dbPath);
+            let find = false;
+            dbData.some((d, i) => {
+                if (d._id === key) {
+                    dbData.splice(i, 1);
+                    find = true;
+                    return true;
+                }
+                return false;
             });
-            return new Promise((resolve, reject) => {
-                ipcRenderer.once(`msg-back-db.remove`, (e, result) => {
-                    result ? resolve(result) : reject();
-                });
-            })
-        },
-        allDocs(key) {
-            ipcRenderer.send('msg-trigger', {
-                type: 'db.allDocs',
-                key,
-            });
-            return new Promise((resolve, reject) => {
-                ipcRenderer.once(`msg-back-db.allDocs`, (e, result) => {
-                    console.log(result);
-                    result ? resolve(result) : reject();
-                });
-            })
+            if (find) {
+                saveData(dbPath, dbData);
+                return {
+                    id: key,
+                    ok: true,
+                    rev: '',
+                }
+            } else {
+                return {
+                    id: key,
+                    ok: false,
+                    rev: '',
+                }
+            }
         },
         bulkDocs(docs) {
-            ipcRenderer.send('msg-trigger', {
-                type: 'db.bulkDocs',
-                key,
+            const dbData = getData(dbPath);
+            dbData.forEach((d, i) => {
+                const result = docs.find(data => data._id === d._id);
+                if (result) {
+                    dbData[i] = result;
+                }
             });
-            return new Promise((resolve, reject) => {
-                ipcRenderer.once(`msg-back-db.bulkDocs`, (e, result) => {
-                    result ? resolve(result) : reject();
-                });
-            })
+            saveData(dbPath, dbData);
+            return docs.map(d => ({
+                id: d._id,
+                success: true,
+                rev: '',
+            }))
+        },
+        allDocs(key) {
+            const dbData = getData(dbPath);
+            if (!key) {
+                return dbData;
+            }
+            if (typeof key === 'string') {
+                return dbData.filter(d => d._id.indexOf(key) >= 0);
+            }
+            if (Array.isArray(key)) {
+                return dbData.filter(d => key.indexOf(d._id) >= 0);
+            }
+            return [];
         }
     },
     isDarkColors() {
@@ -235,7 +272,7 @@ window.utools = window.xiao_t = {
                     nodeIntegration: true // 在网页中集成Node
                 }
             });
-            if(objExp.test(md) && md.indexOf('http') === 0) {
+            if (objExp.test(md) && md.indexOf('http') === 0) {
                 await win.loadURL(md);
                 winId = win.id;
             } else {
@@ -288,7 +325,23 @@ window.utools = window.xiao_t = {
                 }
             }
         },
-    }
+    },
+    // 系统
+    shellOpenExternal(url) {
+        shell.openExternal(url);
+    },
+
+    // isMacOs() {
+    //     return os.type() === 'Darwin';
+    // },
+    //
+    // isWindows() {
+    //     return os.type() === 'Windows_NT';
+    // },
 }
 require(path.join(filePath, '../preload.js'));
+
+console.log('===============')
+console.log('preload加载成功!')
+console.log('===============')
 window.exports && ipcRenderer.sendToHost('templateConfig', {config: window.exports});
