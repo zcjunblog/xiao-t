@@ -4,8 +4,8 @@
             <div class="bar-main">
                 <div class="logo"><img class="img" :src="pluginInfo.icon" alt=""></div>
                 <div class="text">
-                    <!--{{pluginInfo.pluginName}} {{pluginInfo.version}}-->
-                    <el-input v-model="pluginInputValue" size="mini" :placeholder="pluginInputPlaceHolder" @keyup.enter.native="search"></el-input>
+                    <span v-if="!searchInputShow">{{pluginInfo.pluginName}} {{pluginInfo.version}}</span>
+                    <el-input v-else v-model="pluginInputValue" size="mini" :placeholder="pluginInputPlaceHolder" @keyup.enter.native="search"></el-input>
                 </div>
                 <div class="options">
                     <!--关闭-->
@@ -31,15 +31,17 @@
     const {shell, ipcRenderer} = require('electron')
     import {toRefs, reactive, onMounted} from 'vue';
     import {useRouter, useRoute} from 'vue-router'
-
+    import { useStore } from 'vuex'
 
     export default {
         setup() {
+            const store = useStore()
             const route = useRoute()
             const router = useRouter()
             const state: any = reactive({
                 pluginInputValue: '',
                 pluginInputPlaceHolder:'',
+                searchInputShow: false,
                 path: null,
                 // 加载当前 static 目录中的 preload.js
                 preload: null,
@@ -61,30 +63,39 @@
                 webview.send('msg-back-setSubInput', state.pluginInputValue);
             }
 
-            // 页面加载时
-            onMounted(() => {
-                // 插件信息
-                state.pluginInfo = JSON.parse(route.query.info)
+            const init = async () => {
+                state.pluginInfo = JSON.parse(route.params.info)
+                console.log(state.pluginInfo)
                 state.path = state.pluginInfo.sourceFile + '\\' + state.pluginInfo.main
                 if (process.env.NODE_ENV === 'production') {
                     state.preload = `file://${__static}/preload.js`
                 } else {
                     state.preload = path.join(__dirname, '../../../../../../static/preload.js')
                 }
-                ipcRenderer.on('send-data', (event, data) => {
-                    console.log(event)
-                    console.log(data)
-                })
-                // 调用插件生命周期
+            }
+
+            // 页面加载时
+            onMounted(() => {
+                // 分析插件信息
+                init()
+                // 插件初始化
                 const webview = document.getElementById('webview')
+                console.log(webview.addEventListener)
+                console.log('onMounted=========')
                 webview.addEventListener("dom-ready", function () {
+                    console.log('===============')
+                    console.log('渲染进程dom-ready监听')
+                    console.log('===============')
                     webview.openDevTools()
                     webview.send('onPluginReady', JSON.stringify(state.pluginInfo));
                     webview.send('onPluginEnter', JSON.stringify(state.pluginInfo));
                 });
+                console.log('onMounted==========')
                 // 监听host消息
                 webview.addEventListener('ipc-message', (event) => {
+                    console.log('监听host消息==========')
                     if (event.channel === 'setSubInput') {
+                        state.searchInputShow = true
                         state.pluginInputPlaceHolder = event.args[0].placeHolder
                     }
 

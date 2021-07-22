@@ -128,12 +128,15 @@
             })
 
             const readDirectory = (pathName, plugins = []) => {
+                console.log('%c读取插件目录耗时↓↓↓↓↓','color: #ff6f00;font-weight:bold;font-size:18px;')
+                console.time()
                 //fs.readdir读取文件目录
                 fs.readdirSync(pathName).forEach((item, index) => {
                     let filePath = path.join(pathName, item)
                     let pluginDetail;
                     try {
                         pluginDetail = JSON.parse(fs.readFileSync(filePath + '\\plugin.json', 'utf-8'))
+                        delete pluginDetail.features
                     }catch (e) {
                         console.log(e)
                         pluginDetail = null
@@ -146,6 +149,7 @@
                     }
 
                 })
+                console.timeEnd();
                 return plugins
             }
 
@@ -161,12 +165,9 @@
             const showPluginDetail = (e) => {
                 if (state.activeKey === 'my'){
                     if (store.state.vuex_openInNewWin){
-                        ipcRenderer.invoke("open-win", {url: '/plugin',sendData: {info: JSON.stringify(e)}});
+                        ipcRenderer.invoke("open-win", {url: '/plugin/' + encodeURIComponent(JSON.stringify(e))});
                     }else {
-                        router.push({
-                            path: '/plugin',
-                            query: {info: JSON.stringify(e)}
-                        })
+                        router.push('/plugin/'  + encodeURIComponent(JSON.stringify(e)))
                     }
                     return
                 }

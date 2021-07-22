@@ -11,18 +11,6 @@ const path = require('path');
 const appPath = path.join(getlocalDataFile());
 const dbPath = path.join(appPath, './db.json');
 
-let filePath = '';
-function getQueryVariable(variable) {
-    var query = window.location.search.substring(1);
-    var vars = query.split("&");
-    for (var i = 0; i < vars.length; i++) {
-        var pair = vars[i].split("=");
-        if (pair[0] === variable) {
-            return pair[1];
-        }
-    }
-    return false;
-}
 function Toast(msg,duration){
     duration=isNaN(duration)?3000:duration;
     var m = document.createElement('div');
@@ -36,12 +24,7 @@ function Toast(msg,duration){
     }, duration);
 }
 
-if (location.href.indexOf('targetFile') > -1) {
-    filePath = decodeURIComponent(getQueryVariable('targetFile'));
-} else {
-    filePath = location.pathname.replace('file://', '');
-}
-filePath = filePath.substr(1)
+const filePath = location.pathname.replace('file://', '').substr(1);
 const {ipcRenderer, nativeImage, clipboard, remote, shell} = require('electron');
 
 const currentWindow = remote.getCurrentWindow();
@@ -339,9 +322,11 @@ window.utools = window.xiao_t = {
     //     return os.type() === 'Windows_NT';
     // },
 }
-require(path.join(filePath, '../preload.js'));
 
-console.log('===============')
-console.log('preload加载成功!')
-console.log('===============')
-window.exports && ipcRenderer.sendToHost('templateConfig', {config: window.exports});
+try {
+    require(path.join(filePath, '../', './preload.js'));
+}catch (e) {
+    console.log('插件无preload.js或路径错误!')
+}
+
+window.exports
