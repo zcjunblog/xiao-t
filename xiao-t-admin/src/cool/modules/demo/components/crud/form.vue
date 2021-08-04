@@ -49,18 +49,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, resolveComponent, h } from "vue";
-import { CrudLoad, FormItem, FormRef } from "cl-admin-crud-vue3/types";
-import { TestService } from "../../utils/service";
-import Test from "./render/test.vue";
-import Test2 from "./render/test2";
+import { defineComponent, ref, resolveComponent, h } from "vue"
+import { CrudLoad, FormItem, FormRef } from "cl-admin-crud-vue3/types"
+import { TestService } from "../../utils/service"
+import Test from "./render/test.vue"
+import Test2 from "./render/test2"
 
 export default defineComponent({
 	setup() {
-		const formRef = ref<FormRef>();
+		const formRef = ref<FormRef>()
 
 		function renderDivider(label: string) {
-			const el: any = resolveComponent("el-divider");
+			const el: any = resolveComponent("el-divider")
 
 			return h(
 				el,
@@ -70,7 +70,7 @@ export default defineComponent({
 				{
 					default: () => label
 				}
-			);
+			)
 		}
 
 		const items: FormItem[] = [
@@ -79,7 +79,7 @@ export default defineComponent({
 					labelWidth: "0px"
 				},
 				component: () => {
-					return renderDivider("测试组件渲染");
+					return renderDivider("测试组件渲染")
 				}
 			},
 			{
@@ -99,7 +99,7 @@ export default defineComponent({
 					labelWidth: "0px"
 				},
 				component: () => {
-					return renderDivider("测试内嵌CRUD");
+					return renderDivider("测试内嵌CRUD")
 				}
 			},
 			{
@@ -115,7 +115,7 @@ export default defineComponent({
 					labelWidth: "0px"
 				},
 				component: () => {
-					return renderDivider("测试验证规则");
+					return renderDivider("测试验证规则")
 				}
 			},
 			{
@@ -131,7 +131,7 @@ export default defineComponent({
 					labelWidth: "0px"
 				},
 				component: () => {
-					return renderDivider("测试显隐");
+					return renderDivider("测试显隐")
 				}
 			},
 			{
@@ -182,7 +182,7 @@ export default defineComponent({
 				prop: "wx",
 				value: 0,
 				hidden: ({ scope }: any) => {
-					return scope.jn == 1;
+					return scope.jn == 1
 				},
 				component: {
 					name: "el-radio-group",
@@ -214,63 +214,63 @@ export default defineComponent({
 				label: "雨润",
 				prop: "s1",
 				hidden: ({ scope }: any) => {
-					return scope.wx != 0;
+					return scope.wx != 0
 				},
 				component: ({ h }: any) => {
-					return h("p", "以甘甜雨露的滋润使人精力充沛");
+					return h("p", "以甘甜雨露的滋润使人精力充沛")
 				}
 			},
 			{
 				label: "风雪冰天",
 				prop: "s2",
 				hidden: ({ scope }: any) => {
-					return scope.wx != 0;
+					return scope.wx != 0
 				},
 				component: ({ h }: any) => {
-					return h("p", "召唤漫天风雪，对敌方造成巨大的杀伤力");
+					return h("p", "召唤漫天风雪，对敌方造成巨大的杀伤力")
 				}
 			},
 			{
 				label: "三昧真火",
 				prop: "h",
 				hidden: ({ scope }: any) => {
-					return scope.wx != 1;
+					return scope.wx != 1
 				},
 				component: ({ h }: any) => {
-					return h("p", "召唤三昧真火焚烧敌方的仙术");
+					return h("p", "召唤三昧真火焚烧敌方的仙术")
 				}
 			},
 			{
 				label: "惊雷闪",
 				prop: "l",
 				hidden: ({ scope }: any) => {
-					return scope.wx != 2;
+					return scope.wx != 2
 				},
 				component: ({ h }: any) => {
-					return h("p", "召唤惊雷无数，对敌方全体进行攻击，是十分强力的仙术");
+					return h("p", "召唤惊雷无数，对敌方全体进行攻击，是十分强力的仙术")
 				}
 			},
 			{
 				label: "如沐春风",
 				prop: "f",
 				hidden: ({ scope }: any) => {
-					return scope.wx != 3;
+					return scope.wx != 3
 				},
 				component: ({ h }: any) => {
-					return h("p", "温暖柔和的复苏春风，使人回复活力");
+					return h("p", "温暖柔和的复苏春风，使人回复活力")
 				}
 			},
 			{
 				label: "艮山壁障",
 				prop: "t",
 				hidden: ({ scope }: any) => {
-					return scope.wx != 4;
+					return scope.wx != 4
 				},
 				component: ({ h }: any) => {
-					return h("p", "以艮山之灵形成一道壁障，受此壁障守护者刀枪不入");
+					return h("p", "以艮山之灵形成一道壁障，受此壁障守护者刀枪不入")
 				}
 			}
-		];
+		]
 
 		function open() {
 			formRef.value?.open({
@@ -281,22 +281,22 @@ export default defineComponent({
 				items,
 				on: {
 					submit(data, { done }) {
-						console.log(data);
-						done();
+						console.log(data)
+						done()
 					}
 				}
-			});
+			})
 		}
 
 		function onCrudLoad({ ctx, app }: CrudLoad) {
-			ctx.service(TestService).done();
-			app.refresh();
+			ctx.service(TestService).done()
+			app.refresh()
 		}
 
 		function addVad(list: Array<any>) {
 			list.push({
 				val: ""
-			});
+			})
 		}
 
 		return {
@@ -304,9 +304,9 @@ export default defineComponent({
 			formRef,
 			onCrudLoad,
 			addVad
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

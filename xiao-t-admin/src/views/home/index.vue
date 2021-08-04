@@ -1,79 +1,11 @@
 <template>
-	<div class="view-home scroller1">
-		<el-row :gutter="15">
-			<el-col :lg="6" :md="12" :xs="24">
-				<div class="card">
-					<count-sales />
-				</div>
-			</el-col>
-			<el-col :lg="6" :md="12" :xs="24">
-				<div class="card">
-					<count-views />
-				</div>
-			</el-col>
-			<el-col :lg="6" :md="12" :xs="24">
-				<div class="card">
-					<count-paid />
-				</div>
-			</el-col>
-			<el-col :lg="6" :md="12" :xs="24">
-				<div class="card">
-					<count-effect />
-				</div>
-			</el-col>
-		</el-row>
-
-		<el-row :gutter="15">
-			<el-col :lg="14" :xs="24">
-				<div class="card">
-					<tab-chart />
-				</div>
-			</el-col>
-			<el-col :lg="10" :xs="24">
-				<div class="card">
-					<sales-rank />
-				</div>
-			</el-col>
-		</el-row>
-
-		<el-row :gutter="15">
-			<el-col :lg="14" :sm="24">
-				<div class="card card--last">
-					<hot-search />
-				</div>
-			</el-col>
-			<el-col :lg="10" :sm="24">
-				<div class="card card--last">
-					<category-ratio />
-				</div>
-			</el-col>
-		</el-row>
-	</div>
+	<div class="view-home scroller1">this is home page !</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import CategoryRatio from "./components/category-ratio.vue";
-import CountSales from "./components/count-sales.vue";
-import CountViews from "./components/count-views.vue";
-import CountPaid from "./components/count-paid.vue";
-import CountEffect from "./components/count-effect.vue";
-import TabChart from "./components/tab-chart.vue";
-import SalesRank from "./components/sales-rank.vue";
-import HotSearch from "./components/hot-search.vue";
+import { defineComponent } from "vue"
 
-export default defineComponent({
-	components: {
-		CategoryRatio,
-		CountSales,
-		CountViews,
-		CountPaid,
-		CountEffect,
-		TabChart,
-		SalesRank,
-		HotSearch
-	}
-});
+export default defineComponent({})
 </script>
 
 <style lang="scss">

@@ -20,8 +20,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { getBrowser } from "/@/core/utils";
+import { computed, defineComponent } from "vue"
+import { getBrowser } from "/@/core/utils"
 
 export default defineComponent({
 	name: "cl-scrollbar",
@@ -44,15 +44,15 @@ export default defineComponent({
 	},
 
 	setup() {
-		const { plat } = getBrowser();
+		const { plat } = getBrowser()
 
 		const width = computed(() => {
-			return `calc(100% - ${plat == "iphone" ? "10px" : "0px"})`;
-		});
+			return `calc(100% - ${plat == "iphone" ? "10px" : "0px"})`
+		})
 
 		return {
 			width
-		};
+		}
 	}
-});
+})
 </script>

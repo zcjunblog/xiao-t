@@ -1,4 +1,4 @@
-import { BaseService, Service, Permission } from "/@/core";
+import { BaseService, Service, Permission } from "/@/core"
 
 @Service("base/sys/user")
 class SysUser extends BaseService {
@@ -8,8 +8,8 @@ class SysUser extends BaseService {
 			url: "/move",
 			method: "POST",
 			data
-		});
+		})
 	}
 }
 
-export default SysUser;
+export default SysUser

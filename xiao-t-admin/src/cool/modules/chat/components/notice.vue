@@ -17,30 +17,30 @@ export default {
 		return {
 			visible: false,
 			number: 0
-		};
+		}
 	},
 
 	created() {
-		this.refresh();
+		this.refresh()
 	},
 
 	methods: {
 		refresh() {
 			this.service.chat.session.unreadCount().then((res) => {
-				this.number = Number(res);
-			});
+				this.number = Number(res)
+			})
 		},
 
 		updateNum(isOpen) {
-			this.number += isOpen ? 0 : 1;
+			this.number += isOpen ? 0 : 1
 		},
 
 		openChatBox() {
-			this.$refs["chat"].open();
-			this.number = 0;
+			this.$refs["chat"].open()
+			this.number = 0
 		}
 	}
-};
+}
 </script>
 
 <style lang="scss" scoped>

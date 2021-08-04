@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, ref, watch } from "vue";
-import { isArray } from "/@/core/utils";
+import { defineComponent, inject, onMounted, ref, watch } from "vue"
+import { isArray } from "/@/core/utils"
 
 export default defineComponent({
 	name: "cl-role-select",
@@ -20,39 +20,39 @@ export default defineComponent({
 
 	setup(props, { emit }) {
 		// 请求服务
-		const service = inject<any>("service");
+		const service = inject<any>("service")
 
 		// 数据列表
-		const list = ref<any[]>([]);
+		const list = ref<any[]>([])
 
 		// 绑定值
-		const value = ref<any>();
+		const value = ref<any>()
 
 		// 绑定值回调
 		function onChange(val: any) {
-			emit("update:modelValue", val);
+			emit("update:modelValue", val)
 		}
 
 		// 解析值
 		watch(
 			() => props.modelValue,
 			(val: any) => {
-				value.value = (isArray(val) ? val : [val]).filter(Boolean);
+				value.value = (isArray(val) ? val : [val]).filter(Boolean)
 			},
 			{
 				immediate: true
 			}
-		);
+		)
 
 		onMounted(async () => {
-			list.value = await service.base.system.role.list();
-		});
+			list.value = await service.base.system.role.list()
+		})
 
 		return {
 			list,
 			value,
 			onChange
-		};
+		}
 	}
-});
+})
 </script>

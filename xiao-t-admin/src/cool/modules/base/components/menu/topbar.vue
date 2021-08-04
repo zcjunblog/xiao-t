@@ -15,37 +15,37 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
-import { useStore } from "vuex";
-import { useRoute, useRouter } from "vue-router";
-import { firstMenu } from "../../utils";
+import { computed, defineComponent, onMounted, ref } from "vue"
+import { useStore } from "vuex"
+import { useRoute, useRouter } from "vue-router"
+import { firstMenu } from "../../utils"
 
 export default defineComponent({
 	name: "cl-menu-topbar",
 
 	setup() {
 		// 缓存
-		const store = useStore();
+		const store = useStore()
 
 		// 路由控制
-		const router = useRouter();
+		const router = useRouter()
 
 		// 当页路由
-		const route = useRoute();
+		const route = useRoute()
 
 		// 选中标识
-		const index = ref<string>("0");
+		const index = ref<string>("0")
 
 		// 菜单列表
-		const list = computed(() => store.getters.menuGroup.filter((e: any) => e.isShow));
+		const list = computed(() => store.getters.menuGroup.filter((e: any) => e.isShow))
 
 		// 选择导航
 		function onSelect(index: number) {
-			store.commit("SET_MENU_LIST", index);
+			store.commit("SET_MENU_LIST", index)
 
 			// 获取第一个菜单地址
-			const url = firstMenu(list.value[index].children);
-			router.push(url);
+			const url = firstMenu(list.value[index].children)
+			router.push(url)
 		}
 
 		onMounted(function () {
@@ -54,33 +54,33 @@ export default defineComponent({
 				switch (e.type) {
 					case 0:
 						e.children.forEach((e: any) => {
-							deep(e, i);
-						});
-						break;
+							deep(e, i)
+						})
+						break
 					case 1:
 						if (route.path.includes(e.path)) {
-							index.value = String(i);
-							store.commit("SET_MENU_LIST", i);
+							index.value = String(i)
+							store.commit("SET_MENU_LIST", i)
 						}
-						break;
+						break
 					case 2:
 					default:
-						break;
+						break
 				}
 			}
 
 			list.value.forEach((e: any, i: number) => {
-				deep(e, i);
-			});
-		});
+				deep(e, i)
+			})
+		})
 
 		return {
 			index,
 			list,
 			onSelect
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss">

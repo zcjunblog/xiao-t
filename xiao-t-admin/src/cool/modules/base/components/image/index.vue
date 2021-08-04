@@ -26,8 +26,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { isArray, isNumber, isString } from "/@/core/utils";
+import { computed, defineComponent } from "vue"
+import { isArray, isNumber, isString } from "/@/core/utils"
 
 export default defineComponent({
 	name: "cl-image",
@@ -54,34 +54,34 @@ export default defineComponent({
 
 	setup(props) {
 		const urls = computed(() => {
-			const urls: any = props.src;
+			const urls: any = props.src
 
 			if (isArray(urls)) {
-				return urls;
+				return urls
 			}
 
 			if (isString(urls)) {
-				return (urls || "").split(",").filter(Boolean);
+				return (urls || "").split(",").filter(Boolean)
 			}
 
-			return [];
-		});
+			return []
+		})
 
 		const sty = computed(() => {
-			const [h, w]: any = isNumber(props.size) ? [props.size, props.size] : props.size;
+			const [h, w]: any = isNumber(props.size) ? [props.size, props.size] : props.size
 
 			return {
 				h: isNumber(h) ? h + "px" : h,
 				w: isNumber(w) ? w + "px" : w
-			};
-		});
+			}
+		})
 
 		return {
 			urls,
 			sty
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

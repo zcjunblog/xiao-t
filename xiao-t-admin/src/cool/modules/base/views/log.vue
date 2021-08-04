@@ -39,20 +39,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, reactive, ref } from "vue";
-import { ElMessage, ElMessageBox } from "element-plus";
-import { useRefs } from "/@/core";
-import { CrudLoad, Table } from "cl-admin-crud-vue3/types";
+import { defineComponent, inject, reactive, ref } from "vue"
+import { ElMessage, ElMessageBox } from "element-plus"
+import { useRefs } from "/@/core"
+import { CrudLoad, Table } from "cl-admin-crud-vue3/types"
 
 export default defineComponent({
 	name: "sys-log",
 
 	setup() {
-		const service = inject<any>("service");
-		const { refs, setRefs }: any = useRefs();
+		const service = inject<any>("service")
+		const { refs, setRefs }: any = useRefs()
 
 		// 天数
-		const day = ref<number>(1);
+		const day = ref<number>(1)
 
 		// cl-table 配置
 		const table = reactive<Table>({
@@ -108,19 +108,19 @@ export default defineComponent({
 					sortable: true
 				}
 			]
-		});
+		})
 
 		// crud 加载
 		function onLoad({ ctx, app }: CrudLoad) {
-			ctx.service(service.base.system.log).done();
-			app.refresh();
+			ctx.service(service.base.system.log).done()
+			app.refresh()
 		}
 
 		// 保存天数
 		function saveDay() {
 			service.base.system.log.setKeep(day.value).then(() => {
-				ElMessage.success("保存成功");
-			});
+				ElMessage.success("保存成功")
+			})
 		}
 
 		// 清空日志
@@ -132,20 +132,20 @@ export default defineComponent({
 					service.base.system.log
 						.clear()
 						.then(() => {
-							ElMessage.success("清空成功");
-							refs.value.crud.refresh();
+							ElMessage.success("清空成功")
+							refs.value.crud.refresh()
 						})
 						.catch((err: string) => {
-							ElMessage.error(err);
-						});
+							ElMessage.error(err)
+						})
 				})
-				.catch(() => null);
+				.catch(() => null)
 		}
 
 		// 获取天数
 		service.base.system.log.getKeep().then((res: number) => {
-			day.value = Number(res);
-		});
+			day.value = Number(res)
+		})
 
 		return {
 			service,
@@ -156,7 +156,7 @@ export default defineComponent({
 			onLoad,
 			saveDay,
 			clear
-		};
+		}
 	}
-});
+})
 </script>

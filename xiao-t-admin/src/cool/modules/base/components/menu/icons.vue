@@ -32,8 +32,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
-import { iconList } from "/$/base";
+import { defineComponent, ref, watch } from "vue"
+import { iconList } from "/$/base"
 
 export default defineComponent({
 	name: "cl-menu-icons",
@@ -49,32 +49,32 @@ export default defineComponent({
 
 	setup(props, { emit }) {
 		// 是否可见
-		const visible = ref<boolean>(false);
+		const visible = ref<boolean>(false)
 
 		// 图标列表
-		const list = ref<any[]>(iconList());
+		const list = ref<any[]>(iconList())
 
 		// 已选图标
-		const name = ref<string>(props.modelValue);
+		const name = ref<string>(props.modelValue)
 
 		watch(
 			() => props.modelValue,
 			(val) => {
-				name.value = val;
+				name.value = val
 			}
-		);
+		)
 
 		function open() {
-			visible.value = true;
+			visible.value = true
 		}
 
 		function close() {
-			visible.value = false;
+			visible.value = false
 		}
 
 		function onChange(val: string) {
-			emit("update:modelValue", val);
-			close();
+			emit("update:modelValue", val)
+			close()
 		}
 
 		return {
@@ -84,9 +84,9 @@ export default defineComponent({
 			open,
 			close,
 			onChange
-		};
+		}
 	}
-});
+})
 </script>
 
 .

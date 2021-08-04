@@ -1,0 +1,58 @@
+{
+    "sourceFile": "src/cool/modules/client/views/cliTemplate.vue",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 10,
+            "patches": [
+                {
+                    "date": 1628060007937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1628063715022,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,8 +74,9 @@\n \t\t})\n \n \t\t// crud 加载\n \t\tfunction onLoad({ ctx, app }: CrudLoad) {\n+\t\t\tconsole.log(service.client)\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cliTemplate).done()\n \t\t\tapp.refresh()\n \t\t}\n"
+                },
+                {
+                    "date": 1628063754389,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,9 +74,9 @@\n \t\t})\n \n \t\t// crud 加载\n \t\tfunction onLoad({ ctx, app }: CrudLoad) {\n-\t\t\tconsole.log(service.client)\n+\t\t\tconsole.log(\"service.client\", service.client)\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cliTemplate).done()\n \t\t\tapp.refresh()\n \t\t}\n"
+                },
+                {
+                    "date": 1628063771302,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -77,9 +77,9 @@\n \t\tfunction onLoad({ ctx, app }: CrudLoad) {\n \t\t\tconsole.log(\"service.client\", service.client)\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cliTemplate).done()\n-\t\t\tapp.refresh()\n+\t\t\t// app.refresh()\n \t\t}\n \n \t\treturn {\n \t\t\trefs,\n"
+                },
+                {
+                    "date": 1628063787669,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,8 +74,9 @@\n \t\t})\n \n \t\t// crud 加载\n \t\tfunction onLoad({ ctx, app }: CrudLoad) {\n+\t\t\tconsole.log(\"service.client\")\n \t\t\tconsole.log(\"service.client\", service.client)\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cliTemplate).done()\n \t\t\t// app.refresh()\n"
+                },
+                {
+                    "date": 1628063839213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n \tsetup() {\n \t\tconst { refs, setRefs } = useRefs()\n \t\t// 请求服务\n \t\tconst service = inject<any>(\"service\")\n-\n+\t\tconsole.log(\"service.client\", service.client)\n \t\t// 新增、编辑配置\n \t\tconst upsert = reactive<Upsert>({\n \t\t\titems: [\n \t\t\t\t{\n"
+                },
+                {
+                    "date": 1628063945242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n <script lang=\"ts\">\n import { defineComponent, inject, reactive } from \"vue\"\n import { CrudLoad, Upsert, Table } from \"cl-admin-crud-vue3/types\"\n import { useRefs } from \"/@/core\"\n-\n+console.log(\"service.client\")\n export default defineComponent({\n \tsetup() {\n \t\tconst { refs, setRefs } = useRefs()\n \t\t// 请求服务\n"
+                },
+                {
+                    "date": 1628063977552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,15 +31,15 @@\n <script lang=\"ts\">\n import { defineComponent, inject, reactive } from \"vue\"\n import { CrudLoad, Upsert, Table } from \"cl-admin-crud-vue3/types\"\n import { useRefs } from \"/@/core\"\n-console.log(\"service.client\")\n+\n export default defineComponent({\n \tsetup() {\n \t\tconst { refs, setRefs } = useRefs()\n \t\t// 请求服务\n \t\tconst service = inject<any>(\"service\")\n-\t\tconsole.log(\"service.client\", service.client)\n+\n \t\t// 新增、编辑配置\n \t\tconst upsert = reactive<Upsert>({\n \t\t\titems: [\n \t\t\t\t{\n@@ -74,9 +74,8 @@\n \t\t})\n \n \t\t// crud 加载\n \t\tfunction onLoad({ ctx, app }: CrudLoad) {\n-\t\t\tconsole.log(\"service.client\")\n \t\t\tconsole.log(\"service.client\", service.client)\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cliTemplate).done()\n \t\t\t// app.refresh()\n"
+                },
+                {
+                    "date": 1628064150739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -77,9 +77,9 @@\n \t\tfunction onLoad({ ctx, app }: CrudLoad) {\n \t\t\tconsole.log(\"service.client\", service.client)\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cliTemplate).done()\n-\t\t\t// app.refresh()\n+\t\t\tapp.refresh()\n \t\t}\n \n \t\treturn {\n \t\t\trefs,\n"
+                },
+                {
+                    "date": 1628064161072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,9 +74,9 @@\n \t\t})\n \n \t\t// crud 加载\n \t\tfunction onLoad({ ctx, app }: CrudLoad) {\n-\t\t\tconsole.log(\"service.client\", service.client)\n+\t\t\tconsole.log(\"service.client.cliTemplate\", service.client.cliTemplate)\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cliTemplate).done()\n \t\t\tapp.refresh()\n \t\t}\n"
+                },
+                {
+                    "date": 1628064659067,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -74,11 +74,11 @@\n \t\t})\n \n \t\t// crud 加载\n \t\tfunction onLoad({ ctx, app }: CrudLoad) {\n-\t\t\tconsole.log(\"service.client.cliTemplate\", service.client.cliTemplate)\n+\t\t\tconsole.log(\"service.client.cli\", service.client.cli)\n \t\t\t// 绑定 service\n-\t\t\tctx.service(service.client.cliTemplate).done()\n+\t\t\tctx.service(service.client.cli).done()\n \t\t\tapp.refresh()\n \t\t}\n \n \t\treturn {\n"
+                }
+            ],
+            "date": 1628060007937,
+            "name": "Commit-0",
+            "content": "<template>\n\t<cl-crud :ref=\"setRefs('crud')\" @load=\"onLoad\">\n\t\t<el-row type=\"flex\" align=\"middle\">\n\t\t\t<!-- 刷新按钮 -->\n\t\t\t<cl-refresh-btn />\n\t\t\t<!-- 新增按钮 -->\n\t\t\t<cl-add-btn />\n\t\t\t<!-- 删除按钮 -->\n\t\t\t<cl-multi-delete-btn />\n\t\t\t<cl-flex1 />\n\t\t\t<!-- 关键字搜索 -->\n\t\t\t<cl-search-key />\n\t\t</el-row>\n\n\t\t<el-row>\n\t\t\t<!-- 数据表格 -->\n\t\t\t<cl-table :ref=\"setRefs('table')\" v-bind=\"table\" />\n\t\t</el-row>\n\n\t\t<el-row type=\"flex\">\n\t\t\t<cl-flex1 />\n\t\t\t<!-- 分页控件 -->\n\t\t\t<cl-pagination />\n\t\t</el-row>\n\n\t\t<!-- 新增、编辑 -->\n\t\t<cl-upsert :ref=\"setRefs('upsert')\" v-bind=\"upsert\" />\n\t</cl-crud>\n</template>\n\n<script lang=\"ts\">\nimport { defineComponent, inject, reactive } from \"vue\"\nimport { CrudLoad, Upsert, Table } from \"cl-admin-crud-vue3/types\"\nimport { useRefs } from \"/@/core\"\n\nexport default defineComponent({\n\tsetup() {\n\t\tconst { refs, setRefs } = useRefs()\n\t\t// 请求服务\n\t\tconst service = inject<any>(\"service\")\n\n\t\t// 新增、编辑配置\n\t\tconst upsert = reactive<Upsert>({\n\t\t\titems: [\n\t\t\t\t{\n\t\t\t\t\tlabel: \"名称\",\n\t\t\t\t\tprop: \"name\",\n\t\t\t\t\tcomponent: {\n\t\t\t\t\t\tname: \"el-input\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"创建时间\",\n\t\t\t\t\tprop: \"createTime\",\n\t\t\t\t\tcomponent: {\n\t\t\t\t\t\tname: \"el-input\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t]\n\t\t})\n\n\t\t// 表格配置\n\t\tconst table = reactive<Table>({\n\t\t\tcolumns: [\n\t\t\t\t{\n\t\t\t\t\tlabel: \"名称\",\n\t\t\t\t\tprop: \"name\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"创建时间\",\n\t\t\t\t\tprop: \"createTime\"\n\t\t\t\t}\n\t\t\t]\n\t\t})\n\n\t\t// crud 加载\n\t\tfunction onLoad({ ctx, app }: CrudLoad) {\n\t\t\t// 绑定 service\n\t\t\tctx.service(service.client.cliTemplate).done()\n\t\t\tapp.refresh()\n\t\t}\n\n\t\treturn {\n\t\t\trefs,\n\t\t\tsetRefs,\n\t\t\tupsert,\n\t\t\ttable,\n\t\t\tonLoad\n\t\t}\n\t}\n})\n</script>\n"
+        }
+    ]
+}

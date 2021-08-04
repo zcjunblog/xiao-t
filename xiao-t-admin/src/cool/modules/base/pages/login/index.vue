@@ -39,7 +39,7 @@
 						class="value"
 						@change="
 							() => {
-								form.verifyCode = '';
+								form.verifyCode = ''
 							}
 						"
 					/>
@@ -54,12 +54,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "vue";
-import { ElMessage } from "element-plus";
-import { useRouter } from "vue-router";
-import { useStore } from "vuex";
-import Captcha from "./components/captcha.vue";
-import { useRefs } from "/@/core";
+import { defineComponent, reactive, ref } from "vue"
+import { ElMessage } from "element-plus"
+import { useRouter } from "vue-router"
+import { useStore } from "vuex"
+import Captcha from "./components/captcha.vue"
+import { useRefs } from "/@/core"
 
 export default defineComponent({
 	cool: {
@@ -73,11 +73,11 @@ export default defineComponent({
 	},
 
 	setup() {
-		const router = useRouter();
-		const store = useStore();
-		const { refs, setRefs }: any = useRefs();
+		const router = useRouter()
+		const store = useStore()
+		const { refs, setRefs }: any = useRefs()
 
-		const saving = ref<boolean>(false);
+		const saving = ref<boolean>(false)
 
 		// 登录表单数据
 		const form = reactive({
@@ -85,45 +85,45 @@ export default defineComponent({
 			password: "",
 			captchaId: "",
 			verifyCode: ""
-		});
+		})
 
 		// 登录
 		async function toLogin() {
 			if (!form.username) {
-				return ElMessage.warning("用户名不能为空");
+				return ElMessage.warning("用户名不能为空")
 			}
 
 			if (!form.password) {
-				return ElMessage.warning("密码不能为空");
+				return ElMessage.warning("密码不能为空")
 			}
 
 			if (!form.verifyCode) {
-				return ElMessage.warning("图片验证码不能为空");
+				return ElMessage.warning("图片验证码不能为空")
 			}
 
-			saving.value = true;
+			saving.value = true
 
 			try {
 				// 登录
-				await store.dispatch("userLogin", form);
+				await store.dispatch("userLogin", form)
 
 				// 用户信息
-				await store.dispatch("userInfo");
+				await store.dispatch("userInfo")
 
 				// 权限菜单
-				const [first] = await store.dispatch("permMenu");
+				const [first] = await store.dispatch("permMenu")
 
 				if (!first) {
-					ElMessage.error("该账号没有权限");
+					ElMessage.error("该账号没有权限")
 				} else {
-					router.push("/");
+					router.push("/")
 				}
 			} catch (err) {
-				ElMessage.error(err);
-				refs.value.captcha.refresh();
+				ElMessage.error(err)
+				refs.value.captcha.refresh()
 			}
 
-			saving.value = false;
+			saving.value = false
 		}
 
 		return {
@@ -132,9 +132,9 @@ export default defineComponent({
 			saving,
 			toLogin,
 			setRefs
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss">

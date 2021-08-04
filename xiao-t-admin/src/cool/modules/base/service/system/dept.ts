@@ -1,4 +1,4 @@
-import { BaseService, Service, Permission } from "/@/core";
+import { BaseService, Service, Permission } from "/@/core"
 
 @Service("base/sys/department")
 class SysDepartment extends BaseService {
@@ -8,8 +8,8 @@ class SysDepartment extends BaseService {
 			url: "/order",
 			method: "POST",
 			data
-		});
+		})
 	}
 }
 
-export default SysDepartment;
+export default SysDepartment

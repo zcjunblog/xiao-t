@@ -1,4 +1,4 @@
-import { iconList } from "./theme";
-import "./resize";
+import { iconList } from "./theme"
+import "./resize"
 
-export { iconList };
+export { iconList }

@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/app/modules/client/entity/cli-template.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1627550222365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1627551372670,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,27 +1,27 @@\n-import { EntityModel } from '@midwayjs/orm';\r\n-import { BaseEntity } from 'midwayjs-cool-core';\r\n-import { Column } from 'typeorm';\r\n-\r\n-/**\r\n- * 商品\r\n- */\r\n-@EntityModel('client_cli_template')\r\n-export class ClientCliTemplateEntity extends BaseEntity {\r\n-  @Column({ comment: '项目名称' })\r\n-  name: string;\r\n-\r\n-  @Column({ comment: '项目描述' })\r\n-  desc: string;\r\n-\r\n-  @Column({ comment: '适用平台' })\r\n-  type: string;\r\n-\r\n-  @Column({ comment: '克隆地址' })\r\n-  git: string;\r\n-\r\n-  @Column({ comment: '仓库地址' })\r\n-  url: string;\r\n-\r\n-  @Column({ comment: '分支参数' })\r\n-  remote: object;\r\n-}\r\n+import { EntityModel } from '@midwayjs/orm';\n+import { BaseEntity } from 'midwayjs-cool-core';\n+import { Column } from 'typeorm';\n+\n+/**\n+ * 商品\n+ */\n+@EntityModel('client_cli_template')\n+export class ClientCliTemplateEntity extends BaseEntity {\n+  @Column({ comment: '项目名称' })\n+  name: string;\n+\n+  @Column({ comment: '项目描述' })\n+  desc: string;\n+\n+  @Column({ comment: '适用平台' })\n+  type: string;\n+\n+  @Column({ comment: '克隆地址' })\n+  git: string;\n+\n+  @Column({ comment: '仓库地址' })\n+  url: string;\n+\n+  @Column({ comment: '分支参数' })\n+  remote: string;\n+}\n"
+                },
+                {
+                    "date": 1627552710065,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,6 +22,6 @@\n   @Column({ comment: '仓库地址' })\n   url: string;\n \n   @Column({ comment: '分支参数' })\n-  remote: string;\n+  remote: object;\n }\n"
+                },
+                {
+                    "date": 1627552729108,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,8 @@\n   git: string;\n \n   @Column({ comment: '仓库地址' })\n   url: string;\n-\n+  // 序列化处理\n   @Column({ comment: '分支参数' })\n-  remote: object;\n+  remote: string;\n }\n"
+                },
+                {
+                    "date": 1627552734597,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,8 @@\n   git: string;\n \n   @Column({ comment: '仓库地址' })\n   url: string;\n-  // 序列化处理\n+  // 需要序列化处理\n   @Column({ comment: '分支参数' })\n   remote: string;\n }\n"
+                },
+                {
+                    "date": 1627971172916,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,22 +6,22 @@\n  * 商品\n  */\n @EntityModel('client_cli_template')\n export class ClientCliTemplateEntity extends BaseEntity {\n-  @Column({ comment: '项目名称' })\n+  @Column({ comment: '项目名称', default: null })\n   name: string;\n \n-  @Column({ comment: '项目描述' })\n+  @Column({ comment: '项目描述', default: null })\n   desc: string;\n \n-  @Column({ comment: '适用平台' })\n+  @Column({ comment: '适用平台', default: null })\n   type: string;\n \n-  @Column({ comment: '克隆地址' })\n+  @Column({ comment: '克隆地址', default: null })\n   git: string;\n \n-  @Column({ comment: '仓库地址' })\n+  @Column({ comment: '仓库地址', default: null })\n   url: string;\n   // 需要序列化处理\n-  @Column({ comment: '分支参数' })\n+  @Column({ comment: '分支参数', default: null })\n   remote: string;\n }\n"
+                }
+            ],
+            "date": 1627550222365,
+            "name": "Commit-0",
+            "content": "import { EntityModel } from '@midwayjs/orm';\r\nimport { BaseEntity } from 'midwayjs-cool-core';\r\nimport { Column } from 'typeorm';\r\n\r\n/**\r\n * 商品\r\n */\r\n@EntityModel('client_cli_template')\r\nexport class ClientCliTemplateEntity extends BaseEntity {\r\n  @Column({ comment: '项目名称' })\r\n  name: string;\r\n\r\n  @Column({ comment: '项目描述' })\r\n  desc: string;\r\n\r\n  @Column({ comment: '适用平台' })\r\n  type: string;\r\n\r\n  @Column({ comment: '克隆地址' })\r\n  git: string;\r\n\r\n  @Column({ comment: '仓库地址' })\r\n  url: string;\r\n\r\n  @Column({ comment: '分支参数' })\r\n  remote: object;\r\n}\r\n"
+        }
+    ]
+}

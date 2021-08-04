@@ -1,11 +1,11 @@
-import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from "vue-router";
-import { CoolRouter } from "/@/core/types";
-import { routerMode } from "/@/config/env";
+import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw } from "vue-router"
+import { CoolRouter } from "/@/core/types"
+import { routerMode } from "/@/config/env"
 
 // 忽略规则
 const ignore: any = {
 	token: ["/login", "/403", "/404", "/500", "/502"]
-};
+}
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -25,12 +25,12 @@ const routes: Array<RouteRecordRaw> = [
 		name: "404",
 		redirect: "/404"
 	}
-];
+]
 
 const router = createRouter({
 	history: routerMode == "history" ? createWebHistory() : createWebHashHistory(),
 	routes
-}) as CoolRouter;
+}) as CoolRouter
 
-export default router;
-export { ignore };
+export default router
+export { ignore }

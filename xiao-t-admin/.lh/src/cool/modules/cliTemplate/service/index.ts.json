@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/cool/modules/cliTemplate/service/index.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1628059325818,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1628059325818,
+            "name": "Commit-0",
+            "content": "import CliTemplate from \"./info\"\n\nexport default {\n\tcliTemplate: {\n\t\tinfo: new CliTemplate()\n\t}\n}\n"
+        }
+    ]
+}

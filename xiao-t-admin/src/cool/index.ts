@@ -1,5 +1,5 @@
-import Crud from "cl-admin-crud-vue3";
-import "cl-admin-crud-vue3/dist/index.css";
+import Crud from "cl-admin-crud-vue3"
+import "cl-admin-crud-vue3/dist/index.css"
 
 export default {
 	modules: [
@@ -17,6 +17,7 @@ export default {
 					}
 				}
 			}
-		}
+		},
+		"client" // 客户端接口管理
 	]
-};
+}

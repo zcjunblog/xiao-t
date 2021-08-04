@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/cool/modules/cli-template/views/index.vue",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1628059099402,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1628059099402,
+            "name": "Commit-0",
+            "content": "<template>\n\t<cl-crud :ref=\"setRefs('crud')\" @load=\"onLoad\">\n\t\t<el-row type=\"flex\" align=\"middle\">\n\t\t\t<!-- 刷新按钮 -->\n\t\t\t<cl-refresh-btn />\n\t\t\t<!-- 新增按钮 -->\n\t\t\t<cl-add-btn />\n\t\t\t<!-- 删除按钮 -->\n\t\t\t<cl-multi-delete-btn />\n\t\t\t<cl-flex1 />\n\t\t\t<!-- 关键字搜索 -->\n\t\t\t<cl-search-key />\n\t\t</el-row>\n\n\t\t<el-row>\n\t\t\t<!-- 数据表格 -->\n\t\t\t<cl-table :ref=\"setRefs('table')\" v-bind=\"table\" />\n\t\t</el-row>\n\n\t\t<el-row type=\"flex\">\n\t\t\t<cl-flex1 />\n\t\t\t<!-- 分页控件 -->\n\t\t\t<cl-pagination />\n\t\t</el-row>\n\n\t\t<!-- 新增、编辑 -->\n\t\t<cl-upsert :ref=\"setRefs('upsert')\" v-bind=\"upsert\" />\n\t</cl-crud>\n</template>\n\n<script lang=\"ts\">\nimport { defineComponent, inject, reactive } from \"vue\"\nimport { CrudLoad, Upsert, Table } from \"cl-admin-crud-vue3/types\"\nimport { useRefs } from \"/@/core\"\n\nexport default defineComponent({\n\tsetup() {\n\t\tconst { refs, setRefs } = useRefs()\n\t\t// 请求服务\n\t\tconst service = inject<any>(\"service\")\n\n\t\t// 新增、编辑配置\n\t\tconst upsert = reactive<Upsert>({\n\t\t\titems: []\n\t\t})\n\n\t\t// 表格配置\n\t\tconst table = reactive<Table>({\n\t\t\tcolumns: [\n\t\t\t\t{\n\t\t\t\t\tlabel: \"名称\",\n\t\t\t\t\tprop: \"name\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\tlabel: \"创建时间\",\n\t\t\t\t\tprop: \"createTime\"\n\t\t\t\t}\n\t\t\t]\n\t\t})\n\n\t\t// crud 加载\n\t\tfunction onLoad({ ctx, app }: CrudLoad) {\n\t\t\t// 绑定 service\n\t\t\tctx.service(service.xx).done()\n\t\t\tapp.refresh()\n\t\t}\n\n\t\treturn {\n\t\t\trefs,\n\t\t\tsetRefs,\n\t\t\tupsert,\n\t\t\ttable,\n\t\t\tonLoad\n\t\t}\n\t}\n})\n</script>\n"
+        }
+    ]
+}

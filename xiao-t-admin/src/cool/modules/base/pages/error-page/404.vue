@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ErrorPage from "./components/error-page.vue";
+import ErrorPage from "./components/error-page.vue"
 
 export default {
 	cool: {
@@ -15,5 +15,5 @@ export default {
 	components: {
 		ErrorPage
 	}
-};
+}
 </script>

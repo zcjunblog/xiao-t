@@ -11,8 +11,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { isNumber } from "/@/core/utils";
+import { computed, defineComponent } from "vue"
+import { isNumber } from "/@/core/utils"
 
 export default defineComponent({
 	name: "cl-avatar",
@@ -30,20 +30,20 @@ export default defineComponent({
 	},
 
 	setup(props) {
-		const size = isNumber(props.size) ? props.size + "px" : props.size;
+		const size = isNumber(props.size) ? props.size + "px" : props.size
 
 		const style = computed(() => {
 			return {
 				height: size,
 				width: size
-			};
-		});
+			}
+		})
 
 		return {
 			style
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

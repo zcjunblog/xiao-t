@@ -1,7 +1,7 @@
-import { useRefs } from "/@/core";
-import { deepTree } from "/@/core/utils";
-import { ElMessage, ElMessageBox } from "element-plus";
-import { defineComponent, h, inject, ref } from "vue";
+import { useRefs } from "/@/core"
+import { deepTree } from "/@/core/utils"
+import { ElMessage, ElMessageBox } from "element-plus"
+import { defineComponent, h, inject, ref } from "vue"
 
 export default defineComponent({
 	name: "cl-dept-move",
@@ -9,20 +9,20 @@ export default defineComponent({
 	emits: ["success", "error"],
 
 	setup(_: any, { emit }) {
-		const service = inject<any>("service");
-		const { refs, setRefs }: any = useRefs();
+		const service = inject<any>("service")
+		const { refs, setRefs }: any = useRefs()
 
 		// 树形列表
-		const list = ref<any[]>([]);
+		const list = ref<any[]>([])
 
 		// 刷新列表
 		async function refresh() {
-			return await service.base.system.dept.list().then(deepTree);
+			return await service.base.system.dept.list().then(deepTree)
 		}
 
 		// 转移
 		async function toMove(ids: any[]) {
-			list.value = await refresh();
+			list.value = await refresh()
 
 			refs.value.form.open({
 				props: {
@@ -42,11 +42,11 @@ export default defineComponent({
 				on: {
 					submit: (data: any, { done, close }: any) => {
 						if (!data.dept) {
-							ElMessage.warning("请选择部门");
-							return done();
+							ElMessage.warning("请选择部门")
+							return done()
 						}
 
-						const { name, id } = data.dept;
+						const { name, id } = data.dept
 
 						ElMessageBox.confirm(`是否将用户转移到部门 ${name} 下`, "提示", {
 							type: "warning"
@@ -58,21 +58,21 @@ export default defineComponent({
 										userIds: ids
 									})
 									.then((res: any) => {
-										ElMessage.success("转移成功");
-										emit("success", res);
-										close();
+										ElMessage.success("转移成功")
+										emit("success", res)
+										close()
 									})
 									.catch((err: any) => {
-										console.log(err);
-										ElMessage.error(err);
-										emit("error", err);
-										done();
-									});
+										console.log(err)
+										ElMessage.error(err)
+										emit("error", err)
+										done()
+									})
 							})
-							.catch(() => null);
+							.catch(() => null)
 					}
 				}
-			});
+			})
 		}
 
 		return {
@@ -81,7 +81,7 @@ export default defineComponent({
 			setRefs,
 			refresh,
 			toMove
-		};
+		}
 	},
 
 	render(ctx: any) {
@@ -107,14 +107,14 @@ export default defineComponent({
 										node-key="id"
 										highlight-current
 										onNodeClick={(e: any) => {
-											scope["dept"] = e;
+											scope["dept"] = e
 										}}></el-tree>
 								</div>
-							);
+							)
 						}
 					}
 				)}
 			</div>
-		);
+		)
 	}
-});
+})

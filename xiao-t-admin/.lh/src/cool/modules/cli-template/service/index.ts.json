@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/cool/modules/cli-template/service/index.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1628058271032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1628058612683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,1 @@\n-/**\n- * @Created By zhaozc\n- * @date 2021/7/29\n- * @Description:\n- */\n-import { BaseService, Service, Permission } from \"/@/core\"\n-\n-@Service(\"client/cli-template\")\n-class CliTemplate extends BaseService {}\n-\n-export default CliTemplate\n+export default {}\n"
+                },
+                {
+                    "date": 1628058801152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,7 @@\n-export default {}\n+import CliTemplate from \"./info\"\n+\n+export default {\n+\tclitemplate: {\n+\t\tinfo: new CliTemplate()\n+\t}\n+}\n"
+                }
+            ],
+            "date": 1628058271032,
+            "name": "Commit-0",
+            "content": "/**\n * @Created By zhaozc\n * @date 2021/7/29\n * @Description:\n */\nimport { BaseService, Service, Permission } from \"/@/core\"\n\n@Service(\"client/cli-template\")\nclass CliTemplate extends BaseService {}\n\nexport default CliTemplate\n"
+        }
+    ]
+}

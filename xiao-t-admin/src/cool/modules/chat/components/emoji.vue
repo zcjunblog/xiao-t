@@ -28,8 +28,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
-import { useStore } from "vuex";
+import { computed, defineComponent, ref } from "vue"
+import { useStore } from "vuex"
 
 // 表情列表
 const emoji = {
@@ -124,37 +124,37 @@ const emoji = {
 		"worried-face.png",
 		"zipper-mouth-face.png"
 	]
-};
+}
 
 export default defineComponent({
 	emits: ["select"],
 
 	setup(_, { emit }) {
-		const store = useStore();
+		const store = useStore()
 
 		// 是否可见
-		const visible = ref<boolean>(false);
+		const visible = ref<boolean>(false)
 
 		// 表情列表
-		const list = ref<any[]>(emoji.list.map((e) => emoji.url + e));
+		const list = ref<any[]>(emoji.list.map((e) => emoji.url + e))
 
 		// 弹窗宽度
 		const popoverWidth = computed(() => {
-			const { width } = store.getters.browser;
-			return (width > 500 ? 500 : width) - 24;
-		});
+			const { width } = store.getters.browser
+			return (width > 500 ? 500 : width) - 24
+		})
 
 		function open() {
-			visible.value = true;
+			visible.value = true
 		}
 
 		function close() {
-			visible.value = false;
+			visible.value = false
 		}
 
 		function select(e: any) {
-			emit("select", e);
-			close();
+			emit("select", e)
+			close()
 		}
 
 		return {
@@ -164,9 +164,9 @@ export default defineComponent({
 			open,
 			close,
 			select
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss">

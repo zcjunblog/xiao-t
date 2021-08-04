@@ -5,14 +5,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
-import { TableColumn } from "cl-admin-crud-vue3/types";
-import { useRefs } from "/@/core";
-import Test2 from "./render/test2";
+import { defineComponent, onMounted, ref } from "vue"
+import { TableColumn } from "cl-admin-crud-vue3/types"
+import { useRefs } from "/@/core"
+import Test2 from "./render/test2"
 
 export default defineComponent({
 	setup() {
-		const { refs, setRefs } = useRefs();
+		const { refs, setRefs } = useRefs()
 
 		const columns = ref<TableColumn[]>([
 			{
@@ -57,17 +57,17 @@ export default defineComponent({
 				label: "操作",
 				type: "op"
 			}
-		]);
+		])
 
-		onMounted(function () {});
+		onMounted(function () {})
 
 		return {
 			refs,
 			setRefs,
 			columns
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

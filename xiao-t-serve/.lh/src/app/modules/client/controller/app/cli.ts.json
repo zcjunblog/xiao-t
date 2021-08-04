@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/app/modules/client/controller/app/cli.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1628064763048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1628064775842,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n @CoolController({\n   api: ['info', 'list', 'page'],\n   entity: ClientCliTemplateEntity,\n })\n-export class ClientCliTemplateAppController extends BaseController {\n+export class ClientCliAppController extends BaseController {\n   /**\n    * 其他接口\n    */\n }\n"
+                },
+                {
+                    "date": 1628064781886,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,15 @@\n import { Provide } from '@midwayjs/decorator';\n import { CoolController, BaseController } from 'midwayjs-cool-core';\n-import { ClientCliTemplateEntity } from '../../entity/cli';\n+import { ClientCliEntity } from '../../entity/cli';\n \n /**\n  * 商品\n  */\n @Provide()\n @CoolController({\n   api: ['info', 'list', 'page'],\n-  entity: ClientCliTemplateEntity,\n+  entity: ClientCliEntity,\n })\n export class ClientCliAppController extends BaseController {\n   /**\n    * 其他接口\n"
+                }
+            ],
+            "date": 1628064763048,
+            "name": "Commit-0",
+            "content": "import { Provide } from '@midwayjs/decorator';\nimport { CoolController, BaseController } from 'midwayjs-cool-core';\nimport { ClientCliTemplateEntity } from '../../entity/cli';\n\n/**\n * 商品\n */\n@Provide()\n@CoolController({\n  api: ['info', 'list', 'page'],\n  entity: ClientCliTemplateEntity,\n})\nexport class ClientCliTemplateAppController extends BaseController {\n  /**\n   * 其他接口\n   */\n}\n"
+        }
+    ]
+}

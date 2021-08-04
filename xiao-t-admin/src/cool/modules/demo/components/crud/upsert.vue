@@ -5,12 +5,12 @@
 </template>
 
 <script lang="ts">
-import { UpsertItem, UpsertRef } from "cl-admin-crud-vue3/types";
-import { defineComponent, ref } from "vue";
+import { UpsertItem, UpsertRef } from "cl-admin-crud-vue3/types"
+import { defineComponent, ref } from "vue"
 
 export default defineComponent({
 	setup() {
-		const upsertRef = ref<UpsertRef>();
+		const upsertRef = ref<UpsertRef>()
 
 		const items = ref<UpsertItem[]>([
 			{
@@ -86,7 +86,7 @@ export default defineComponent({
 					name: "el-input-number"
 				},
 				append: ({ h }: any) => {
-					return h("p", "元");
+					return h("p", "元")
 				},
 				rules: {
 					required: true,
@@ -120,7 +120,7 @@ export default defineComponent({
 					],
 					props: {
 						onChange(v: any) {
-							upsertRef.value?.toggleItem("remark", v == 1);
+							upsertRef.value?.toggleItem("remark", v == 1)
 						}
 					}
 				}
@@ -132,12 +132,12 @@ export default defineComponent({
 					name: "el-input"
 				}
 			}
-		]);
+		])
 
 		return {
 			items,
 			upsertRef
-		};
+		}
 	}
-});
+})
 </script>

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/app/modules/client/service/cliTemplate.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1628060407488,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1628060407488,
+            "name": "Commit-0",
+            "content": "import { Inject, Provide } from '@midwayjs/decorator';\nimport { BaseService, Cache, CoolTransaction } from 'midwayjs-cool-core';\nimport { InjectEntityModel } from '@midwayjs/orm';\nimport { Repository } from 'typeorm';\nimport { ClientCliTemplateEntity } from '../entity/cliTemplate';\n\n/**\n * 商品\n */\n@Provide()\nexport class DemoGoodsService extends BaseService {\n  @InjectEntityModel(ClientCliTemplateEntity)\n  demoAppGoodsEntity: Repository<ClientCliTemplateEntity>;\n}\n"
+        }
+    ]
+}

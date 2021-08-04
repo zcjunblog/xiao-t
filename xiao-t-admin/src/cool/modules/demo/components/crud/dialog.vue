@@ -15,30 +15,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref } from "vue"
 
 export default defineComponent({
 	setup() {
-		const visible = ref<boolean>(false);
+		const visible = ref<boolean>(false)
 
 		function open() {
-			visible.value = true;
+			visible.value = true
 		}
 
 		function onOpen() {
-			console.log("open");
+			console.log("open")
 		}
 
 		function onOpened() {
-			console.log("opened");
+			console.log("opened")
 		}
 
 		function onClose() {
-			console.log("close");
+			console.log("close")
 		}
 
 		function onClosed() {
-			console.log("closed");
+			console.log("closed")
 		}
 
 		return {
@@ -48,9 +48,9 @@ export default defineComponent({
 			onOpened,
 			onClose,
 			onClosed
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

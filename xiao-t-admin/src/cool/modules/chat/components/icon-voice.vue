@@ -14,29 +14,29 @@ export default {
 		return {
 			timer: null,
 			index: ""
-		};
+		}
 	},
 
 	watch: {
 		play(val) {
-			clearInterval(this.timer);
+			clearInterval(this.timer)
 
 			if (val) {
-				this.index = 1;
+				this.index = 1
 
 				this.timer = setInterval(() => {
 					if (this.index == 1) {
-						this.index = "";
+						this.index = ""
 					} else {
-						this.index += 1;
+						this.index += 1
 					}
-				}, 500);
+				}, 500)
 			} else {
-				this.index = "";
+				this.index = ""
 			}
 		}
 	}
-};
+}
 </script>
 
 <style lang="scss" scoped>

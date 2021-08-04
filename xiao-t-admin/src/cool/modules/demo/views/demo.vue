@@ -9,13 +9,13 @@
 </template>
 
 <script lang="ts">
-import BClUpload from "../components/demo/b-cl-upload.vue";
-import BVCopy from "../components/demo/b-v-copy.vue";
-import BIconSvg from "../components/demo/b-icon-svg.vue";
-import BClCrud from "../components/demo/b-cl-crud.vue";
-import BClContextMenu from "../components/demo/b-cl-context-menu.vue";
-import BErrorPage from "../components/demo/b-error-page.vue";
-import BClEditorQuill from "../components/demo/b-cl-editor-quill.vue";
+import BClUpload from "../components/demo/b-cl-upload.vue"
+import BVCopy from "../components/demo/b-v-copy.vue"
+import BIconSvg from "../components/demo/b-icon-svg.vue"
+import BClCrud from "../components/demo/b-cl-crud.vue"
+import BClContextMenu from "../components/demo/b-cl-context-menu.vue"
+import BErrorPage from "../components/demo/b-error-page.vue"
+import BClEditorQuill from "../components/demo/b-cl-editor-quill.vue"
 
 export default {
 	name: "demo",
@@ -41,9 +41,9 @@ export default {
 				"b-error-page",
 				"b-cl-editor-quill"
 			]
-		};
+		}
 	}
-};
+}
 </script>
 
 <style lang="scss">

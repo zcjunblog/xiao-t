@@ -1,6 +1,6 @@
-import dayjs from "dayjs";
+import dayjs from "dayjs"
 
-let id = 10;
+let id = 10
 
 export const UserList = [
 	{
@@ -39,31 +39,31 @@ export const UserList = [
 		price: 160.23,
 		status: 1
 	}
-];
+]
 
 export const TestService = {
 	page: (p: any) => {
-		console.log("GET[page]", p);
+		console.log("GET[page]", p)
 
-		let total = 0;
+		let total = 0
 
 		const list = UserList.filter((e, i) => {
 			if (p.name) {
-				return e.name.includes(p.name);
+				return e.name.includes(p.name)
 			}
 
 			if (![undefined, null, ""].includes(p.status)) {
-				return e.status === p.status;
+				return e.status === p.status
 			}
 
-			total++;
+			total++
 
 			if (i >= (p.page - 1) * p.size && i < p.page * p.size) {
-				return true;
+				return true
 			} else {
-				return false;
+				return false
 			}
-		});
+		})
 
 		return Promise.resolve({
 			list,
@@ -72,38 +72,38 @@ export const TestService = {
 				size: p.size,
 				total
 			}
-		});
+		})
 	},
 	info: (d: any) => {
-		console.log("GET[info]", d);
+		console.log("GET[info]", d)
 		return new Promise((resolve) => {
 			setTimeout(() => {
-				resolve(UserList.find((e) => e.id == d.id));
-			}, 500);
-		});
+				resolve(UserList.find((e) => e.id == d.id))
+			}, 500)
+		})
 	},
 	add: (d: any) => {
-		console.log("POST[add]", d);
+		console.log("POST[add]", d)
 		UserList.push({
 			...d,
 			id: id++,
 			createTime: dayjs().format("YYYY年MM月DD日")
-		});
-		return Promise.resolve();
+		})
+		return Promise.resolve()
 	},
 	delete: (d: any) => {
-		console.log("POST[delete]", d);
-		const ids = d.ids.split(",");
+		console.log("POST[delete]", d)
+		const ids = d.ids.split(",")
 		ids.forEach((id: any) => {
-			const index = UserList.findIndex((e) => e.id == id);
-			UserList.splice(index, 1);
-		});
-		return Promise.resolve();
+			const index = UserList.findIndex((e) => e.id == id)
+			UserList.splice(index, 1)
+		})
+		return Promise.resolve()
 	},
 	update: (d: any) => {
-		console.log("POST[update]", d);
-		const item = UserList.find((e) => e.id == d.id);
-		Object.assign(item, d);
-		return Promise.resolve();
+		console.log("POST[update]", d)
+		const item = UserList.find((e) => e.id == d.id)
+		Object.assign(item, d)
+		return Promise.resolve()
 	}
-};
+}

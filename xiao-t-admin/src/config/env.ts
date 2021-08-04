@@ -1,34 +1,34 @@
-import store from "store";
-import { getUrlParam } from "/@/core/utils";
-import { MenuItem } from "/$/base/types";
+import store from "store"
+import { getUrlParam } from "/@/core/utils"
+import { MenuItem } from "/$/base/types"
 
 // 路由模式
-const routerMode: String = "history";
+const routerMode: String = "history"
 
 // 开发模式
-const isDev: Boolean = import.meta.env.MODE === "development";
+const isDev: Boolean = import.meta.env.MODE === "development"
 
 // Host
-const host: String = "https://show.cool-admin.com";
+const host: String = "https://show.cool-admin.com"
 
 // 请求地址
 const baseUrl: String = (function () {
-	let proxy = getUrlParam("proxy");
-	console.log("proxy", proxy);
+	let proxy = getUrlParam("proxy")
 	if (proxy) {
-		store.set("proxy", proxy);
+		store.set("proxy", proxy)
 	} else {
-		proxy = store.get("proxy") || "dev";
+		proxy = store.get("proxy") || "dev"
 	}
-	console.log("store", store);
-	return isDev ? `/${proxy}/admin` : `/api/admin`;
-})();
-console.log("baseUrl", baseUrl);
+	// console.log("proxy", proxy)
+	// console.log("store", store)
+	return isDev ? `/${proxy}/admin` : `/api/admin`
+})()
+// console.log("baseUrl", baseUrl)
 // Socket
-const socketUrl: String = (isDev ? `${host}` : "") + "/socket";
+const socketUrl: String = (isDev ? `${host}` : "") + "/socket"
 
 // 阿里字体图标库 https://at.alicdn.com/t/**.css
-const iconfontUrl = ``;
+const iconfontUrl = ``
 
 // 程序配置参数
 const app: any = store.get("__app__") || {
@@ -45,9 +45,9 @@ const app: any = store.get("__app__") || {
 		color: "", // 主题色
 		url: "" // 主题样式地址
 	}
-};
+}
 
 // 自定义菜单列表
-const menuList: MenuItem[] = [];
+const menuList: MenuItem[] = []
 
-export { routerMode, baseUrl, socketUrl, iconfontUrl, app, isDev, menuList };
+export { routerMode, baseUrl, socketUrl, iconfontUrl, app, isDev, menuList }

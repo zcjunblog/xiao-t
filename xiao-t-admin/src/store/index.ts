@@ -1,8 +1,8 @@
-import { createStore } from "vuex";
-import { CoolStore } from "/@/core/types";
+import { createStore } from "vuex"
+import { CoolStore } from "/@/core/types"
 
 const store = createStore({
 	strict: true
-}) as CoolStore<any>;
+}) as CoolStore<any>
 
-export default store;
+export default store

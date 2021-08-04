@@ -6,16 +6,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref } from "vue";
-import { ElMessage } from "element-plus";
+import { defineComponent, inject, ref } from "vue"
+import { ElMessage } from "element-plus"
 
 export default defineComponent({
 	emits: ["update:modelValue", "change"],
 
 	setup(_, { emit }) {
-		const base64 = ref("");
-		const svg = ref("");
-		const service = inject<any>("service");
+		const base64 = ref("")
+		const svg = ref("")
+		const service = inject<any>("service")
 
 		const refresh = () => {
 			service.base.open
@@ -25,32 +25,32 @@ export default defineComponent({
 				})
 				.then(({ captchaId, data }: any) => {
 					if (data.includes(";base64,")) {
-						base64.value = data;
+						base64.value = data
 					} else {
-						svg.value = data;
+						svg.value = data
 					}
 
-					emit("update:modelValue", captchaId);
+					emit("update:modelValue", captchaId)
 					emit("change", {
 						base64,
 						svg,
 						captchaId
-					});
+					})
 				})
 				.catch((err: string) => {
-					ElMessage.error(err);
-				});
-		};
+					ElMessage.error(err)
+				})
+		}
 
-		refresh();
+		refresh()
 
 		return {
 			base64,
 			svg,
 			refresh
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

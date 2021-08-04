@@ -53,42 +53,42 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, onUnmounted, reactive, ref } from "vue";
-import { useStore } from "vuex";
-import { ElMessage } from "element-plus";
-import { isEmpty } from "/@/core/utils";
-import { ContextMenu } from "cl-admin-crud-vue3";
-import { parseContent } from "../utils";
+import { computed, defineComponent, inject, onUnmounted, reactive, ref } from "vue"
+import { useStore } from "vuex"
+import { ElMessage } from "element-plus"
+import { isEmpty } from "/@/core/utils"
+import { ContextMenu } from "cl-admin-crud-vue3"
+import { parseContent } from "../utils"
 
 export default defineComponent({
 	setup() {
-		const store = useStore();
-		const service = inject<any>("service");
-		const mitt = inject<any>("mitt");
+		const store = useStore()
+		const service = inject<any>("service")
+		const mitt = inject<any>("mitt")
 
 		// 当前会话信息
-		const session = computed(() => store.getters.session);
+		const session = computed(() => store.getters.session)
 		// 是否显示会话列表
-		const sessionVisible = computed(() => store.getters.sessionVisible);
+		const sessionVisible = computed(() => store.getters.sessionVisible)
 		// 浏览器信息
-		const browser = computed(() => store.getters.browser);
+		const browser = computed(() => store.getters.browser)
 
 		// 加载状态
-		const loading = ref<boolean>(false);
+		const loading = ref<boolean>(false)
 
 		// 分页信息
 		const pagination = reactive<any>({
 			page: 1,
 			size: 100,
 			total: 0
-		});
+		})
 
 		// 关键字筛选
-		const keyWord = ref<string>("");
+		const keyWord = ref<string>("")
 
 		// 刷新列表
 		async function refresh(params?: any) {
-			loading.value = true;
+			loading.value = true
 
 			const res = await service.chat.session
 				.page({
@@ -99,29 +99,29 @@ export default defineComponent({
 					sort: "desc"
 				})
 				.then((res: any) => {
-					store.commit("SET_SESSION_LIST", res.list);
-					Object.assign(pagination, res.pagination);
-					return res;
+					store.commit("SET_SESSION_LIST", res.list)
+					Object.assign(pagination, res.pagination)
+					return res
 				})
 				.catch((err: string) => {
-					ElMessage.error(err);
-					return Promise.reject(err);
-				});
+					ElMessage.error(err)
+					return Promise.reject(err)
+				})
 
-			loading.value = false;
-			return res;
+			loading.value = false
+			return res
 		}
 
 		// 搜索关键字
 		function onSearch() {
-			refresh({ page: 1 });
+			refresh({ page: 1 })
 		}
 
 		// 设置会话
 		function setSession(item: any) {
 			if (item) {
-				store.commit("SET_SESSION", item);
-				mitt.emit("message.refresh", { page: 1 });
+				store.commit("SET_SESSION", item)
+				mitt.emit("message.refresh", { page: 1 })
 			}
 		}
 
@@ -129,14 +129,14 @@ export default defineComponent({
 		function toDetail(item?: any) {
 			if (item) {
 				// 点击关闭弹窗
-				if (browser.value.isMini) store.commit("CLOSE_SESSION");
+				if (browser.value.isMini) store.commit("CLOSE_SESSION")
 
 				// 设置为当前会话
 				if (!session.value || session.value.id != item.id) {
-					setSession(item);
+					setSession(item)
 				}
 			} else {
-				store.commit("CLEAR_SESSION");
+				store.commit("CLEAR_SESSION")
 			}
 		}
 
@@ -144,16 +144,16 @@ export default defineComponent({
 		const list = computed(() => {
 			return store.getters.sessionList
 				.map((e: any) => {
-					const { _text } = parseContent(e);
+					const { _text } = parseContent(e)
 					return {
 						...e,
 						lastMessage: _text
-					};
+					}
 				})
 				.sort((a: any, b: any) => {
-					return a.updateTime < b.updateTime ? 1 : -1;
-				});
-		});
+					return a.updateTime < b.updateTime ? 1 : -1
+				})
+		})
 
 		// 右键菜单
 		function openCM(e: any, id: any, index: number) {
@@ -165,35 +165,35 @@ export default defineComponent({
 						callback: (_: any, done: Function) => {
 							service.chat.session.delete({
 								ids: id
-							});
+							})
 
-							list.value.splice(index, 1);
+							list.value.splice(index, 1)
 
 							if (id == session.value.id) {
-								toDetail();
+								toDetail()
 							}
 
-							done();
+							done()
 						}
 					}
 				]
-			});
+			})
 		}
 
 		// PC 端下首次请求读取第一个消息
 		refresh().then((res: any) => {
 			if (!isEmpty(res.list) && !browser.value.isMini) {
-				setSession(res.list[0]);
+				setSession(res.list[0])
 			}
-		});
+		})
 
 		// 事件监听
-		mitt.on("session.refresh", refresh);
+		mitt.on("session.refresh", refresh)
 
 		// 销毁
 		onUnmounted(function () {
-			mitt.off("session.refresh", refresh);
-		});
+			mitt.off("session.refresh", refresh)
+		})
 
 		return {
 			session,
@@ -207,9 +207,9 @@ export default defineComponent({
 			refresh,
 			onSearch,
 			toDetail
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

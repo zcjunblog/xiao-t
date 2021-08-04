@@ -47,28 +47,28 @@
 </template>
 
 <script lang="ts">
-import { ElMessage } from "element-plus";
-import { defineComponent, inject, reactive } from "vue";
-import { checkPerm } from "/$/base";
-import { useRefs } from "/@/core";
-import { CrudLoad, RefreshOp, Table } from "cl-admin-crud-vue3/types";
+import { ElMessage } from "element-plus"
+import { defineComponent, inject, reactive } from "vue"
+import { checkPerm } from "/$/base"
+import { useRefs } from "/@/core"
+import { CrudLoad, RefreshOp, Table } from "cl-admin-crud-vue3/types"
 
 export default defineComponent({
 	name: "plugin",
 
 	setup() {
-		const service = inject<any>("service");
-		const { refs, setRefs } = useRefs();
+		const service = inject<any>("service")
+		const { refs, setRefs } = useRefs()
 
 		// 编辑权限
-		const { config, getConfig, enable } = service.base.plugin.info.permission;
+		const { config, getConfig, enable } = service.base.plugin.info.permission
 
 		const perms = reactive<any>({
 			edit: checkPerm({
 				and: [config, getConfig]
 			}),
 			enable: checkPerm(enable)
-		});
+		})
 
 		// crud 加载
 		function onLoad({ ctx, app }: CrudLoad) {
@@ -78,22 +78,22 @@ export default defineComponent({
 						page: "list"
 					}
 				})
-				.done();
-			app.refresh();
+				.done()
+			app.refresh()
 		}
 
 		// 刷新钩子
 		function onRefresh(params: any, { next, render }: RefreshOp) {
 			next(params).then((res: any) => {
 				const list = res.map((e: any) => {
-					e._enable = e.enable ? true : false;
-					return e;
-				});
+					e._enable = e.enable ? true : false
+					return e
+				})
 
 				render(list, {
 					total: res.length
-				});
-			});
+				})
+			})
 		}
 
 		// 开启、关闭
@@ -104,25 +104,25 @@ export default defineComponent({
 					enable: val
 				})
 				.then(() => {
-					ElMessage.success(val ? "开启成功" : "关闭成功");
+					ElMessage.success(val ? "开启成功" : "关闭成功")
 				})
 				.catch((err: string) => {
-					ElMessage.error(err);
-				});
+					ElMessage.error(err)
+				})
 		}
 
 		// 打开配置
 		async function openConf({ name, namespace, view }: any) {
 			const form = await service.base.plugin.info.getConfig({
 				namespace
-			});
+			})
 
-			let items = [];
+			let items = []
 
 			try {
-				items = JSON.parse(view);
+				items = JSON.parse(view)
 			} catch (e) {
-				items = [];
+				items = []
 			}
 
 			refs.value.form.open({
@@ -137,16 +137,16 @@ export default defineComponent({
 								config: data
 							})
 							.then(() => {
-								ElMessage.success("保存成功");
-								close();
+								ElMessage.success("保存成功")
+								close()
 							})
 							.catch((err: string) => {
-								ElMessage.error(err);
-								done();
-							});
+								ElMessage.error(err)
+								done()
+							})
 					}
 				}
-			});
+			})
 		}
 
 		// 表格配置
@@ -164,10 +164,10 @@ export default defineComponent({
 						label: "配置",
 						hidden: !perms.edit || !scope.view,
 						callback: (_: any, done: Function) => {
-							openConf(scope);
-							done();
+							openConf(scope)
+							done()
 						}
-					};
+					}
 				}
 			],
 			columns: [
@@ -247,7 +247,7 @@ export default defineComponent({
 					buttons: ["slot-conf"]
 				}
 			]
-		});
+		})
 
 		return {
 			refs,
@@ -258,7 +258,7 @@ export default defineComponent({
 			onRefresh,
 			onEnableChange,
 			openConf
-		};
+		}
 	}
-});
+})
 </script>

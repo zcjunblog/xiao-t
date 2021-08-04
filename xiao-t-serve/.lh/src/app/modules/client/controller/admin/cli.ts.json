@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/app/modules/client/controller/admin/cli.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1628064763048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1628066847818,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n  * 商品\n  */\n @Provide()\n @CoolController({\n-  api: ['add', 'delete', 'update'],\n+  api: ['info', 'list', 'page', 'add', 'delete', 'update'],\n   entity: ClientCliEntity,\n })\n export class ClientCliAdminController extends BaseController {\n   /**\n"
+                }
+            ],
+            "date": 1628064763047,
+            "name": "Commit-0",
+            "content": "import { Provide } from '@midwayjs/decorator';\nimport { CoolController, BaseController } from 'midwayjs-cool-core';\nimport { ClientCliEntity } from '../../entity/cli';\n\n/**\n * 商品\n */\n@Provide()\n@CoolController({\n  api: ['add', 'delete', 'update'],\n  entity: ClientCliEntity,\n})\nexport class ClientCliAdminController extends BaseController {\n  /**\n   * 其他接口\n   */\n}\n"
+        }
+    ]
+}

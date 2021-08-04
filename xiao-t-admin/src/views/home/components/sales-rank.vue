@@ -62,12 +62,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref } from "vue"
 
 export default defineComponent({
 	setup() {
-		const date = ref<Array<string>>([]);
-		const type = ref<string>("day");
+		const date = ref<Array<string>>([])
+		const type = ref<string>("day")
 		const types = ref<Array<any>>([
 			{
 				label: "今日",
@@ -85,20 +85,20 @@ export default defineComponent({
 				label: "全年",
 				value: "year"
 			}
-		]);
+		])
 
 		const changeDate = (value: string) => {
-			type.value = value;
-		};
+			type.value = value
+		}
 
 		return {
 			changeDate,
 			types,
 			date,
 			type
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

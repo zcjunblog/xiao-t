@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/app/modules/client/controller/app/cli-template.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1627553113006,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1627553200399,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,21 +1,17 @@\n import { Provide } from '@midwayjs/decorator';\r\n import { CoolController, BaseController } from 'midwayjs-cool-core';\r\n-import { DemoAppGoodsEntity } from '../../entity/goods';\r\n+import { ClientCliTemplateEntity } from '../../entity/cli-template';\r\n \r\n /**\r\n  * 商品\r\n  */\r\n @Provide()\r\n @CoolController({\r\n   api: ['add', 'delete', 'update', 'info', 'list', 'page'],\r\n-  entity: DemoAppGoodsEntity,\r\n+  entity: ClientCliTemplateEntity,\r\n })\r\n-export class DemoAppGoodsController extends BaseController {\r\n+export class ClientCliTemplateController extends BaseController {\r\n   /**\r\n    * 其他接口\r\n    */\r\n-  @Get('/other')\r\n-  async other() {\r\n-    return this.ok('hello, cool-admin!!!');\r\n-  }\r\n-}\r\n+\r\n"
+                },
+                {
+                    "date": 1627553206478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,5 +13,5 @@\n export class ClientCliTemplateController extends BaseController {\r\n   /**\r\n    * 其他接口\r\n    */\r\n-\r\n+}\r\n"
+                },
+                {
+                    "date": 1627553248787,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,17 +1,17 @@\n-import { Provide } from '@midwayjs/decorator';\r\n-import { CoolController, BaseController } from 'midwayjs-cool-core';\r\n-import { ClientCliTemplateEntity } from '../../entity/cli-template';\r\n-\r\n-/**\r\n- * 商品\r\n- */\r\n-@Provide()\r\n-@CoolController({\r\n-  api: ['add', 'delete', 'update', 'info', 'list', 'page'],\r\n-  entity: ClientCliTemplateEntity,\r\n-})\r\n-export class ClientCliTemplateController extends BaseController {\r\n-  /**\r\n-   * 其他接口\r\n-   */\r\n-}\r\n+import { Provide } from '@midwayjs/decorator';\n+import { CoolController, BaseController } from 'midwayjs-cool-core';\n+import { ClientCliTemplateEntity } from '../../entity/cli-template';\n+\n+/**\n+ * 商品\n+ */\n+@Provide()\n+@CoolController({\n+  api: ['add', 'delete', 'update', 'info', 'list', 'page'],\n+  entity: ClientCliTemplateEntity,\n+})\n+export class ClientCliTemplateController extends BaseController {\n+  /**\n+   * 其他接口\n+   */\n+}\n"
+                },
+                {
+                    "date": 1628056885566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n  * 商品\n  */\n @Provide()\n @CoolController({\n-  api: ['add', 'delete', 'update', 'info', 'list', 'page'],\n+  api: ['info', 'list', 'page'],\n   entity: ClientCliTemplateEntity,\n })\n export class ClientCliTemplateController extends BaseController {\n   /**\n"
+                },
+                {
+                    "date": 1628057007953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n @CoolController({\n   api: ['info', 'list', 'page'],\n   entity: ClientCliTemplateEntity,\n })\n-export class ClientCliTemplateController extends BaseController {\n+export class ClientCliTemplateAppController extends BaseController {\n   /**\n    * 其他接口\n    */\n }\n"
+                }
+            ],
+            "date": 1627553113006,
+            "name": "Commit-0",
+            "content": "import { Provide } from '@midwayjs/decorator';\r\nimport { CoolController, BaseController } from 'midwayjs-cool-core';\r\nimport { DemoAppGoodsEntity } from '../../entity/goods';\r\n\r\n/**\r\n * 商品\r\n */\r\n@Provide()\r\n@CoolController({\r\n  api: ['add', 'delete', 'update', 'info', 'list', 'page'],\r\n  entity: DemoAppGoodsEntity,\r\n})\r\nexport class DemoAppGoodsController extends BaseController {\r\n  /**\r\n   * 其他接口\r\n   */\r\n  @Get('/other')\r\n  async other() {\r\n    return this.ok('hello, cool-admin!!!');\r\n  }\r\n}\r\n"
+        }
+    ]
+}

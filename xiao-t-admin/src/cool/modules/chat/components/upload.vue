@@ -11,9 +11,9 @@
 </template>
 
 <script lang="ts">
-import { ElFile } from "element-plus/lib/el-upload/src/upload.type";
-import { defineComponent, inject } from "vue";
-import { useStore } from "vuex";
+import { ElFile } from "element-plus/lib/el-upload/src/upload.type"
+import { defineComponent, inject } from "vue"
+import { useStore } from "vuex"
 
 export default defineComponent({
 	props: {
@@ -24,8 +24,8 @@ export default defineComponent({
 	emits: ["before-upload", "success"],
 
 	setup(props, { emit }) {
-		const store = useStore();
-		const chat = inject<any>("chat");
+		const store = useStore()
+		const chat = inject<any>("chat")
 
 		// 上传前
 		function onBeforeUpload(file: ElFile) {
@@ -41,26 +41,26 @@ export default defineComponent({
 					progress: "0%",
 					contentType: chat.modes.indexOf(props.name),
 					...options
-				};
+				}
 
-				emit("before-upload", data);
+				emit("before-upload", data)
 			}
 
 			// 图片预览
 			if (props.name == "image") {
-				const fileReader = new FileReader();
+				const fileReader = new FileReader()
 
 				fileReader.onload = (e: any) => {
-					const imageUrl = e.target.result;
-					const image = new Image();
+					const imageUrl = e.target.result
+					const image = new Image()
 
 					image.onload = () => {
-						let height = 0;
-						let width = 0;
+						let height = 0
+						let width = 0
 
 						if (image.width > 200) {
-							width = 200;
-							height = (image.height * 200) / image.width;
+							width = 200
+							height = (image.height * 200) / image.width
 						}
 
 						next({
@@ -71,15 +71,15 @@ export default defineComponent({
 								height: height + "px",
 								width: width + "px"
 							}
-						});
-					};
+						})
+					}
 
-					image.src = imageUrl;
-				};
+					image.src = imageUrl
+				}
 
-				fileReader.readAsDataURL(file);
+				fileReader.readAsDataURL(file)
 			} else {
-				next();
+				next()
 			}
 		}
 
@@ -90,7 +90,7 @@ export default defineComponent({
 				data: {
 					progress: e.percent + "%"
 				}
-			});
+			})
 		}
 
 		// 上传成功
@@ -104,16 +104,16 @@ export default defineComponent({
 					}
 				},
 				callback: (data: any) => {
-					emit("success", data);
+					emit("success", data)
 				}
-			});
+			})
 		}
 
 		return {
 			onBeforeUpload,
 			onUploadProgress,
 			onUploadSuccess
-		};
+		}
 	}
-});
+})
 </script>

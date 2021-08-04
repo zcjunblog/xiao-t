@@ -1,4 +1,4 @@
-import { BaseService, Service, Permission } from "/@/core";
+import { BaseService, Service, Permission } from "/@/core"
 
 @Service({
 	namespace: "im/session",
@@ -9,8 +9,8 @@ class ImSession extends BaseService {
 	unreadCount() {
 		return this.request({
 			url: "/unreadCount"
-		});
+		})
 	}
 }
 
-export default ImSession;
+export default ImSession

@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/cool/index.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1628058389234,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1628059259839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,7 +17,7 @@\n \t\t\t\t\t}\n \t\t\t\t}\n \t\t\t}\n \t\t},\n-\t\t\"cli-template\" // 代码模板克隆\n+\t\t\"cliTemplate\" // 代码模板克隆\n \t]\n }\n"
+                },
+                {
+                    "date": 1628063217790,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,23 @@\n+import Crud from \"cl-admin-crud-vue3\"\n+import \"cl-admin-crud-vue3/dist/index.css\"\n+\n+export default {\n+\tmodules: [\n+\t\t// crud 模块\n+\t\t{\n+\t\t\tname: \"crud\",\n+\t\t\tvalue: Crud,\n+\t\t\toptions: {\n+\t\t\t\tcrud: {\n+\t\t\t\t\tdict: {\n+\t\t\t\t\t\tsort: {\n+\t\t\t\t\t\t\tprop: \"order\",\n+\t\t\t\t\t\t\torder: \"sort\"\n+\t\t\t\t\t\t}\n+\t\t\t\t\t}\n+\t\t\t\t}\n+\t\t\t}\n+\t\t},\n+\t\t\"client\" // 代码模板克隆\n+\t]\n+}\n"
+                },
+                {
+                    "date": 1628063232930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,30 +17,7 @@\n \t\t\t\t\t}\n \t\t\t\t}\n \t\t\t}\n \t\t},\n-\t\t\"client\" // 代码模板克隆\n+\t\t\"client\" // 客户端接口管理\n \t]\n }\n-import Crud from \"cl-admin-crud-vue3\"\n-import \"cl-admin-crud-vue3/dist/index.css\"\n-\n-export default {\n-\tmodules: [\n-\t\t// crud 模块\n-\t\t{\n-\t\t\tname: \"crud\",\n-\t\t\tvalue: Crud,\n-\t\t\toptions: {\n-\t\t\t\tcrud: {\n-\t\t\t\t\tdict: {\n-\t\t\t\t\t\tsort: {\n-\t\t\t\t\t\t\tprop: \"order\",\n-\t\t\t\t\t\t\torder: \"sort\"\n-\t\t\t\t\t\t}\n-\t\t\t\t\t}\n-\t\t\t\t}\n-\t\t\t}\n-\t\t},\n-\t\t\"cliTemplate\" // 代码模板克隆\n-\t]\n-}\n"
+                }
+            ],
+            "date": 1628058389234,
+            "name": "Commit-0",
+            "content": "import Crud from \"cl-admin-crud-vue3\"\nimport \"cl-admin-crud-vue3/dist/index.css\"\n\nexport default {\n\tmodules: [\n\t\t// crud 模块\n\t\t{\n\t\t\tname: \"crud\",\n\t\t\tvalue: Crud,\n\t\t\toptions: {\n\t\t\t\tcrud: {\n\t\t\t\t\tdict: {\n\t\t\t\t\t\tsort: {\n\t\t\t\t\t\t\tprop: \"order\",\n\t\t\t\t\t\t\torder: \"sort\"\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t\"cli-template\" // 代码模板克隆\n\t]\n}\n"
+        }
+    ]
+}

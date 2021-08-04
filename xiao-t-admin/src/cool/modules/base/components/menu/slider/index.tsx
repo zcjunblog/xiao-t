@@ -1,43 +1,43 @@
-import { useStore } from "vuex";
-import { computed, defineComponent, h, ref, watch } from "vue";
-import "./index.scss";
-import { useRoute, useRouter } from "vue-router";
+import { useStore } from "vuex"
+import { computed, defineComponent, h, ref, watch } from "vue"
+import "./index.scss"
+import { useRoute, useRouter } from "vue-router"
 
 export default defineComponent({
 	name: "cl-menu-slider",
 
 	setup() {
-		const router = useRouter();
-		const route = useRoute();
-		const store = useStore();
+		const router = useRouter()
+		const route = useRoute()
+		const store = useStore()
 
 		// 是否可见
-		const visible = ref<boolean>(true);
+		const visible = ref<boolean>(true)
 		// 菜单列表
-		const menuList = computed(() => store.getters.menuList);
+		const menuList = computed(() => store.getters.menuList)
 		// 菜单是否折叠
-		const menuCollapse = computed(() => store.getters.menuCollapse);
+		const menuCollapse = computed(() => store.getters.menuCollapse)
 		// 浏览器信息
-		const browser: any = computed(() => store.getters.browser);
+		const browser: any = computed(() => store.getters.browser)
 
 		// 页面跳转
 		function toView(url: string) {
 			if (url != route.path) {
-				router.push(url);
+				router.push(url)
 			}
 		}
 
 		// 刷新菜单
 		function refresh() {
-			visible.value = false;
+			visible.value = false
 
 			setTimeout(() => {
-				visible.value = true;
-			}, 0);
+				visible.value = true
+			}, 0)
 		}
 
 		// 监听菜单变化
-		watch(menuList, refresh);
+		watch(menuList, refresh)
 
 		return {
 			route,
@@ -47,7 +47,7 @@ export default defineComponent({
 			browser,
 			toView,
 			refresh
-		};
+		}
 	},
 
 	render(ctx: any) {
@@ -55,7 +55,7 @@ export default defineComponent({
 			return list
 				.filter((e: any) => e.isShow)
 				.map((e: any) => {
-					let html = null;
+					let html = null
 
 					if (e.type == 0) {
 						html = h(
@@ -74,13 +74,13 @@ export default defineComponent({
 											<icon-svg name={e.icon}></icon-svg>
 											<span>{e.name}</span>
 										</span>
-									);
+									)
 								},
 								default() {
-									return deepMenu(e.children, index + 1);
+									return deepMenu(e.children, index + 1)
 								}
 							}
-						);
+						)
 					} else {
 						html = h(
 							<el-menu-item></el-menu-item>,
@@ -90,20 +90,20 @@ export default defineComponent({
 							},
 							{
 								title() {
-									return <span>{e.name}</span>;
+									return <span>{e.name}</span>
 								},
 								default() {
-									return <icon-svg name={e.icon}></icon-svg>;
+									return <icon-svg name={e.icon}></icon-svg>
 								}
 							}
-						);
+						)
 					}
 
-					return html;
-				});
+					return html
+				})
 		}
 
-		const children = deepMenu(ctx.menuList, 1);
+		const children = deepMenu(ctx.menuList, 1)
 
 		return (
 			ctx.visible && (
@@ -118,6 +118,6 @@ export default defineComponent({
 					</el-menu>
 				</div>
 			)
-		);
+		)
 	}
-});
+})

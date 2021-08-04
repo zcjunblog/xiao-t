@@ -1,4 +1,4 @@
-import { BaseService, Service } from "/@/core";
+import { BaseService, Service } from "/@/core"
 
 @Service("base/open")
 class Open extends BaseService {
@@ -19,7 +19,7 @@ class Open extends BaseService {
 				captchaId,
 				verifyCode
 			}
-		});
+		})
 	}
 
 	/**
@@ -36,7 +36,7 @@ class Open extends BaseService {
 				height,
 				width
 			}
-		});
+		})
 	}
 
 	/**
@@ -49,8 +49,8 @@ class Open extends BaseService {
 			params: {
 				refreshToken: token
 			}
-		});
+		})
 	}
 }
 
-export default Open;
+export default Open

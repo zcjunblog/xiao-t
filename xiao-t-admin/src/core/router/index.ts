@@ -1,32 +1,32 @@
-import { ElMessage } from "element-plus";
-import store from "/@/store";
-import router, { ignore } from "/@/router";
-import storage from "../utils/storage";
-import { cloneDeep } from "../utils";
+import { ElMessage } from "element-plus"
+import store from "/@/store"
+import router, { ignore } from "/@/router"
+import storage from "../utils/storage"
+import { cloneDeep } from "../utils"
 
-const views = import.meta.globEager("/src/**/views/**/*.vue");
+const views = import.meta.globEager("/src/**/views/**/*.vue")
 
 for (const i in views) {
-	views[i.slice(5)] = views[i];
-	delete views[i];
+	views[i.slice(5)] = views[i]
+	delete views[i]
 }
 
 function useRouter() {
 	router.$plugin = {
 		addViews: (list: Array<any>, options: any) => {
 			if (!options) {
-				options = {};
+				options = {}
 			}
 
 			// Parse route config
 			list.forEach((e: any) => {
-				const d: any = cloneDeep(e);
+				const d: any = cloneDeep(e)
 
 				// avoid router repeat
-				d.name = d.router;
+				d.name = d.router
 
 				if (!d.component) {
-					const url = d.viewPath;
+					const url = d.viewPath
 
 					if (url) {
 						if (
@@ -34,30 +34,30 @@ function useRouter() {
 								url
 							)
 						) {
-							d.meta.iframeUrl = url;
-							d.component = () => import(`/$/base/pages/iframe/index.vue`);
+							d.meta.iframeUrl = url
+							d.component = () => import(`/$/base/pages/iframe/index.vue`)
 						} else {
-							d.component = () => Promise.resolve(views[url]);
+							d.component = () => Promise.resolve(views[url])
 						}
 					} else {
-						d.redirect = "/404";
+						d.redirect = "/404"
 					}
 				}
 
 				// Batch add route
-				router.addRoute("index", d);
-			});
+				router.addRoute("index", d)
+			})
 		}
-	};
+	}
 
 	router.beforeEach((to: any, from: any, next: any) => {
-		const { token, browser } = store.getters;
+		const { token, browser } = store.getters
 
 		if (token) {
 			if (to.path.indexOf("/login") === 0) {
 				// 登录成功且 token 未过期，回到首页
 				if (!storage.isExpired("token")) {
-					return next("/");
+					return next("/")
 				}
 			} else {
 				// 添加路由进程
@@ -65,41 +65,41 @@ function useRouter() {
 					keepAlive: to.meta?.keepAlive,
 					label: to.meta?.label || to.name,
 					value: to.fullPath
-				});
+				})
 			}
 		} else {
 			if (!ignore.token.some((e: string) => to.path.indexOf(e) === 0)) {
-				return next("/login");
+				return next("/login")
 			}
 		}
 
 		// H5 下关闭左侧菜单
 		if (browser && browser.isMini) {
-			store.commit("COLLAPSE_MENU", true);
+			store.commit("COLLAPSE_MENU", true)
 		}
 
-		next();
-	});
+		next()
+	})
 
-	let lock = false;
+	let lock = false
 
 	router.onError((err: any) => {
 		if (!lock) {
-			lock = true;
+			lock = true
 
 			if (err.code == "MODULE_NOT_FOUND") {
-				console.error(err.ElMessage.replace("Cannot find module ", ""), "路由组件不存在");
+				console.error(err.ElMessage.replace("Cannot find module ", ""), "路由组件不存在")
 
-				ElMessage.error(`路由组件路径错误`);
+				ElMessage.error(`路由组件路径错误`)
 			} else {
-				console.error(err);
+				console.error(err)
 			}
 
 			setTimeout(() => {
-				lock = false;
-			}, 0);
+				lock = false
+			}, 0)
 		}
-	});
+	})
 }
 
-export { useRouter };
+export { useRouter }

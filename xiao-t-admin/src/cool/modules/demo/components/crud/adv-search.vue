@@ -6,8 +6,8 @@
 </template>
 
 <script lang="ts">
-import { AdvSearchItem } from "cl-admin-crud-vue3/types";
-import { defineComponent, ref } from "vue";
+import { AdvSearchItem } from "cl-admin-crud-vue3/types"
+import { defineComponent, ref } from "vue"
 
 export default defineComponent({
 	setup() {
@@ -39,16 +39,16 @@ export default defineComponent({
 					]
 				}
 			}
-		]);
+		])
 
-		const opList = ref<string[]>(["search", "reset", "clear", "close"]);
+		const opList = ref<string[]>(["search", "reset", "clear", "close"])
 
 		return {
 			items,
 			opList
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped></style>

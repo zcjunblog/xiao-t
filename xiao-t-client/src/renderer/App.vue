@@ -17,7 +17,7 @@ export default defineComponent({
 <style>
   @font-face {
     font-family: 'iconfont';
-    src: url('//at.alicdn.com/t/font_2651202_koey3m09eyq.ttf') format('truetype');
+    src: url('./assets/fonts/iconfont.ttf') format('truetype');
   }
   .iconfont {
     font-family: "iconfont" !important;

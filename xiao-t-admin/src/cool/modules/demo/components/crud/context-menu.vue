@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-import { ContextMenu } from "cl-admin-crud-vue3";
-import { ElMessage } from "element-plus";
-import { defineComponent } from "vue";
+import { ContextMenu } from "cl-admin-crud-vue3"
+import { ElMessage } from "element-plus"
+import { defineComponent } from "vue"
 
 export default defineComponent({
 	setup() {
@@ -18,24 +18,24 @@ export default defineComponent({
 						label: "新增",
 						"suffix-icon": "el-icon-plus",
 						callback: (_: any, done: Function) => {
-							ElMessage.success("点击了新增");
-							done();
+							ElMessage.success("点击了新增")
+							done()
 						}
 					},
 					{
 						label: "编辑",
 						"suffix-icon": "el-icon-edit",
 						callback: (_: any, done: Function) => {
-							ElMessage.success("点击了编辑");
-							done();
+							ElMessage.success("点击了编辑")
+							done()
 						}
 					},
 					{
 						label: "删除",
 						"suffix-icon": "el-icon-delete",
 						callback: (_: any, done: Function) => {
-							ElMessage.error("点击了删除");
-							done();
+							ElMessage.error("点击了删除")
+							done()
 						}
 					},
 					{
@@ -56,7 +56,7 @@ export default defineComponent({
 									{
 										label: "空空如也",
 										callback: (_: any, done: Function) => {
-											done();
+											done()
 										}
 									}
 								]
@@ -64,14 +64,14 @@ export default defineComponent({
 						]
 					}
 				]
-			});
+			})
 		}
 
 		return {
 			open
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

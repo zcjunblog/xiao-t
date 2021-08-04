@@ -22,19 +22,19 @@
 </template>
 
 <script lang="ts">
-import { CrudLoad, Table, Upsert } from "cl-admin-crud-vue3/types";
-import { defineComponent, inject, reactive } from "vue";
+import { CrudLoad, Table, Upsert } from "cl-admin-crud-vue3/types"
+import { defineComponent, inject, reactive } from "vue"
 
 export default defineComponent({
 	name: "sys-role",
 
 	setup() {
-		const service = inject<any>("service");
+		const service = inject<any>("service")
 
 		// 表单值
 		const form = reactive<any>({
 			relevance: 1
-		});
+		})
 
 		// 新增、编辑配置
 		const upsert = reactive<Upsert>({
@@ -101,7 +101,7 @@ export default defineComponent({
 					}
 				}
 			]
-		});
+		})
 
 		// 表格配置
 		const table = reactive<Table>({
@@ -149,12 +149,12 @@ export default defineComponent({
 					type: "op"
 				}
 			]
-		});
+		})
 
 		// crud 加载
 		function onLoad({ ctx, app }: CrudLoad) {
-			ctx.service(service.base.system.role).done();
-			app.refresh();
+			ctx.service(service.base.system.role).done()
+			app.refresh()
 		}
 
 		return {
@@ -162,7 +162,7 @@ export default defineComponent({
 			upsert,
 			table,
 			onLoad
-		};
+		}
 	}
-});
+})
 </script>

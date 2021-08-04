@@ -10,27 +10,27 @@ export default {
 		return {
 			loading: false,
 			url: ""
-		};
+		}
 	},
 
 	watch: {
 		$route: {
 			handler({ meta }) {
-				this.url = meta.iframeUrl;
+				this.url = meta.iframeUrl
 			},
 			immediate: true
 		}
 	},
 
 	mounted() {
-		const iframe = this.$el.querySelector("iframe");
-		this.loading = true;
+		const iframe = this.$el.querySelector("iframe")
+		this.loading = true
 
 		iframe.onload = () => {
-			this.loading = false;
-		};
+			this.loading = false
+		}
 	}
-};
+}
 </script>
 
 <style lang="scss" scoped>

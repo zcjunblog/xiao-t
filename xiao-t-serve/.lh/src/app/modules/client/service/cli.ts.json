@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/app/modules/client/service/cli.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1628064763049,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1628064798117,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n import { Inject, Provide } from '@midwayjs/decorator';\n import { BaseService, Cache, CoolTransaction } from 'midwayjs-cool-core';\n import { InjectEntityModel } from '@midwayjs/orm';\n import { Repository } from 'typeorm';\n-import { ClientCliTemplateEntity } from '../entity/cli';\n+import { ClientCliEntity } from '../entity/cli';\n \n /**\n  * 商品\n  */\n @Provide()\n export class DemoGoodsService extends BaseService {\n-  @InjectEntityModel(ClientCliTemplateEntity)\n-  demoAppGoodsEntity: Repository<ClientCliTemplateEntity>;\n+  @InjectEntityModel(ClientCliEntity)\n+  demoAppGoodsEntity: Repository<ClientCliEntity>;\n }\n"
+                },
+                {
+                    "date": 1628066794803,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,8 @@\n /**\n  * 商品\n  */\n @Provide()\n-export class DemoGoodsService extends BaseService {\n+export class ClientCliService extends BaseService {\n   @InjectEntityModel(ClientCliEntity)\n-  demoAppGoodsEntity: Repository<ClientCliEntity>;\n+  ClientCliEntity: Repository<ClientCliEntity>;\n }\n"
+                },
+                {
+                    "date": 1628066804680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,11 +3,8 @@\n import { InjectEntityModel } from '@midwayjs/orm';\n import { Repository } from 'typeorm';\n import { ClientCliEntity } from '../entity/cli';\n \n-/**\n- * 商品\n- */\n @Provide()\n export class ClientCliService extends BaseService {\n   @InjectEntityModel(ClientCliEntity)\n   ClientCliEntity: Repository<ClientCliEntity>;\n"
+                }
+            ],
+            "date": 1628064763049,
+            "name": "Commit-0",
+            "content": "import { Inject, Provide } from '@midwayjs/decorator';\nimport { BaseService, Cache, CoolTransaction } from 'midwayjs-cool-core';\nimport { InjectEntityModel } from '@midwayjs/orm';\nimport { Repository } from 'typeorm';\nimport { ClientCliTemplateEntity } from '../entity/cli';\n\n/**\n * 商品\n */\n@Provide()\nexport class DemoGoodsService extends BaseService {\n  @InjectEntityModel(ClientCliTemplateEntity)\n  demoAppGoodsEntity: Repository<ClientCliTemplateEntity>;\n}\n"
+        }
+    ]
+}

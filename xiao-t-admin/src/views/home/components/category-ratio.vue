@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive } from "vue"
 
 export default defineComponent({
 	setup() {
@@ -64,13 +64,13 @@ export default defineComponent({
 					roundCap: 1
 				}
 			]
-		});
+		})
 
 		return {
 			chartOption
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

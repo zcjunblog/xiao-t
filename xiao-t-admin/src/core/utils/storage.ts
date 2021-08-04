@@ -1,4 +1,4 @@
-import store from "store";
+import store from "store"
 
 export default {
 	// 后缀标识
@@ -9,20 +9,20 @@ export default {
 	 * @param {string} key 关键字
 	 */
 	get(key: string) {
-		return store.get(key);
+		return store.get(key)
 	},
 
 	/**
 	 * 获取全部
 	 */
 	info() {
-		const d: any = {};
+		const d: any = {}
 
 		store.each(function (value: any, key: any) {
-			d[key] = value;
-		});
+			d[key] = value
+		})
 
-		return d;
+		return d
 	},
 
 	/**
@@ -32,10 +32,10 @@ export default {
 	 * @param {number} expires 过期时间
 	 */
 	set(key: string, value: any, expires?: any) {
-		store.set(key, value);
+		store.set(key, value)
 
 		if (expires) {
-			store.set(`${key}${this.suffix}`, Date.parse(String(new Date())) + expires * 1000);
+			store.set(`${key}${this.suffix}`, Date.parse(String(new Date())) + expires * 1000)
 		}
 	},
 
@@ -44,7 +44,7 @@ export default {
 	 * @param {string} key 关键字
 	 */
 	isExpired(key: string) {
-		return (this.getExpiration(key) || 0) - Date.parse(String(new Date())) <= 2000;
+		return (this.getExpiration(key) || 0) - Date.parse(String(new Date())) <= 2000
 	},
 
 	/**
@@ -52,7 +52,7 @@ export default {
 	 * @param {string} key 关键字
 	 */
 	getExpiration(key: string) {
-		return this.get(key + this.suffix);
+		return this.get(key + this.suffix)
 	},
 
 	/**
@@ -60,8 +60,8 @@ export default {
 	 * @param {string} key 关键字
 	 */
 	remove(key: string) {
-		store.remove(key);
-		this.removeExpiration(key);
+		store.remove(key)
+		this.removeExpiration(key)
 	},
 
 	/**
@@ -69,13 +69,13 @@ export default {
 	 * @param {string} key 关键字
 	 */
 	removeExpiration(key: string) {
-		store.remove(key + this.suffix);
+		store.remove(key + this.suffix)
 	},
 
 	/**
 	 * 清理
 	 */
 	clearAll() {
-		store.clearAll();
+		store.clearAll()
 	}
-};
+}

@@ -214,13 +214,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, onMounted, reactive } from "vue";
-import { ElMessage, ElMessageBox } from "element-plus";
-import Draggable from "vuedraggable/src/vuedraggable";
-import { checkPerm } from "/$/base";
-import { ContextMenu } from "cl-admin-crud-vue3";
-import Cron from "../components/cron";
-import { useRefs } from "/@/core";
+import { computed, defineComponent, inject, onMounted, reactive } from "vue"
+import { ElMessage, ElMessageBox } from "element-plus"
+import Draggable from "vuedraggable/src/vuedraggable"
+import { checkPerm } from "/$/base"
+import { ContextMenu } from "cl-admin-crud-vue3"
+import Cron from "../components/cron"
+import { useRefs } from "/@/core"
 
 export default defineComponent({
 	name: "task",
@@ -231,8 +231,8 @@ export default defineComponent({
 	},
 
 	setup() {
-		const { refs, setRefs } = useRefs();
-		const service = inject<any>("service");
+		const { refs, setRefs } = useRefs()
+		const service = inject<any>("service")
 
 		// 任务列表
 		const list = reactive<any[]>([
@@ -283,7 +283,7 @@ export default defineComponent({
 					total: 0
 				}
 			}
-		]);
+		])
 
 		// 日志列表
 		const logs = reactive<any>({
@@ -298,7 +298,7 @@ export default defineComponent({
 				status: []
 			},
 			current: null
-		});
+		})
 
 		// 拖动选项
 		const drag = reactive<any>({
@@ -309,80 +309,80 @@ export default defineComponent({
 				dragClass: "Drag",
 				draggable: "._drag"
 			}
-		});
+		})
 
 		// 权限
-		const perm: any = computed(() => service.task.info.permission);
+		const perm: any = computed(() => service.task.info.permission)
 
 		// 更多列表
 		function moreList(res: any, { list, pagination }: any) {
-			const { page, size } = res.pagination;
-			const len = res.list.length;
-			const max = list.length;
+			const { page, size } = res.pagination
+			const len = res.list.length
+			const max = list.length
 
 			if (page == 1) {
-				list.splice(0, max, ...res.list);
+				list.splice(0, max, ...res.list)
 			} else {
-				const start = max - (max % size);
-				const end = start + len;
+				const start = max - (max % size)
+				const end = start + len
 
-				list.splice(start, end, ...res.list);
+				list.splice(start, end, ...res.list)
 			}
 
 			if (len == size) {
-				res.pagination.page += 1;
+				res.pagination.page += 1
 			}
 
-			Object.assign(pagination, res.pagination);
+			Object.assign(pagination, res.pagination)
 
-			return page != 1;
+			return page != 1
 		}
 
 		// 刷新任务
 		function refreshTask(params?: any, options?: any) {
-			const { index, more } = options || {};
-			const arr = index === undefined || index === null ? list.map((e, i) => i) : [index];
+			const { index, more } = options || {}
+			const arr = index === undefined || index === null ? list.map((e, i) => i) : [index]
 
 			arr.forEach(async (k) => {
-				const item = list[k];
+				const item = list[k]
 
 				Object.assign(item.params, {
 					...item.pagination,
 					...params
-				});
+				})
 
-				item.loading = true;
+				item.loading = true
 
-				const res = await service.task.info.page(item.params);
+				const res = await service.task.info.page(item.params)
 
-				moreList(res, item);
+				moreList(res, item)
 
 				if (!more) {
-					refs.value[`${item.key}-scroller`].scroll(0, 0);
+					refs.value[`${item.key}-scroller`].scroll(0, 0)
 				}
 
-				item.loading = false;
-			});
+				item.loading = false
+			})
 		}
 
 		// 编辑任务
 		async function edit(params: any) {
-			const { id, type } = params || {};
+			const { id, type } = params || {}
 
 			let info: any = {
 				type
-			};
+			}
 
 			if (id) {
-				info = await service.task.info.info({ id });
+				info = await service.task.info.info({ id })
 			}
 
 			if (info.every) {
-				info.every /= 1000;
+				info.every /= 1000
 			}
 
 			if (!info.limit) {
-				info.limit = undefined;
+				info.limit = undefined
 			}
 
 			const { setForm } = refs.value.form.open({
@@ -426,10 +426,10 @@ export default defineComponent({
 							on: {
 								change: (v: number) => {
 									if (v == 0) {
-										setForm("limit", undefined);
-										setForm("every", undefined);
+										setForm("limit", undefined)
+										setForm("every", undefined)
 									} else {
-										setForm("cron", undefined);
+										setForm("cron", undefined)
 									}
 								}
 							}
@@ -439,7 +439,7 @@ export default defineComponent({
 						label: "cron",
 						prop: "cron",
 						hidden: ({ scope }: any) => {
-							return scope.taskType == 1;
+							return scope.taskType == 1
 						},
 						value: info.cron,
 						component: {
@@ -455,7 +455,7 @@ export default defineComponent({
 						prop: "limit",
 						value: info.limit,
 						hidden: ({ scope }: any) => {
-							return scope.taskType == 0;
+							return scope.taskType == 0
 						},
 						component: {
 							name: "el-input-number",
@@ -470,7 +470,7 @@ export default defineComponent({
 						prop: "every",
 						value: info.every,
 						hidden: ({ scope }: any) => {
-							return scope.taskType == 0;
+							return scope.taskType == 0
 						},
 						component: {
 							name: "el-input-number",
@@ -550,7 +550,7 @@ export default defineComponent({
 				on: {
 					submit: (data: any, { close, done }: any) => {
 						if (!data.limit) {
-							data.limit = null;
+							data.limit = null
 						}
 
 						service.task.info[id ? "update" : "add"]({
@@ -559,18 +559,18 @@ export default defineComponent({
 							every: data.every * 1000
 						})
 							.then(() => {
-								refreshTask();
+								refreshTask()
 
-								ElMessage.success("保存成功");
-								close();
+								ElMessage.success("保存成功")
+								close()
 							})
 							.catch((err: string) => {
-								ElMessage.error(err);
-								done();
-							});
+								ElMessage.error(err)
+								done()
+							})
 					}
 				}
-			});
+			})
 		}
 
 		// 删除任务
@@ -580,10 +580,10 @@ export default defineComponent({
 			})
 				.then(() => {
 					service.task.info.delete({ ids: [id] }).then(() => {
-						refreshTask();
-					});
+						refreshTask()
+					})
 				})
-				.catch(() => null);
+				.catch(() => null)
 		}
 
 		// 开始任务
@@ -591,11 +591,11 @@ export default defineComponent({
 			service.task.info
 				.start({ id, type })
 				.then(() => {
-					refreshTask();
+					refreshTask()
 				})
 				.catch((err: string) => {
-					ElMessage.error(err);
-				});
+					ElMessage.error(err)
+				})
 		}
 
 		// 停止任务
@@ -603,11 +603,11 @@ export default defineComponent({
 			service.task.info
 				.stop({ id })
 				.then(() => {
-					refreshTask();
+					refreshTask()
 				})
 				.catch((err: string) => {
-					ElMessage.error(err);
-				});
+					ElMessage.error(err)
+				})
 		}
 
 		// 任务执行一次
@@ -615,84 +615,84 @@ export default defineComponent({
 			service.task.info
 				.once({ id })
 				.then(() => {
-					refreshTask();
+					refreshTask()
 				})
 				.catch((err: string) => {
-					ElMessage.error(err);
-				});
+					ElMessage.error(err)
+				})
 		}
 
 		// 展开
 		function expandLog(e: any) {
-			e._expand = !e._expand;
+			e._expand = !e._expand
 		}
 
 		// 任务拖动
 		function onDragEnd({ to, item }: any) {
-			const status = to.getAttribute("data-status");
-			const type = to.getAttribute("data-type");
-			const id = item.getAttribute("data-id");
+			const status = to.getAttribute("data-status")
+			const type = to.getAttribute("data-type")
+			const id = item.getAttribute("data-id")
 
 			if (status == 0) {
-				stop({ id });
+				stop({ id })
 			}
 
 			if (status == 1) {
-				start({ id, type });
+				start({ id, type })
 			}
 		}
 
 		// 刷新日志
 		async function refreshLog(newParams: any, options?: any) {
 			if (logs.loading) {
-				return false;
+				return false
 			}
 
 			if (!checkPerm(perm.value.log)) {
-				return false;
+				return false
 			}
 
-			const { params, pagination } = logs;
-			const { more } = options || {};
+			const { params, pagination } = logs
+			const { more } = options || {}
 
 			Object.assign(params, {
 				...pagination,
 				...newParams
-			});
+			})
 
-			logs.loading = true;
+			logs.loading = true
 
-			const res = await service.task.info.log(params);
+			const res = await service.task.info.log(params)
 
-			moreList(res, logs);
+			moreList(res, logs)
 
 			if (!more) {
-				refs.value["log-scroller"].scroll(0, 0);
+				refs.value["log-scroller"].scroll(0, 0)
 			}
 
-			logs.loading = false;
+			logs.loading = false
 		}
 
 		// 更多日志
 		function moreLog() {
-			refreshLog(null, { more: true });
+			refreshLog(null, { more: true })
 		}
 
 		// 查看任务对应的日志
 		function findLog(e: any) {
-			logs.current = e;
-			refreshLog({ page: 1, id: e.id });
+			logs.current = e
+			refreshLog({ page: 1, id: e.id })
 		}
 
 		// 所有日志
 		function allLog() {
-			logs.current = null;
-			refreshLog({ page: 1, id: null });
+			logs.current = null
+			refreshLog({ page: 1, id: null })
 		}
 
 		// 过滤日志
 		function filterLog([v]: any) {
-			refreshLog({ page: 1, status: v === undefined ? 1 : 0 });
+			refreshLog({ page: 1, status: v === undefined ? 1 : 0 })
 		}
 
 		// 右键菜单
@@ -703,8 +703,8 @@ export default defineComponent({
 					perm: ["once"],
 					"suffix-icon": "el-icon-video-play",
 					callback: (_: any, close: Function) => {
-						once({ id });
-						close();
+						once({ id })
+						close()
 					}
 				},
 				{
@@ -712,8 +712,8 @@ export default defineComponent({
 					perm: ["update", "info"],
 					"suffix-icon": "el-icon-edit",
 					callback: (_: any, close: Function) => {
-						edit({ id, type });
-						close();
+						edit({ id, type })
+						close()
 					}
 				},
 				{
@@ -721,8 +721,8 @@ export default defineComponent({
 					perm: ["delete"],
 					"suffix-icon": "el-icon-delete",
 					callback: (_: any, close: Function) => {
-						remove({ id });
-						close();
+						remove({ id })
+						close()
 					}
 				},
 				{
@@ -730,11 +730,11 @@ export default defineComponent({
 					perm: ["log"],
 					"suffix-icon": "el-icon-tickets",
 					callback: (_: any, close: Function) => {
-						findLog({ id, name });
-						close();
+						findLog({ id, name })
+						close()
 					}
 				}
-			];
+			]
 
 			if (status == 1) {
 				menus.splice(1, 0, {
@@ -742,41 +742,41 @@ export default defineComponent({
 					perm: ["stop"],
 					"suffix-icon": "el-icon-video-pause",
 					callback: (_: any, close: Function) => {
-						stop({ id, type });
-						close();
+						stop({ id, type })
+						close()
 					}
-				});
+				})
 			} else {
 				menus.splice(1, 0, {
 					label: "开始",
 					perm: ["start"],
 					"suffix-icon": "el-icon-video-play",
 					callback: (_: any, close: Function) => {
-						start({ id, type });
-						close();
+						start({ id, type })
+						close()
 					}
-				});
+				})
 			}
 
 			ContextMenu.open(e, {
 				list: menus.filter((e) => {
 					return checkPerm({
 						and: e.perm.map((a) => perm.value[a])
-					});
+					})
 				})
-			});
+			})
 
-			return false;
+			return false
 		}
 
 		// 更多任务
 		function moreTask(index: number) {
-			refreshTask(null, { index, more: true });
+			refreshTask(null, { index, more: true })
 		}
 
 		onMounted(() => {
-			refreshTask({ page: 1 });
-		});
+			refreshTask({ page: 1 })
+		})
 
 		return {
 			refs,
@@ -801,9 +801,9 @@ export default defineComponent({
 			allLog,
 			filterLog,
 			moreList
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

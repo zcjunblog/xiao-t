@@ -5,19 +5,19 @@
 </template>
 
 <script lang="ts">
-import { ref } from "vue";
+import { ref } from "vue"
 
 export default {
 	name: "editor-quill",
 
 	setup() {
-		const content = ref<string>("");
+		const content = ref<string>("")
 
 		return {
 			content
-		};
+		}
 	}
-};
+}
 </script>
 
 <style lang="scss" scoped>

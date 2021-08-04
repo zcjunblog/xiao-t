@@ -46,8 +46,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject } from "vue";
-import { ContextMenu } from "cl-admin-crud-vue3";
+import { computed, defineComponent, inject } from "vue"
+import { ContextMenu } from "cl-admin-crud-vue3"
 
 export default defineComponent({
 	name: "cl-upload-space-item",
@@ -56,7 +56,7 @@ export default defineComponent({
 		modelValue: {
 			type: Object,
 			default: () => {
-				return {};
+				return {}
 			}
 		}
 	},
@@ -64,30 +64,30 @@ export default defineComponent({
 	emits: ["select", "remove"],
 
 	setup(props, { emit }) {
-		const space = inject<any>("space");
+		const space = inject<any>("space")
 
 		// 文件信息
-		const info = computed(() => props.modelValue);
+		const info = computed(() => props.modelValue)
 
 		// 已选的序号
 		const index = computed(() =>
 			space.selection.value.findIndex((e: any) => e.id === info.value.id)
-		);
+		)
 
 		// 是否已选择
-		const isSelected = computed(() => index.value >= 0);
+		const isSelected = computed(() => index.value >= 0)
 
 		// 文件类型
-		const type = computed(() => (info.value.type || "").split("/")[0]);
+		const type = computed(() => (info.value.type || "").split("/")[0])
 
 		// 选择
 		function select() {
-			emit("select", info.value);
+			emit("select", info.value)
 		}
 
 		// 移除
 		function remove() {
-			emit("remove", info.value);
+			emit("remove", info.value)
 		}
 
 		// 右键菜单
@@ -98,20 +98,20 @@ export default defineComponent({
 						label: isSelected.value ? "取消选中" : "选中",
 						"suffix-icon": isSelected.value ? "el-icon-close" : "el-icon-check",
 						callback: (_: any, done: Function) => {
-							select();
-							done();
+							select()
+							done()
 						}
 					},
 					{
 						label: "删除",
 						"suffix-icon": "el-icon-delete",
 						callback: (_: any, done: Function) => {
-							remove();
-							done();
+							remove()
+							done()
 						}
 					}
 				]
-			});
+			})
 		}
 
 		return {
@@ -122,9 +122,9 @@ export default defineComponent({
 			select,
 			remove,
 			openContextMenu
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

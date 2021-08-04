@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/configuration.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1627551282421,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1627551282421,
+            "name": "Commit-0",
+            "content": "import { App, Configuration } from '@midwayjs/decorator';\nimport { ILifeCycle, IMidwayContainer } from '@midwayjs/core';\nimport { Application } from 'egg';\nimport * as orm from '@midwayjs/orm';\nimport * as cool from 'midwayjs-cool-core';\n// import * as wxpay from 'midwayjs-cool-wxpay';\nimport * as oss from 'midwayjs-cool-oss';\nimport * as swagger from '@midwayjs/swagger';\n// import * as redis from 'midwayjs-cool-redis';\n// import * as queue from 'midwayjs-cool-queue';\n// import * as alipay from 'midwayjs-cool-alipay';\n// import * as socket from 'midwayjs-cool-socket';\n\n@Configuration({\n  // 注意组件顺序 cool 有依赖orm组件， 所以必须放在，orm组件之后 cool的其他组件必须放在cool 核心组件之后\n  imports: [\n    // 必须，不可移除， https://typeorm.io  打不开？ https://typeorm.biunav.com/zh/\n    orm,\n    // 必须，不可移除， cool-admin 官方组件 https://www.cool-js.com\n    cool,\n    // oss插件，需要到后台配置之后才有用，默认是本地上传\n    oss,\n    swagger,\n    // 将缓存替换成redis\n    //redis,\n    // 队列\n    //queue,\n    // 微信支付\n    //wxpay,\n    // 支付宝支付\n    //alipay,\n    // socket\n    //socket,\n  ],\n})\nexport class ContainerLifeCycle implements ILifeCycle {\n  @App()\n  app: Application;\n  // 应用启动完成\n  async onReady(container?: IMidwayContainer) {}\n  // 应用停止\n  async onStop() {}\n}\n"
+        }
+    ]
+}

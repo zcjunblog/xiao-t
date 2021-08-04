@@ -9,15 +9,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, onMounted, ref, watch } from "vue";
-import CodeMirror from "codemirror";
-import beautifyJs from "js-beautify";
-import "codemirror/lib/codemirror.css";
-import "codemirror/addon/hint/show-hint.css";
-import "codemirror/theme/hopscotch.css";
-import "codemirror/addon/hint/javascript-hint";
-import "codemirror/mode/javascript/javascript";
-import { deepMerge } from "/@/core/utils";
+import { defineComponent, nextTick, onMounted, ref, watch } from "vue"
+import CodeMirror from "codemirror"
+import beautifyJs from "js-beautify"
+import "codemirror/lib/codemirror.css"
+import "codemirror/addon/hint/show-hint.css"
+import "codemirror/theme/hopscotch.css"
+import "codemirror/addon/hint/javascript-hint"
+import "codemirror/mode/javascript/javascript"
+import { deepMerge } from "/@/core/utils"
 
 export default defineComponent({
 	name: "cl-codemirror",
@@ -32,30 +32,30 @@ export default defineComponent({
 	emits: ["update:modelValue", "load"],
 
 	setup(props, { emit }) {
-		const editorRef = ref<any>(null);
+		const editorRef = ref<any>(null)
 
-		let editor: any = null;
+		let editor: any = null
 
 		// 获取内容
 		function getValue() {
 			if (editor) {
-				return editor.getValue();
+				return editor.getValue()
 			} else {
-				return "";
+				return ""
 			}
 		}
 
 		// 设置内容
 		function setValue(val?: string) {
 			if (editor) {
-				editor.setValue(val || "");
+				editor.setValue(val || "")
 			}
 		}
 
 		// 格式化
 		function formatCode() {
 			if (editor) {
-				editor.setValue(beautifyJs(getValue()));
+				editor.setValue(beautifyJs(getValue()))
 			}
 		}
 
@@ -64,10 +64,10 @@ export default defineComponent({
 			() => props.modelValue,
 			(val: string) => {
 				if (editor && val != getValue()) {
-					setValue(val);
+					setValue(val)
 				}
 			}
-		);
+		)
 
 		onMounted(function () {
 			nextTick(() => {
@@ -96,33 +96,33 @@ export default defineComponent({
 						},
 						props.options
 					)
-				);
+				)
 
 				// 输入监听
 				editor.on("change", (e: any) => {
-					emit("update:modelValue", e.getValue());
-				});
+					emit("update:modelValue", e.getValue())
+				})
 
 				// 设置内容
-				setValue(props.modelValue);
+				setValue(props.modelValue)
 
 				// 格式化
-				formatCode();
+				formatCode()
 
 				// 加载回调
-				emit("load", editor);
+				emit("load", editor)
 
 				// 设置编辑框大小
-				editor.setSize(props.width || "auto", props.height || "auto");
-			});
-		});
+				editor.setSize(props.width || "auto", props.height || "auto")
+			})
+		})
 
 		return {
 			editorRef,
 			formatCode
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss">

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "package.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1627465572299,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1627465572299,
+            "name": "Commit-0",
+            "content": "{\n  \"name\": \"cool-admin\",\n  \"version\": \"3.0.0\",\n  \"description\": \"\",\n  \"private\": true,\n  \"dependencies\": {\n    \"@midwayjs/decorator\": \"^2.7.5\",\n    \"@midwayjs/orm\": \"^1.3.0\",\n    \"@midwayjs/web\": \"^2.7.7\",\n    \"egg\": \"^2.29.3\",\n    \"egg-scripts\": \"^2.13.0\",\n    \"egg-view-nunjucks\": \"^2.3.0\",\n    \"ipip-ipdb\": \"^0.3.0\",\n    \"jsonwebtoken\": \"^8.5.1\",\n    \"lodash\": \"^4.17.21\",\n    \"md5\": \"^2.3.0\",\n    \"midwayjs-cool-alipay\": \"^1.0.8\",\n    \"midwayjs-cool-core\": \"^3.2.20\",\n    \"midwayjs-cool-oss\": \"^1.0.12\",\n    \"midwayjs-cool-queue\": \"^1.0.8\",\n    \"midwayjs-cool-redis\": \"^1.1.6\",\n    \"midwayjs-cool-socket\": \"^1.0.7\",\n    \"midwayjs-cool-wxpay\": \"^1.0.12\",\n    \"mysql2\": \"^2.2.5\",\n    \"svg-captcha\": \"^1.4.0\",\n    \"svg-to-dataurl\": \"^1.0.0\"\n  },\n  \"devDependencies\": {\n    \"@midwayjs/cli\": \"^1.2.41\",\n    \"@midwayjs/cli-plugin-faas\": \"^1.2.49\",\n    \"@midwayjs/egg-ts-helper\": \"^1.0.5\",\n    \"@midwayjs/fcli-plugin-fc\": \"^1.2.49\",\n    \"@midwayjs/luckyeye\": \"^1.0.2\",\n    \"@midwayjs/mock\": \"^2.7.7\",\n    \"@types/jest\": \"^26.0.20\",\n    \"@types/jsonwebtoken\": \"^8.5.0\",\n    \"@types/node\": \"14\",\n    \"cross-env\": \"^7.0.3\",\n    \"jest\": \"^26.6.3\",\n    \"mwts\": \"^1.1.2\",\n    \"ts-jest\": \"^26.5.2\",\n    \"typescript\": \"^4.2.2\"\n  },\n  \"engines\": {\n    \"node\": \">=12.0.0\"\n  },\n  \"scripts\": {\n    \"start\": \"egg-scripts start --daemon --title=cool-admin-midway --framework=@midwayjs/web --port=8848 --sticky\",\n    \"stop\": \"egg-scripts stop --title=cool-admin-midway\",\n    \"start_build\": \"npm run build && cross-env NODE_ENV=development midway-bin dev\",\n    \"docker\": \"egg-scripts start --title=cool-admin-midway --framework=@midwayjs/web  --sticky\",\n    \"dev\": \"cross-env ets && cross-env NODE_ENV=local TS_NODE_TYPE_CHECK=false TS_NODE_TRANSPILE_ONLY=true midway-bin dev --ts --port=8848 --sticky\",\n    \"test\": \"midway-bin test\",\n    \"cov\": \"midway-bin cov\",\n    \"lint\": \"mwts check\",\n    \"lint:fix\": \"mwts fix\",\n    \"ci\": \"npm run cov\",\n    \"build\": \"midway-bin build -c\",\n    \"check\": \"luckyeye\",\n    \"deploy\": \"midway-bin deploy\"\n  },\n  \"midway-bin-clean\": [\n    \".vscode/.tsbuildinfo\",\n    \"dist\"\n  ],\n  \"midway-luckyeye\": {\n    \"packages\": [\n      \"midway_v2\"\n    ]\n  },\n  \"midway-integration\": {\n    \"lifecycle\": {\n      \"before:package:cleanup\": \"npm run build\"\n    }\n  },\n  \"egg\": {\n    \"framework\": \"@midwayjs/web\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"\"\n  },\n  \"author\": \"cool-js.com\",\n  \"license\": \"MIT\"\n}\n"
+        }
+    ]
+}

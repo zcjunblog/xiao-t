@@ -35,16 +35,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { CrudLoad } from "cl-admin-crud-vue3/types";
-import { TestService } from "../utils/service";
-import Dialog from "../components/crud/dialog.vue";
-import ContextMenu from "../components/crud/context-menu.vue";
-import Query from "../components/crud/query.vue";
-import AdvSearch from "../components/crud/adv-search.vue";
-import Table from "../components/crud/table.vue";
-import Upsert from "../components/crud/upsert.vue";
-import Form from "../components/crud/form.vue";
+import { defineComponent } from "vue"
+import { CrudLoad } from "cl-admin-crud-vue3/types"
+import { TestService } from "../utils/service"
+import Dialog from "../components/crud/dialog.vue"
+import ContextMenu from "../components/crud/context-menu.vue"
+import Query from "../components/crud/query.vue"
+import AdvSearch from "../components/crud/adv-search.vue"
+import Table from "../components/crud/table.vue"
+import Upsert from "../components/crud/upsert.vue"
+import Form from "../components/crud/form.vue"
 
 export default defineComponent({
 	name: "crud",
@@ -61,15 +61,15 @@ export default defineComponent({
 
 	setup() {
 		function onLoad({ ctx, app }: CrudLoad) {
-			ctx.service(TestService).done();
-			app.refresh();
+			ctx.service(TestService).done()
+			app.refresh()
 		}
 
 		return {
 			onLoad
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss">

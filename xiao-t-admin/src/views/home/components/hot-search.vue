@@ -86,8 +86,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
-import * as echarts from "echarts";
+import { defineComponent, reactive } from "vue"
+import * as echarts from "echarts"
 
 export default defineComponent({
 	setup() {
@@ -186,7 +186,7 @@ export default defineComponent({
 					}
 				}
 			]
-		});
+		})
 
 		function onLoad({ ctx, app }: any) {
 			ctx.service({
@@ -224,15 +224,15 @@ export default defineComponent({
 								ud: -1
 							}
 						]
-					});
+					})
 				}
-			}).done();
-			app.refresh();
+			}).done()
+			app.refresh()
 		}
 
-		return { chartOption, onLoad };
+		return { chartOption, onLoad }
 	}
-});
+})
 </script>
 
 <style lang="scss">

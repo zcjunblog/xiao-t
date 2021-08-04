@@ -51,18 +51,18 @@
 </template>
 
 <script lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref } from "vue"
 
 export default {
 	name: "upload",
 
 	setup() {
-		const urls = ref<string>("");
-		const urlList = computed(() => urls.value.split(",").filter(Boolean));
+		const urls = ref<string>("")
+		const urlList = computed(() => urls.value.split(",").filter(Boolean))
 
-		return { urls, urlList };
+		return { urls, urlList }
 	}
-};
+}
 </script>
 
 <style lang="scss" scoped>

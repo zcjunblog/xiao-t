@@ -6,6 +6,7 @@
   "dependencies": {
     "@midwayjs/decorator": "^2.7.5",
     "@midwayjs/orm": "^1.3.0",
+    "@midwayjs/swagger": "^1.0.7",
     "@midwayjs/web": "^2.7.7",
     "egg": "^2.29.3",
     "egg-scripts": "^2.13.0",
@@ -23,7 +24,8 @@
     "midwayjs-cool-wxpay": "^1.0.12",
     "mysql2": "^2.2.5",
     "svg-captcha": "^1.4.0",
-    "svg-to-dataurl": "^1.0.0"
+    "svg-to-dataurl": "^1.0.0",
+    "swagger-ui-dist": "^4.0.0-beta.1"
   },
   "devDependencies": {
     "@midwayjs/cli": "^1.2.41",
@@ -45,11 +47,11 @@
     "node": ">=12.0.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=cool-admin-midway --framework=@midwayjs/web --port=8001 --sticky",
+    "start": "egg-scripts start --daemon --title=cool-admin-midway --framework=@midwayjs/web --port=8848 --sticky",
     "stop": "egg-scripts stop --title=cool-admin-midway",
     "start_build": "npm run build && cross-env NODE_ENV=development midway-bin dev",
     "docker": "egg-scripts start --title=cool-admin-midway --framework=@midwayjs/web  --sticky",
-    "dev": "cross-env ets && cross-env NODE_ENV=local TS_NODE_TYPE_CHECK=false TS_NODE_TRANSPILE_ONLY=true midway-bin dev --ts --port=8001 --sticky",
+    "dev": "cross-env ets && cross-env NODE_ENV=local TS_NODE_TYPE_CHECK=false TS_NODE_TRANSPILE_ONLY=true midway-bin dev --ts --port=8848 --sticky",
     "test": "midway-bin test",
     "cov": "midway-bin cov",
     "lint": "mwts check",

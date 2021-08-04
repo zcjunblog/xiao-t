@@ -29,10 +29,10 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { useStore } from "vuex";
-import Topbar from "./topbar.vue";
-import Slider from "./slider.vue";
+import { computed, defineComponent } from "vue"
+import { useStore } from "vuex"
+import Topbar from "./topbar.vue"
+import Slider from "./slider.vue"
 
 export default defineComponent({
 	components: {
@@ -41,29 +41,29 @@ export default defineComponent({
 	},
 
 	setup() {
-		const store = useStore();
+		const store = useStore()
 
 		// 菜单是否折叠
-		const menuCollapse = computed<boolean>(() => store.getters.menuCollapse);
+		const menuCollapse = computed<boolean>(() => store.getters.menuCollapse)
 
 		// 应用信息
-		const app = computed<any>(() => store.getters.app);
+		const app = computed<any>(() => store.getters.app)
 
 		// 应用加载
-		const appLoading = computed<boolean>(() => store.getters.appLoading);
+		const appLoading = computed<boolean>(() => store.getters.appLoading)
 
 		// 缓存列表
 		const caches = computed(() => {
 			return store.getters.processList
 				.filter((e: any) => e.keepAlive)
 				.map((e: any) => {
-					return e.value.substring(1, e.value.length).replace(/\//g, "-");
-				});
-		});
+					return e.value.substring(1, e.value.length).replace(/\//g, "-")
+				})
+		})
 
 		// 折叠菜单
 		function collapseMenu(val: boolean) {
-			store.commit("COLLAPSE_MENU", val);
+			store.commit("COLLAPSE_MENU", val)
 		}
 
 		return {
@@ -72,9 +72,9 @@ export default defineComponent({
 			appLoading,
 			collapseMenu,
 			caches
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

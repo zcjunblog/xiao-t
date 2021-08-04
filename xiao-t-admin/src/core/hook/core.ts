@@ -1,15 +1,15 @@
-import { onBeforeUpdate, ref } from "vue";
+import { onBeforeUpdate, ref } from "vue"
 
 export function useRefs() {
-	const refs: any = ref<any[]>([]);
+	const refs: any = ref<any[]>([])
 
 	onBeforeUpdate(() => {
-		refs.value = [];
-	});
+		refs.value = []
+	})
 
 	const setRefs = (index: string) => (el: any) => {
-		refs.value[index] = el;
-	};
+		refs.value[index] = el
+	}
 
-	return { refs, setRefs };
+	return { refs, setRefs }
 }

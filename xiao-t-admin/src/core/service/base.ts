@@ -1,12 +1,12 @@
-import request from "/@/service/request";
-import { baseUrl, isDev } from "/@/config/env";
+import request from "/@/service/request"
+import { baseUrl, isDev } from "/@/config/env"
 
 export default class BaseService {
-	permission: any;
-	namespace: any;
-	proxy: any;
-	url: any;
-	mock: any;
+	permission: any
+	namespace: any
+	proxy: any
+	url: any
+	mock: any
 
 	constructor() {
 		const crud: any = {
@@ -16,44 +16,44 @@ export default class BaseService {
 			add: "add",
 			delete: "delete",
 			update: "update"
-		};
+		}
 
-		if (!this.permission) this.permission = {};
+		if (!this.permission) this.permission = {}
 
 		for (const i in crud) {
 			if (this.namespace) {
-				this.permission[i] = this.namespace.replace(/\//g, ":") + ":" + crud[i];
+				this.permission[i] = this.namespace.replace(/\//g, ":") + ":" + crud[i]
 			} else {
-				this.permission[i] = crud[i];
+				this.permission[i] = crud[i]
 			}
 		}
 	}
 
 	request(options: any = {}) {
-		if (!options.params) options.params = {};
+		if (!options.params) options.params = {}
 
-		let ns = "";
+		let ns = ""
 
 		// 是否 mock 模式
 		if (!this.mock) {
 			if (isDev) {
-				ns = this.proxy || baseUrl;
+				ns = this.proxy || baseUrl
 			} else {
-				ns = this.proxy ? this.url : baseUrl;
+				ns = this.proxy ? this.url : baseUrl
 			}
 		}
 
 		// 拼接前缀
 		if (this.namespace) {
-			ns += "/" + this.namespace;
+			ns += "/" + this.namespace
 		}
 
 		// 处理 http
 		if (options.url.indexOf("http") !== 0) {
-			options.url = ns + options.url;
+			options.url = ns + options.url
 		}
 
-		return request(options);
+		return request(options)
 	}
 
 	list(params: any) {
@@ -63,7 +63,7 @@ export default class BaseService {
 			data: {
 				...params
 			}
-		});
+		})
 	}
 
 	page(params: any) {
@@ -73,7 +73,7 @@ export default class BaseService {
 			data: {
 				...params
 			}
-		});
+		})
 	}
 
 	info(params: any) {
@@ -82,7 +82,7 @@ export default class BaseService {
 			params: {
 				...params
 			}
-		});
+		})
 	}
 
 	update(params: any) {
@@ -92,7 +92,7 @@ export default class BaseService {
 			data: {
 				...params
 			}
-		});
+		})
 	}
 
 	delete(params: any) {
@@ -102,7 +102,7 @@ export default class BaseService {
 			data: {
 				...params
 			}
-		});
+		})
 	}
 
 	add(params: any) {
@@ -112,6 +112,6 @@ export default class BaseService {
 			data: {
 				...params
 			}
-		});
+		})
 	}
 }

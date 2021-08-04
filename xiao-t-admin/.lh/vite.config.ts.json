@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1625206627673,
@@ -12,6 +12,30 @@
                 {
                     "date": 1625206691730,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,15 +35,15 @@\n \t\t\t},\n \t\t\tproxy: {\n \t\t\t\t\"/dev\": {\n \t\t\t\t\ttarget: \"http://127.0.0.1:8001\",\n-\t\t\t\t\tchangeOrigin: false,\n+\t\t\t\t\tchangeOrigin: true,\n \t\t\t\t\trewrite: (path) => path.replace(/^\\/dev/, \"\")\n \t\t\t\t},\n \n \t\t\t\t\"/pro\": {\n \t\t\t\t\ttarget: \"https://show.cool-admin.com\",\n-\t\t\t\t\tchangeOrigin: false,\n+\t\t\t\t\tchangeOrigin: true,\n \t\t\t\t\trewrite: (path) => path.replace(/^\\/pro/, \"/api\")\n \t\t\t\t}\n \t\t\t}\n \t\t},\n"
+                },
+                {
+                    "date": 1628064908341,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n-import path from \"path\";\n-import type { UserConfig } from \"vite\";\n-import vue from \"@vitejs/plugin-vue\";\n-import vueJsx from \"@vitejs/plugin-vue-jsx\";\n-import { svgBuilder } from \"./src/core/utils/svg\";\n+const path  =  require(\"path\")\n+import type { UserConfig } from \"vite\"\n+import vue from \"@vitejs/plugin-vue\"\n+import vueJsx from \"@vitejs/plugin-vue-jsx\"\n+import { svgBuilder } from \"./src/core/utils/svg\"\n \n function resolve(dir: string) {\n-\treturn path.resolve(__dirname, \".\", dir);\n+\treturn path.resolve(__dirname, \".\", dir)\n }\n \n // https://vitejs.dev/config/\n \n@@ -34,10 +34,10 @@\n \t\t\t\toverlay: true\n \t\t\t},\n \t\t\tproxy: {\n \t\t\t\t\"/dev\": {\n-\t\t\t\t\ttarget: \"http://127.0.0.1:8001\",\n-\t\t\t\t\tchangeOrigin: true,\n+\t\t\t\t\ttarget: \"http://127.0.0.1:8848\",\n+\t\t\t\t\t// changeOrigin: true,\n \t\t\t\t\trewrite: (path) => path.replace(/^\\/dev/, \"\")\n \t\t\t\t},\n \n \t\t\t\t\"/pro\": {\n@@ -53,6 +53,6 @@\n \t\t},\n \t\toptimizeDeps: {\n \t\t\texclude: [\"vue-demi\"]\n \t\t}\n-\t};\n+\t}\n };\n"
+                },
+                {
+                    "date": 1628064939937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n \t\t\t},\n \t\t\tproxy: {\n \t\t\t\t\"/dev\": {\n \t\t\t\t\ttarget: \"http://127.0.0.1:8848\",\n-\t\t\t\t\t// changeOrigin: true,\n+\t\t\t\t\tchangeOrigin: false,\n \t\t\t\t\trewrite: (path) => path.replace(/^\\/dev/, \"\")\n \t\t\t\t},\n \n \t\t\t\t\"/pro\": {\n"
+                },
+                {
+                    "date": 1628064985497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n \t\t\t},\n \t\t\tproxy: {\n \t\t\t\t\"/dev\": {\n \t\t\t\t\ttarget: \"http://127.0.0.1:8848\",\n-\t\t\t\t\tchangeOrigin: false,\n+\t\t\t\t\tchangeOrigin: true,\n \t\t\t\t\trewrite: (path) => path.replace(/^\\/dev/, \"\")\n \t\t\t\t},\n \n \t\t\t\t\"/pro\": {\n"
+                },
+                {
+                    "date": 1628066384274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,8 +36,9 @@\n \t\t\tproxy: {\n \t\t\t\t\"/dev\": {\n \t\t\t\t\ttarget: \"http://127.0.0.1:8848\",\n \t\t\t\t\tchangeOrigin: true,\n+\t\t\t\t\tlogLevel: \"debug\",\n \t\t\t\t\trewrite: (path) => path.replace(/^\\/dev/, \"\")\n \t\t\t\t},\n \n \t\t\t\t\"/pro\": {\n"
+                },
+                {
+                    "date": 1628066422141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-const path  =  require(\"path\")\n+const path = require(\"path\")\n import type { UserConfig } from \"vite\"\n import vue from \"@vitejs/plugin-vue\"\n import vueJsx from \"@vitejs/plugin-vue-jsx\"\n import { svgBuilder } from \"./src/core/utils/svg\"\n"
+                },
+                {
+                    "date": 1628066456240,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,8 @@\n \t\t\tproxy: {\n \t\t\t\t\"/dev\": {\n \t\t\t\t\ttarget: \"http://127.0.0.1:8848\",\n \t\t\t\t\tchangeOrigin: true,\n-\t\t\t\t\tlogLevel: \"debug\",\n \t\t\t\t\trewrite: (path) => path.replace(/^\\/dev/, \"\")\n \t\t\t\t},\n \n \t\t\t\t\"/pro\": {\n"
                 }
             ],
             "date": 1625206627673,

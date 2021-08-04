@@ -1,4 +1,4 @@
-import { BaseService, Service, Permission } from "/@/core";
+import { BaseService, Service, Permission } from "/@/core"
 
 @Service("base/sys/log")
 class SysLog extends BaseService {
@@ -7,14 +7,14 @@ class SysLog extends BaseService {
 		return this.request({
 			url: "/clear",
 			method: "POST"
-		});
+		})
 	}
 
 	@Permission("getKeep")
 	getKeep() {
 		return this.request({
 			url: "/getKeep"
-		});
+		})
 	}
 
 	@Permission("setKeep")
@@ -25,8 +25,8 @@ class SysLog extends BaseService {
 			data: {
 				value
 			}
-		});
+		})
 	}
 }
 
-export default SysLog;
+export default SysLog

@@ -77,43 +77,43 @@
 </template>
 
 <script lang="ts">
-import { useRefs } from "/@/core";
-import { deepTree } from "/@/core/utils";
-import { useRouter } from "vue-router";
-import { defineComponent, inject, reactive } from "vue";
-import { CrudLoad, Table, Upsert, RefreshOp } from "cl-admin-crud-vue3/types";
+import { useRefs } from "/@/core"
+import { deepTree } from "/@/core/utils"
+import { useRouter } from "vue-router"
+import { defineComponent, inject, reactive } from "vue"
+import { CrudLoad, Table, Upsert, RefreshOp } from "cl-admin-crud-vue3/types"
 
 export default defineComponent({
 	name: "sys-menu",
 
 	setup() {
-		const router = useRouter();
-		const { refs, setRefs } = useRefs();
-		const service = inject<any>("service");
+		const router = useRouter()
+		const { refs, setRefs } = useRefs()
+		const service = inject<any>("service")
 
 		// crud 加载
 		function onLoad({ ctx, app }: CrudLoad) {
-			ctx.service(service.base.system.menu).done();
-			app.refresh();
+			ctx.service(service.base.system.menu).done()
+			app.refresh()
 		}
 
 		// 刷新监听
 		function onRefresh(_: any, { render }: RefreshOp) {
 			service.base.system.menu.list().then((list: any[]) => {
 				list.map((e) => {
-					e.permList = e.perms ? e.perms.split(",") : [];
-				});
+					e.permList = e.perms ? e.perms.split(",") : []
+				})
 
 				render(deepTree(list), {
 					total: list.length
-				});
-			});
+				})
+			})
 		}
 
 		// 行点击展开
 		function onRowClick(row: any, column: any) {
 			if (column.property && row.children) {
-				refs.value.table.toggleRowExpansion(row);
+				refs.value.table.toggleRowExpansion(row)
 			}
 		}
 
@@ -122,7 +122,7 @@ export default defineComponent({
 			refs.value.crud.rowAppend({
 				parentId: id,
 				type: type + 1
-			});
+			})
 		}
 
 		// 设置权限
@@ -130,12 +130,12 @@ export default defineComponent({
 			refs.value.crud.rowAppend({
 				parentId: id,
 				type: 2
-			});
+			})
 		}
 
 		// 跳转
 		function toUrl(url: string) {
-			router.push(url);
+			router.push(url)
 		}
 
 		// 表格配置
@@ -149,10 +149,10 @@ export default defineComponent({
 						label: "新增",
 						hidden: row.type == 2,
 						callback: (_: any, done: Function) => {
-							upsertAppend(row);
-							done();
+							upsertAppend(row)
+							done()
 						}
-					};
+					}
 				},
 				"update",
 				"delete",
@@ -161,10 +161,10 @@ export default defineComponent({
 						label: "权限",
 						hidden: row.type != 1,
 						callback: (_: any, done: Function) => {
-							setPermission(row);
-							done();
+							setPermission(row)
+							done()
 						}
-					};
+					}
 				}
 			],
 			columns: [
@@ -237,7 +237,7 @@ export default defineComponent({
 					buttons: ["slot-add", "edit", "delete"]
 				}
 			]
-		});
+		})
 
 		// 新增、编辑配置
 		const upsert = reactive<Upsert>({
@@ -374,7 +374,7 @@ export default defineComponent({
 					}
 				}
 			]
-		});
+		})
 
 		return {
 			refs,
@@ -387,7 +387,7 @@ export default defineComponent({
 			upsertAppend,
 			setPermission,
 			toUrl
-		};
+		}
 	}
-});
+})
 </script>

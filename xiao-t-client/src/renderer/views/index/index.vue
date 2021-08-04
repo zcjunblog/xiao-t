@@ -25,10 +25,10 @@
                 </el-tab-pane>
                 <el-tab-pane name="fourth">
                     <template #label>
-                        <span><span class="icon iconfont" style="font-size: 18px">&#xe615;</span> 开发者</span>
+                        <span><span class="icon iconfont" style="font-size: 18px">&#xe615;</span> 表单生成</span>
                     </template>
-                    <developer-panel></developer-panel>
-                    <!--<form-generator></form-generator>-->
+                    <!--<developer-panel></developer-panel>-->
+                    <form-generator></form-generator>
                 </el-tab-pane>
             </el-tabs>
         </div>

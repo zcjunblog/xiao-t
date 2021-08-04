@@ -15,4 +15,4 @@ export default {
 	limitSize: 2,
 	// 是否已 uuid 重新命名
 	rename: true
-};
+}

@@ -33,9 +33,9 @@
 </template>
 
 <script lang="ts">
-import { deepTree } from "/@/core/utils";
-import { ElMessage } from "element-plus";
-import { defineComponent, inject, nextTick, onMounted, ref, watch } from "vue";
+import { deepTree } from "/@/core/utils"
+import { ElMessage } from "element-plus"
+import { defineComponent, inject, nextTick, onMounted, ref, watch } from "vue"
 
 export default defineComponent({
 	name: "cl-dept-check",
@@ -52,31 +52,31 @@ export default defineComponent({
 
 	setup(props, { emit }) {
 		// 请求服务
-		const service = inject<any>("service");
+		const service = inject<any>("service")
 
 		// 表单值
-		const form = inject<any>("form");
+		const form = inject<any>("form")
 
 		// 树形列表
-		const list = ref<any[]>([]);
+		const list = ref<any[]>([])
 
 		// 已选列表
-		const checked = ref<any>([]);
+		const checked = ref<any>([])
 
 		// 关键字搜素
-		const keyword = ref<string>("");
+		const keyword = ref<string>("")
 
 		// 加载中
-		const loading = ref<boolean>(false);
+		const loading = ref<boolean>(false)
 
 		// 是否可见
-		const visible = ref<boolean>(false);
+		const visible = ref<boolean>(false)
 
-		const treeRef = ref<any>({});
+		const treeRef = ref<any>({})
 
 		// 刷新已选列表
 		function refreshTree(val: any[]) {
-			checked.value = val || [];
+			checked.value = val || []
 		}
 
 		// 刷新树形列表
@@ -84,52 +84,52 @@ export default defineComponent({
 			service.base.system.dept
 				.list()
 				.then((res: any[]) => {
-					list.value = deepTree(res);
-					refreshTree(props.modelValue);
+					list.value = deepTree(res)
+					refreshTree(props.modelValue)
 				})
 				.catch((err: string) => {
-					ElMessage.error(err);
-				});
+					ElMessage.error(err)
+				})
 		}
 
 		// 过滤节点
 		function filterNode(val: string, data: any) {
-			if (!val) return true;
-			return data.name.includes(val);
+			if (!val) return true
+			return data.name.includes(val)
 		}
 
 		// 是否关联上下级
 		function onCheckStrictlyChange() {
-			visible.value = false;
-			checked.value = [];
-			emit("update:modelValue", []);
+			visible.value = false
+			checked.value = []
+			emit("update:modelValue", [])
 
 			nextTick(() => {
-				visible.value = true;
-			});
+				visible.value = true
+			})
 		}
 
 		// 监听选择
 		function onCheckChange() {
-			emit("update:modelValue", treeRef.value.getCheckedKeys());
+			emit("update:modelValue", treeRef.value.getCheckedKeys())
 		}
 
 		// 监听过滤
 		watch(keyword, (val: string) => {
-			treeRef.value.filter(val);
-		});
+			treeRef.value.filter(val)
+		})
 
 		// 刷新树
 		watch(
 			() => props.modelValue,
 			(val: any[]) => {
-				refreshTree(val);
+				refreshTree(val)
 			}
-		);
+		)
 
 		onMounted(() => {
-			refresh();
-		});
+			refresh()
+		})
 
 		return {
 			form,
@@ -143,9 +143,9 @@ export default defineComponent({
 			onCheckStrictlyChange,
 			onCheckChange,
 			treeRef
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

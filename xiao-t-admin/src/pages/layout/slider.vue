@@ -12,26 +12,26 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { useStore } from "vuex";
-import Logo from "/@/assets/icon/logo/silder-simple.png";
+import { computed, defineComponent } from "vue"
+import { useStore } from "vuex"
+import Logo from "/@/assets/icon/logo/silder-simple.png"
 
 export default defineComponent({
 	setup() {
-		const store = useStore();
+		const store = useStore()
 
 		// 菜单是否展开
-		const menuCollapse = computed<any>(() => store.getters.menuCollapse);
+		const menuCollapse = computed<any>(() => store.getters.menuCollapse)
 
 		// 浏览器信息
-		const browser = computed<any>(() => store.getters.browser);
+		const browser = computed<any>(() => store.getters.browser)
 
 		// 应用信息
-		const app = computed<any>(() => store.getters.app);
+		const app = computed<any>(() => store.getters.app)
 
 		// 跳转官网
 		function toHome() {
-			location.href = "https://cool-js.com/";
+			location.href = "https://cool-js.com/"
 		}
 
 		return {
@@ -40,9 +40,9 @@ export default defineComponent({
 			browser,
 			app,
 			toHome
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

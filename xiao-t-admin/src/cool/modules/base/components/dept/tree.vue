@@ -61,11 +61,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, ref } from "vue";
-import { ElMessage, ElMessageBox } from "element-plus";
-import { ContextMenu } from "cl-admin-crud-vue3";
-import { useRefs } from "/@/core";
-import { deepTree, isArray, revDeepTree, isPc } from "/@/core/utils";
+import { defineComponent, inject, onMounted, ref } from "vue"
+import { ElMessage, ElMessageBox } from "element-plus"
+import { ContextMenu } from "cl-admin-crud-vue3"
+import { useRefs } from "/@/core"
+import { deepTree, isArray, revDeepTree, isPc } from "/@/core/utils"
 
 export default defineComponent({
 	name: "cl-dept-tree",
@@ -84,53 +84,53 @@ export default defineComponent({
 	emits: ["list-change", "row-click", "user-add"],
 
 	setup(props, { emit }) {
-		const { refs, setRefs } = useRefs();
+		const { refs, setRefs } = useRefs()
 
 		// 树形列表
-		const list = ref<any[]>([]);
+		const list = ref<any[]>([])
 
 		// 加载中
-		const loading = ref<boolean>(false);
+		const loading = ref<boolean>(false)
 
 		// 是否能拖动
-		const isDrag = ref<boolean>(false);
+		const isDrag = ref<boolean>(false)
 
 		// 请求服务
-		const service = inject<any>("service");
+		const service = inject<any>("service")
 
 		// 允许托的规则
 		function allowDrag({ data }: any) {
-			return data.parentId;
+			return data.parentId
 		}
 
 		// 允许放的规则
 		function allowDrop(_: any, dropNode: any) {
-			return dropNode.data.parentId;
+			return dropNode.data.parentId
 		}
 
 		// 刷新
 		async function refresh() {
-			isDrag.value = false;
-			loading.value = true;
+			isDrag.value = false
+			loading.value = true
 
 			await service.base.system.dept.list().then((res: any[]) => {
-				list.value = deepTree(res);
-				emit("list-change", list.value);
-			});
+				list.value = deepTree(res)
+				emit("list-change", list.value)
+			})
 
-			loading.value = false;
+			loading.value = false
 		}
 
 		// 获取 ids
 		function rowClick(e: any) {
-			const ids = e.children ? revDeepTree(e.children).map((e) => e.id) : [];
-			ids.unshift(e.id);
-			emit("row-click", { item: e, ids });
+			const ids = e.children ? revDeepTree(e.children).map((e) => e.id) : []
+			ids.unshift(e.id)
+			emit("row-click", { item: e, ids })
 		}
 
 		// 编辑部门
 		function rowEdit(e: any) {
-			const method = e.id ? "update" : "add";
+			const method = e.id ? "update" : "add"
 
 			refs.value.form.open({
 				title: "编辑部门",
@@ -188,17 +188,17 @@ export default defineComponent({
 							orderNum: data.orderNum
 						})
 							.then(() => {
-								ElMessage.success(`新增部门${data.name}成功`);
-								close();
-								refresh();
+								ElMessage.success(`新增部门${data.name}成功`)
+								close()
+								refresh()
 							})
 							.catch((err: string) => {
-								ElMessage.error(err);
-								done();
-							});
+								ElMessage.error(err)
+								done()
+							})
 					}
 				}
-			});
+			})
 		}
 
 		// 删除部门
@@ -211,17 +211,17 @@ export default defineComponent({
 					})
 					.then(() => {
 						if (f) {
-							ElMessage.success("删除成功");
+							ElMessage.success("删除成功")
 						} else {
 							ElMessageBox.confirm(
 								`“${e.name}” 部门的用户已成功转移到 “${e.parentName}” 部门。`,
 								"删除成功"
-							);
+							)
 						}
-					});
+					})
 
-				refresh();
-			};
+				refresh()
+			}
 
 			ElMessageBox.confirm(`该操作会删除 “${e.name}” 部门的所有用户，是否确认？`, "提示", {
 				type: "warning",
@@ -230,13 +230,13 @@ export default defineComponent({
 				distinguishCancelAndClose: true
 			})
 				.then(() => {
-					del(true);
+					del(true)
 				})
 				.catch((action: string) => {
 					if (action == "cancel") {
-						del(false);
+						del(false)
 					}
-				});
+				})
 		}
 
 		// 部门排序
@@ -246,20 +246,20 @@ export default defineComponent({
 					type: "warning"
 				})
 					.then(async () => {
-						const ids: any[] = [];
+						const ids: any[] = []
 
 						const deep = (list: any[], pid: any) => {
 							list.forEach((e) => {
-								e.parentId = pid;
-								ids.push(e);
+								e.parentId = pid
+								ids.push(e)
 
 								if (e.children && isArray(e.children)) {
-									deep(e.children, e.id);
+									deep(e.children, e.id)
 								}
-							});
-						};
+							})
+						}
 
-						deep(list.value, null);
+						deep(list.value, null)
 
 						await service.base.system.dept
 							.order(
@@ -268,29 +268,29 @@ export default defineComponent({
 										id: e.id,
 										parentId: e.parentId,
 										orderNum: i
-									};
+									}
 								})
 							)
 							.then(() => {
-								ElMessage.success("更新排序成功");
+								ElMessage.success("更新排序成功")
 							})
 							.catch((err: string) => {
-								ElMessage.error(err);
-							});
+								ElMessage.error(err)
+							})
 
-						refresh();
-						isDrag.value = false;
+						refresh()
+						isDrag.value = false
 					})
-					.catch(() => null);
+					.catch(() => null)
 			} else {
-				refresh();
+				refresh()
 			}
 		}
 
 		// 右键菜单
 		function openCM(e: any, d?: any, n?: any) {
 			if (!d) {
-				d = list.value[0] || {};
+				d = list.value[0] || {}
 			}
 
 			ContextMenu.open(e, {
@@ -306,8 +306,8 @@ export default defineComponent({
 								name: "",
 								parentName: d.name,
 								parentId: d.id
-							});
-							done();
+							})
+							done()
 						}
 					},
 					{
@@ -315,8 +315,8 @@ export default defineComponent({
 						"suffix-icon": "el-icon-edit",
 						hidden: !service.base.system.dept._permission.update,
 						callback: (_: any, done: Function) => {
-							rowEdit(d);
-							done();
+							rowEdit(d)
+							done()
 						}
 					},
 					{
@@ -324,8 +324,8 @@ export default defineComponent({
 						"suffix-icon": "el-icon-delete",
 						hidden: !d.parentId || !service.base.system.dept._permission.delete,
 						callback: (_: any, done: Function) => {
-							rowDel(d);
-							done();
+							rowDel(d)
+							done()
 						}
 					},
 					{
@@ -333,17 +333,17 @@ export default defineComponent({
 						"suffix-icon": "el-icon-user",
 						hidden: !service.base.system.user._permission.add,
 						callback: (_: any, done: Function) => {
-							emit("user-add", d);
-							done();
+							emit("user-add", d)
+							done()
 						}
 					}
 				]
-			});
+			})
 		}
 
 		onMounted(function () {
-			refresh();
-		});
+			refresh()
+		})
 
 		return {
 			refs,
@@ -360,9 +360,9 @@ export default defineComponent({
 			rowEdit,
 			rowDel,
 			treeOrder
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss">

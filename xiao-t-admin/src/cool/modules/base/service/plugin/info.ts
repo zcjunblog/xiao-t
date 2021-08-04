@@ -1,4 +1,4 @@
-import { BaseService, Service, Permission } from "/@/core";
+import { BaseService, Service, Permission } from "/@/core"
 
 @Service("base/plugin/info")
 class PluginInfo extends BaseService {
@@ -8,7 +8,7 @@ class PluginInfo extends BaseService {
 			url: "/config",
 			method: "POST",
 			data
-		});
+		})
 	}
 
 	@Permission("getConfig")
@@ -16,7 +16,7 @@ class PluginInfo extends BaseService {
 		return this.request({
 			url: "/getConfig",
 			params
-		});
+		})
 	}
 
 	@Permission("enable")
@@ -25,8 +25,8 @@ class PluginInfo extends BaseService {
 			url: "/enable",
 			method: "POST",
 			data
-		});
+		})
 	}
 }
 
-export default PluginInfo;
+export default PluginInfo

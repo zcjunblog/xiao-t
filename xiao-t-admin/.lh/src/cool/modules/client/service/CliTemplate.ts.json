@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/cool/modules/client/service/CliTemplate.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1628061273775,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1628063338814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,7 @@\n  */\n import { BaseService, Service } from \"/@/core\"\n \n @Service(\"client/cliTemplate\")\n-class CliTemplate extends BaseService {}\n+class ClientCliTemplate extends BaseService {}\n \n-export default CliTemplate\n+export default ClientCliTemplate\n"
+                }
+            ],
+            "date": 1628061273775,
+            "name": "Commit-0",
+            "content": "/**\n * @Created By zhaozc\n * @date 2021/7/29\n * @Description:\n */\nimport { BaseService, Service } from \"/@/core\"\n\n@Service(\"client/cliTemplate\")\nclass CliTemplate extends BaseService {}\n\nexport default CliTemplate\n"
+        }
+    ]
+}

@@ -1,4 +1,4 @@
-import { BaseService, Service, Permission } from "/@/core";
+import { BaseService, Service, Permission } from "/@/core"
 
 @Service({
 	namespace: "im/message",
@@ -11,8 +11,8 @@ class ImMessage extends BaseService {
 			url: "/read",
 			method: "POST",
 			data
-		});
+		})
 	}
 }
 
-export default ImMessage;
+export default ImMessage

@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
-import { isNumber } from "/@/core/utils";
+import { computed, defineComponent, ref } from "vue"
+import { isNumber } from "/@/core/utils"
 
 export default defineComponent({
 	name: "icon-svg",
@@ -30,20 +30,20 @@ export default defineComponent({
 	setup(props) {
 		const style = ref<any>({
 			fontSize: isNumber(props.size) ? props.size + "px" : props.size
-		});
+		})
 
-		const iconName = computed<string>(() => `#icon-${props.name}`);
+		const iconName = computed<string>(() => `#icon-${props.name}`)
 		const svgClass = computed<Array<string>>(() => {
-			return ["icon-svg", `icon-svg__${props.name}`, String(props.className || "")];
-		});
+			return ["icon-svg", `icon-svg__${props.name}`, String(props.className || "")]
+		})
 
 		return {
 			style,
 			iconName,
 			svgClass
-		};
+		}
 	}
-});
+})
 </script>
 
 <style scoped>

@@ -105,9 +105,9 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import { isDev } from "/@/config/env";
-import { isArray, cloneDeep } from "/@/core/utils";
+import { mapGetters } from "vuex"
+import { isDev } from "/@/config/env"
+import { isArray, cloneDeep } from "/@/core/utils"
 
 export default {
 	name: "cl-theme",
@@ -161,14 +161,14 @@ export default {
 					url: ""
 				}
 			}
-		};
+		}
 	},
 
 	computed: {
 		...mapGetters(["app", "modules", "browser"]),
 
 		themeList() {
-			return isArray(this.list) ? this.list : this.themes;
+			return isArray(this.list) ? this.list : this.themes
 		}
 	},
 
@@ -176,70 +176,70 @@ export default {
 		app: {
 			immediate: true,
 			handler(val) {
-				this.form = cloneDeep(val);
+				this.form = cloneDeep(val)
 			}
 		},
 
 		form: {
 			deep: true,
 			handler(val) {
-				this.$store.commit("UPDATE_APP", val);
+				this.$store.commit("UPDATE_APP", val)
 			}
 		}
 	},
 
 	methods: {
 		open() {
-			this.drawer.visible = true;
+			this.drawer.visible = true
 		},
 
 		close() {
-			this.drawer.visible = false;
+			this.drawer.visible = false
 		},
 
 		onAMenuChange() {
 			setTimeout(() => {
-				this.$store.commit("SET_MENU_LIST");
-			}, 0);
+				this.$store.commit("SET_MENU_LIST")
+			}, 0)
 		},
 
 		// 设置主题
 		setTheme({ name, color, label }) {
 			if (this.form.theme.color == color) {
-				return false;
+				return false
 			}
 
-			this.$message.success(`切换主题：${label}`);
+			this.$message.success(`切换主题：${label}`)
 
-			const theme = document.getElementById("theme-style");
-			const style = theme || document.createElement("link");
+			const theme = document.getElementById("theme-style")
+			const style = theme || document.createElement("link")
 
-			style.href = `${this.modules.theme.options.sourceUrl || "/theme/"}${name}.css`;
+			style.href = `${this.modules.theme.options.sourceUrl || "/theme/"}${name}.css`
 
 			if (!theme) {
-				style.type = "text/css";
-				style.rel = "stylesheet";
-				style.id = "theme-style";
+				style.type = "text/css"
+				style.rel = "stylesheet"
+				style.id = "theme-style"
 
-				document.getElementsByTagName("head").item(0).appendChild(style);
+				document.getElementsByTagName("head").item(0).appendChild(style)
 			}
 
 			// 设置主题色和路径
-			this.form.theme.color = color;
-			this.form.theme.url = style.href;
+			this.form.theme.color = color
+			this.form.theme.url = style.href
 
 			// 设置 css 变量
-			document.getElementsByTagName("body")[0].style.setProperty("--color-primary", color);
+			document.getElementsByTagName("body")[0].style.setProperty("--color-primary", color)
 		},
 
 		// 打开修改说明
 		openDesc() {
-			this.desc.visible = true;
+			this.desc.visible = true
 
 			this.desc.color = `
 				// src/assets/css/common.scss
 				$primary: ${this.form.theme.color};
-			`;
+			`
 
 			this.desc.conf = `
 				// src/config/env.js
@@ -249,10 +249,10 @@ export default {
 						url: "${this.form.theme.url}"
 					}
 				}
-			`;
+			`
 		}
 	}
-};
+}
 </script>
 
 <style lang="scss">

@@ -33,12 +33,12 @@
 </template>
 
 <script lang="ts">
-import { ElMessage, ElMessageBox } from "element-plus";
-import { computed, defineComponent, inject, ref, watch } from "vue";
-import { useStore } from "vuex";
-import { isEmpty } from "/@/core/utils";
-import { ContextMenu } from "cl-admin-crud-vue3";
-import { useRefs } from "/@/core";
+import { ElMessage, ElMessageBox } from "element-plus"
+import { computed, defineComponent, inject, ref, watch } from "vue"
+import { useStore } from "vuex"
+import { isEmpty } from "/@/core/utils"
+import { ContextMenu } from "cl-admin-crud-vue3"
+import { useRefs } from "/@/core"
 
 export default defineComponent({
 	name: "cl-upload-space-category",
@@ -50,36 +50,36 @@ export default defineComponent({
 	emits: ["update:modelValue", "change"],
 
 	setup(_, { emit }) {
-		const store = useStore();
-		const { refs, setRefs }: any = useRefs();
-		const service: any = inject("service");
-		const space = inject<any>("space");
+		const store = useStore()
+		const { refs, setRefs }: any = useRefs()
+		const service: any = inject("service")
+		const space = inject<any>("space")
 
 		// 数据列表
-		const list = ref<any[]>([]);
+		const list = ref<any[]>([])
 
 		// 当前选择
-		const current = ref<number | string>("");
+		const current = ref<number | string>("")
 
 		// 搜索关键字
-		const keyword = ref<string>("");
+		const keyword = ref<string>("")
 
 		// 过滤列表
 		const flist = computed(() => {
-			return list.value.filter((e: any) => e.name.includes(keyword.value));
-		});
+			return list.value.filter((e: any) => e.name.includes(keyword.value))
+		})
 
 		// 浏览器信息
-		const browser = computed(() => store.getters.browser);
+		const browser = computed(() => store.getters.browser)
 
 		// 监听选择变化
 		watch(
 			() => current.value,
 			(id: number | string) => {
-				emit("update:modelValue", id);
-				emit("change", id);
+				emit("update:modelValue", id)
+				emit("change", id)
 			}
-		);
+		)
 
 		// 刷新分类
 		function refresh() {
@@ -87,16 +87,16 @@ export default defineComponent({
 				res.unshift({
 					name: "全部文件",
 					id: null
-				});
+				})
 
-				list.value = res;
+				list.value = res
 
 				if (!isEmpty(res)) {
 					if (!current.value) {
-						current.value = res[0].id;
+						current.value = res[0].id
 					}
 				}
-			});
+			})
 		}
 
 		// 编辑分类
@@ -123,43 +123,43 @@ export default defineComponent({
 				],
 				on: {
 					submit: (data: any, { done, close }: any) => {
-						let next = null;
+						let next = null
 
 						if (!item.id) {
-							next = service.upload.type.add(data);
+							next = service.upload.type.add(data)
 						} else {
 							next = service.upload.type.update({
 								...data,
 								id: item.id
-							});
+							})
 						}
 
 						next.then(() => {
-							refresh();
-							close();
+							refresh()
+							close()
 						}).catch((err: string) => {
-							ElMessage.error(err);
-							done();
-						});
+							ElMessage.error(err)
+							done()
+						})
 					}
 				}
-			});
+			})
 		}
 
 		// 选择类目
 		function select(id: number) {
-			current.value = id;
+			current.value = id
 
 			// 小屏幕下收起左侧类目
 			if (browser.value.isMini) {
-				space.category.visible = false;
+				space.category.visible = false
 			}
 		}
 
 		// 打开类目列表右键菜单
 		function openContextMenu(e: any, { id, name }: any) {
 			if (!id) {
-				return false;
+				return false
 			}
 
 			ContextMenu.open(e, {
@@ -168,16 +168,16 @@ export default defineComponent({
 						label: "刷新",
 						"suffix-icon": "el-icon-edit",
 						callback: (_: any, done: Function) => {
-							refresh();
-							done();
+							refresh()
+							done()
 						}
 					},
 					{
 						label: "编辑",
 						"suffix-icon": "el-icon-edit",
 						callback: (_: any, done: Function) => {
-							edit({ id, name });
-							done();
+							edit({ id, name })
+							done()
 						}
 					},
 					{
@@ -197,28 +197,28 @@ export default defineComponent({
 											ids: [id]
 										})
 										.then(() => {
-											ElMessage.success("删除成功");
+											ElMessage.success("删除成功")
 
 											if (id == current.value) {
-												current.value = 0;
+												current.value = 0
 											}
 
-											refresh();
+											refresh()
 										})
 										.catch((err: string) => {
-											ElMessage.error(err);
-										});
+											ElMessage.error(err)
+										})
 								})
-								.catch(() => null);
+								.catch(() => null)
 
-							done();
+							done()
 						}
 					}
 				]
-			});
+			})
 		}
 
-		refresh();
+		refresh()
 
 		return {
 			refs,
@@ -233,9 +233,9 @@ export default defineComponent({
 			edit,
 			select,
 			openContextMenu
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

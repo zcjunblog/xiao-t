@@ -51,4 +51,4 @@ export default {
 	},
 	Save: "保存",
 	Close: "关闭"
-};
+}

@@ -1,4 +1,4 @@
-import { BaseService, Service, Permission } from "/@/core";
+import { BaseService, Service, Permission } from "/@/core"
 
 @Service("base/sys/task")
 class SysTask extends BaseService {
@@ -8,7 +8,7 @@ class SysTask extends BaseService {
 			url: "/stop",
 			method: "POST",
 			data
-		});
+		})
 	}
 
 	@Permission("start")
@@ -17,7 +17,7 @@ class SysTask extends BaseService {
 			url: "/start",
 			method: "POST",
 			data
-		});
+		})
 	}
 
 	@Permission("once")
@@ -26,7 +26,7 @@ class SysTask extends BaseService {
 			url: "/once",
 			method: "POST",
 			data
-		});
+		})
 	}
 
 	@Permission("log")
@@ -34,8 +34,8 @@ class SysTask extends BaseService {
 		return this.request({
 			url: "/log",
 			params
-		});
+		})
 	}
 }
 
-export default SysTask;
+export default SysTask

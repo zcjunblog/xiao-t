@@ -110,15 +110,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, nextTick, onUnmounted, reactive, ref } from "vue";
-import dayjs from "dayjs";
-import { ElMessage } from "element-plus";
-import { useStore } from "vuex";
-import { isString } from "/@/core/utils";
-import { useRefs } from "/@/core";
-import IconVoice from "./icon-voice.vue";
+import { computed, defineComponent, inject, nextTick, onUnmounted, reactive, ref } from "vue"
+import dayjs from "dayjs"
+import { ElMessage } from "element-plus"
+import { useStore } from "vuex"
+import { isString } from "/@/core/utils"
+import { useRefs } from "/@/core"
+import IconVoice from "./icon-voice.vue"
 
-import AvatarUrl from "../static/images/custom-avatar.png";
+import AvatarUrl from "../static/images/custom-avatar.png"
 
 export default defineComponent({
 	components: {
@@ -126,42 +126,42 @@ export default defineComponent({
 	},
 
 	setup() {
-		const store = useStore();
-		const { refs, setRefs } = useRefs();
-		const service = inject<any>("service");
-		const chat = inject<any>("chat");
-		const mitt = inject<any>("mitt");
+		const store = useStore()
+		const { refs, setRefs } = useRefs()
+		const service = inject<any>("service")
+		const chat = inject<any>("chat")
+		const mitt = inject<any>("mitt")
 
 		// 当前会话信息
-		const session = computed(() => store.getters.session);
+		const session = computed(() => store.getters.session)
 
 		// 加载状态
-		const loading = ref<boolean>(false);
+		const loading = ref<boolean>(false)
 
 		// 是否可见
-		const visible = ref<boolean>(false);
+		const visible = ref<boolean>(false)
 
 		// 分页信息
 		const pagination = reactive<any>({
 			page: 1,
 			size: 20,
 			total: 0
-		});
+		})
 
 		// 语音
 		const voice = reactive<any>({
 			url: "",
 			timer: null
-		});
+		})
 
 		// 请求随机值
-		const refreshRd = ref<any>(null);
+		const refreshRd = ref<any>(null)
 
 		// 消息列表
 		const list = computed(() => {
-			const { userInfo, messageList } = store.getters;
+			const { userInfo, messageList } = store.getters
 
-			let date = "";
+			let date = ""
 
 			return messageList.map((e: any) => {
 				// 时间间隔
@@ -169,25 +169,25 @@ export default defineComponent({
 					? dayjs(e.createTime).isBefore(dayjs(date).add(1, "minute"))
 						? ""
 						: e.createTime
-					: e.createTime;
+					: e.createTime
 
 				// 发送时间
-				date = e.createTime;
+				date = e.createTime
 
 				// 解析内容
 				if (isString(e)) {
-					e = JSON.parse(e);
+					e = JSON.parse(e)
 				}
 
 				// 内容
-				const content = isString(e.content) ? JSON.parse(e.content) : e.content;
+				const content = isString(e.content) ? JSON.parse(e.content) : e.content
 
 				// 昵称
-				const nickName = e.type == 0 ? userInfo.nickName : session.value.nickname;
+				const nickName = e.type == 0 ? userInfo.nickName : session.value.nickname
 
 				// 头像
 				const avatarUrl =
-					e.type == 0 ? userInfo.avatarUrl || AvatarUrl : session.value.headimgurl;
+					e.type == 0 ? userInfo.avatarUrl || AvatarUrl : session.value.headimgurl
 
 				return {
 					...e,
@@ -196,36 +196,36 @@ export default defineComponent({
 					avatarUrl,
 					nickName,
 					mode: chat.modes[e.contentType]
-				};
-			});
-		});
+				}
+			})
+		})
 
 		// 点击
 		function onTap(item: any) {
 			// 播放语音
 			if (item.mode == "voice") {
 				store.getters.messageList.map((e: any) => {
-					e.isPlay = e.id == item.id ? e.isPlay : false;
-				});
+					e.isPlay = e.id == item.id ? e.isPlay : false
+				})
 
-				item.isPlay = !item.isPlay;
+				item.isPlay = !item.isPlay
 
 				if (item.isPlay) {
-					voice.url = item.content.voiceUrl;
+					voice.url = item.content.voiceUrl
 
 					nextTick(() => {
-						refs.value.voice.play();
-					});
+						refs.value.voice.play()
+					})
 				} else {
-					refs.value.voice.pause();
-					item.isPlay = false;
+					refs.value.voice.pause()
+					item.isPlay = false
 				}
 
-				clearTimeout(voice.timer);
+				clearTimeout(voice.timer)
 
 				voice.timer = setTimeout(() => {
-					item.isPlay = false;
-				}, item.content.duration);
+					item.isPlay = false
+				}, item.content.duration)
 			}
 		}
 
@@ -236,15 +236,15 @@ export default defineComponent({
 					refs.value.scroller.scrollTo({
 						top: 99999,
 						behavior: visible.value ? "smooth" : "auto"
-					});
+					})
 				}
-			});
+			})
 		}
 
 		// 刷新列表
 		function refresh(params?: any) {
 			// 请求随机值
-			const rd = (refreshRd.value = Math.random());
+			const rd = (refreshRd.value = Math.random())
 
 			// 请求参数
 			const data = {
@@ -253,75 +253,75 @@ export default defineComponent({
 				sessionId: session.value.id,
 				order: "createTime",
 				sort: "desc"
-			};
+			}
 
 			// 加载动画
-			loading.value = true;
+			loading.value = true
 
 			// 首页处理
 			if (data.page === 1) {
-				visible.value = false;
-				store.commit("CLEAR_MESSAGE_LIST");
+				visible.value = false
+				store.commit("CLEAR_MESSAGE_LIST")
 			}
 
 			// 完成
 			const done = () => {
-				loading.value = false;
-				visible.value = true;
-			};
+				loading.value = false
+				visible.value = true
+			}
 
 			service.chat.message
 				.page(data)
 				.then((res: any) => {
 					// 防止脏数据
 					if (rd != refreshRd.value) {
-						return false;
+						return false
 					}
 
 					// 分页信息
-					Object.assign(pagination, res.pagination);
+					Object.assign(pagination, res.pagination)
 
 					// 追加数据
-					store.commit("PREPEND_MESSAGE_LIST", res.list);
+					store.commit("PREPEND_MESSAGE_LIST", res.list)
 
 					if (data.page === 1) {
-						scrollToBottom();
+						scrollToBottom()
 
 						// 首次滚动隐藏
-						setTimeout(done, 0);
+						setTimeout(done, 0)
 					} else {
-						done();
+						done()
 					}
 				})
 				.catch((err: string) => {
-					ElMessage.error(err);
-					done();
-				});
+					ElMessage.error(err)
+					done()
+				})
 		}
 
 		// 加载更多
 		function onLoadmore() {
-			refresh({ page: pagination.page + 1 });
+			refresh({ page: pagination.page + 1 })
 		}
 
 		// 监听列表刷新
-		mitt.on("message.refresh", refresh);
+		mitt.on("message.refresh", refresh)
 		// 滚动到底部
-		mitt.on("message.scrollToBottom", scrollToBottom);
+		mitt.on("message.scrollToBottom", scrollToBottom)
 
 		// 销毁
 		onUnmounted(function () {
 			// 移除语音播放
-			clearTimeout(voice.timer);
+			clearTimeout(voice.timer)
 
 			list.value.map((e: any) => {
-				e.isPlay = false;
-			});
+				e.isPlay = false
+			})
 
 			// 移除事件
-			mitt.off("message.refresh", refresh);
-			mitt.off("message.scrollToBottom", scrollToBottom);
-		});
+			mitt.off("message.refresh", refresh)
+			mitt.off("message.scrollToBottom", scrollToBottom)
+		})
 
 		return {
 			refs,
@@ -337,9 +337,9 @@ export default defineComponent({
 			refresh,
 			onLoadmore,
 			scrollToBottom
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

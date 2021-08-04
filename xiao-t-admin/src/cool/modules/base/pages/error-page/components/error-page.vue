@@ -33,10 +33,10 @@
 </template>
 
 <script lang="ts">
-import { useStore } from "vuex";
-import { computed, defineComponent, ref } from "vue";
-import { useRouter } from "vue-router";
-import { href } from "/@/core/utils";
+import { useStore } from "vuex"
+import { computed, defineComponent, ref } from "vue"
+import { useRouter } from "vue-router"
+import { href } from "/@/core/utils"
 
 export default defineComponent({
 	props: {
@@ -45,35 +45,35 @@ export default defineComponent({
 	},
 
 	setup() {
-		const store = useStore();
-		const router = useRouter();
+		const store = useStore()
+		const router = useRouter()
 
-		const url = ref<string>("");
-		const isLogout = ref<boolean>(false);
+		const url = ref<string>("")
+		const isLogout = ref<boolean>(false)
 
-		const routes = computed(() => store.getters.routes);
-		const token = computed(() => store.getters.token);
+		const routes = computed(() => store.getters.routes)
+		const token = computed(() => store.getters.token)
 
 		function navTo() {
-			router.push(url.value);
+			router.push(url.value)
 		}
 
 		function toLogin() {
-			router.push("/login");
+			router.push("/login")
 		}
 
 		async function reLogin() {
-			isLogout.value = true;
-			await store.dispatch("userLogout");
-			href("/login");
+			isLogout.value = true
+			await store.dispatch("userLogout")
+			href("/login")
 		}
 
 		function back() {
-			history.back();
+			history.back()
 		}
 
 		function home() {
-			router.push("/");
+			router.push("/")
 		}
 
 		return {
@@ -86,9 +86,9 @@ export default defineComponent({
 			reLogin,
 			back,
 			home
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

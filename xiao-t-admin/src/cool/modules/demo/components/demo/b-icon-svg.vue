@@ -20,7 +20,7 @@ export default {
 	data() {
 		return {
 			list: ["like", "video", "rank", "menu", "favor"]
-		};
+		}
 	}
-};
+}
 </script>

@@ -7,6 +7,7 @@ const {getData, getlocalDataFile, saveData} = require("./utils");
 const marked = require("marked");
 const rendererMD = new marked.Renderer();
 const path = require('path');
+const os = require('os');
 
 const appPath = path.join(getlocalDataFile());
 const dbPath = path.join(appPath, './db.json');
@@ -57,6 +58,18 @@ window.utools = window.xiao_t = {
     },
     onPluginReady(cb) {
         ipcRenderer.once('', (e, message) => {
+            const info = JSON.parse(message)
+            cb({...info, type: 'text'})
+        })
+    },
+    outPlugin(cb) {
+        ipcRenderer.once('onPluginOut', (e, message) => {
+            const info = JSON.parse(message)
+            cb({...info, type: 'text'})
+        })
+    },
+    onDbPull(cb) {
+        ipcRenderer.once('onPluginOut', (e, message) => {
             const info = JSON.parse(message)
             cb({...info, type: 'text'})
         })
@@ -314,13 +327,13 @@ window.utools = window.xiao_t = {
         shell.openExternal(url);
     },
 
-    // isMacOs() {
-    //     return os.type() === 'Darwin';
-    // },
-    //
-    // isWindows() {
-    //     return os.type() === 'Windows_NT';
-    // },
+    isMacOs() {
+        return os.type() === 'Darwin';
+    },
+
+    isWindows() {
+        return os.type() === 'Windows_NT';
+    },
 }
 
 try {

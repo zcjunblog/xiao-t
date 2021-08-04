@@ -1,4 +1,4 @@
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref } from "vue"
 
 export default defineComponent({
 	name: "test2",
@@ -11,20 +11,20 @@ export default defineComponent({
 	emits: ["update:modelValue", "change"],
 
 	setup(props, { emit }) {
-		const value = ref<string>(props.modelValue || "");
+		const value = ref<string>(props.modelValue || "")
 
 		function onChange(val: string) {
-			emit("update:modelValue", val);
-			emit("change", val);
+			emit("update:modelValue", val)
+			emit("change", val)
 		}
 
 		return {
 			value,
 			onChange
-		};
+		}
 	},
 
 	render(ctx: any) {
-		return <el-input v-model={ctx.value} size="mini" onChange={ctx.onChange} />;
+		return <el-input v-model={ctx.value} size="mini" onChange={ctx.onChange} />
 	}
-});
+})

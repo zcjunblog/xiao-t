@@ -16,12 +16,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
-import { isPc } from "/@/core/utils";
+import { defineComponent, reactive } from "vue"
+import { isPc } from "/@/core/utils"
 
 export default defineComponent({
 	setup() {
-		const barWidth = isPc() ? 25 : 15;
+		const barWidth = isPc() ? 25 : 15
 		const chartOption = reactive<any>({
 			grid: {
 				top: "20px",
@@ -56,9 +56,9 @@ export default defineComponent({
 			tooltip: {
 				trigger: "axis",
 				formatter: (comp: any) => {
-					const [serie] = comp;
+					const [serie] = comp
 
-					return `${serie.seriesName}：${serie.value}`;
+					return `${serie.seriesName}：${serie.value}`
 				},
 				axisPointer: {
 					show: true,
@@ -97,22 +97,22 @@ export default defineComponent({
 					zlevel: -1
 				}
 			]
-		});
+		})
 
-		chartOption.xAxis.data = new Array(12).fill(1).map((e, i) => i + 1 + "月");
+		chartOption.xAxis.data = new Array(12).fill(1).map((e, i) => i + 1 + "月")
 		chartOption.series[0].data = new Array(12)
 			.fill(1)
-			.map(() => parseInt(String(Math.random() * 100)));
-		chartOption.series[1].data = new Array(12).fill(100);
+			.map(() => parseInt(String(Math.random() * 100)))
+		chartOption.series[1].data = new Array(12).fill(100)
 
 		return {
 			chartOption
-		};
+		}
 	},
 	data() {
-		return {};
+		return {}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

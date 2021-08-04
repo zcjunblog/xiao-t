@@ -34,17 +34,17 @@
 </template>
 
 <script lang="ts">
-import { ElMessageBox } from "element-plus";
-import { defineComponent, inject, nextTick, reactive } from "vue";
-import { useRefs } from "/@/core";
-import { CrudLoad, Table, Upsert } from "cl-admin-crud-vue3/types";
+import { ElMessageBox } from "element-plus"
+import { defineComponent, inject, nextTick, reactive } from "vue"
+import { useRefs } from "/@/core"
+import { CrudLoad, Table, Upsert } from "cl-admin-crud-vue3/types"
 
 export default defineComponent({
 	name: "sys-param",
 
 	setup() {
-		const service = inject<any>("service");
-		const { refs, setRefs } = useRefs();
+		const service = inject<any>("service")
+		const { refs, setRefs } = useRefs()
 
 		// 选项卡
 		const tab = reactive<any>({
@@ -62,7 +62,7 @@ export default defineComponent({
 					component: "cl-editor-quill"
 				}
 			]
-		});
+		})
 
 		// 表格配置
 		const table = reactive<Table>({
@@ -98,7 +98,7 @@ export default defineComponent({
 					type: "op"
 				}
 			]
-		});
+		})
 
 		// 新增编辑配置
 		const upsert = reactive<Upsert>({
@@ -155,12 +155,12 @@ export default defineComponent({
 					}
 				}
 			]
-		});
+		})
 
 		// crud 加载
 		function onLoad({ ctx, app }: CrudLoad) {
-			ctx.service(service.base.system.param).done();
-			app.refresh();
+			ctx.service(service.base.system.param).done()
+			app.refresh()
 		}
 
 		// 切换编辑器
@@ -169,23 +169,23 @@ export default defineComponent({
 				type: "warning"
 			})
 				.then(() => {
-					tab.index = i;
-					refs.value.upsert.setForm("data", "");
+					tab.index = i
+					refs.value.upsert.setForm("data", "")
 				})
-				.catch(() => null);
+				.catch(() => null)
 		}
 
 		// 监听打开
 		function onUpsertOpen(isEdit: boolean, data: any) {
-			tab.index = null;
+			tab.index = null
 
 			nextTick(() => {
 				if (isEdit) {
-					tab.index = /<*>/g.test(data.data) ? 1 : 0;
+					tab.index = /<*>/g.test(data.data) ? 1 : 0
 				} else {
-					tab.index = 1;
+					tab.index = 1
 				}
-			});
+			})
 		}
 
 		return {
@@ -197,9 +197,9 @@ export default defineComponent({
 			onLoad,
 			changeTab,
 			onUpsertOpen
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

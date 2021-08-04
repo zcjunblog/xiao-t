@@ -1,10 +1,9 @@
 import setIpc from './ipcMain'
 import config from '@config/index'
 import menuconfig from '../config/menu'
-import DownloadUpdate from './downloadFile'
-import Update from './checkupdate';
-import { app, globalShortcut, BrowserWindow, Menu, Tray, dialog, ipcMain } from 'electron'
+import { app, BrowserWindow, Menu, Tray, dialog, ipcMain } from 'electron'
 import { winURL, loadingURL, logoURL } from '../config/StaticPath'
+
 const path = require("path")
 
 class MainInit {
@@ -69,6 +68,26 @@ class MainInit {
     const menu = Menu.buildFromTemplate(menuconfig as any)
     // 加载模板
     Menu.setApplicationMenu(menu)
+
+    // 进程通信部分
+    ipcMain.on("zIndexMessage", (event, atTheTop) => {
+      this.mainWindow.setAlwaysOnTop(atTheTop)
+      this.mainWindow.webContents.send("receiveZIndexMessage", atTheTop);
+    });
+    ipcMain.on("minimizeMessage", () => {
+      this.mainWindow.minimize()
+    });
+    ipcMain.on("closeMessage", () => {
+      this.mainWindow.hide();
+    });
+    ipcMain.on("maximizeMessage", (event, isMaximize) => {
+      if (isMaximize){
+        this.mainWindow.unmaximize()
+      }else {
+        this.mainWindow.maximize()
+      }
+      this.mainWindow.webContents.send("receiveMaximizeMessageMessage", !isMaximize);
+    });
     // 加载主窗口
     this.mainWindow.loadURL(this.winURL)
     // TODO: 暂时不使用electron提供的更新方案
@@ -237,25 +256,6 @@ class MainInit {
       this.mainWindow = null
     })
 
-    // 进程通信部分
-    ipcMain.on("zIndexMessage", (event, atTheTop) => {
-      this.mainWindow.setAlwaysOnTop(atTheTop)
-      this.mainWindow.webContents.send("receiveZIndexMessage", atTheTop);
-    });
-    ipcMain.on("minimizeMessage", () => {
-      this.mainWindow.minimize()
-    });
-    ipcMain.on("closeMessage", () => {
-      this.mainWindow.close()
-    });
-    ipcMain.on("maximizeMessage", (event, isMaximize) => {
-      if (isMaximize){
-        this.mainWindow.unmaximize()
-      }else {
-        this.mainWindow.maximize()
-      }
-      this.mainWindow.webContents.send("receiveMaximizeMessageMessage", !isMaximize);
-    });
   }
 
   // 加载窗口函数

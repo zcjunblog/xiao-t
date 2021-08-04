@@ -12,11 +12,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref, watch } from "vue";
-import Quill from "quill";
-import "quill/dist/quill.snow.css";
-import { isNumber } from "/@/core/utils";
-import { useRefs } from "/@/core";
+import { computed, defineComponent, onMounted, ref, watch } from "vue"
+import Quill from "quill"
+import "quill/dist/quill.snow.css"
+import { isNumber } from "/@/core/utils"
+import { useRefs } from "/@/core"
 
 export default defineComponent({
 	name: "cl-editor-quill",
@@ -31,25 +31,25 @@ export default defineComponent({
 	emits: ["update:modelValue", "load"],
 
 	setup(props, { emit }) {
-		const { refs, setRefs }: any = useRefs();
+		const { refs, setRefs }: any = useRefs()
 
-		let quill: any = null;
+		let quill: any = null
 
 		// 文本内容
-		const content = ref<string>("");
+		const content = ref<string>("")
 
 		// 光标位置
-		const cursorIndex = ref<number>(0);
+		const cursorIndex = ref<number>(0)
 
 		// 上传处理
 		function uploadFileHandler() {
-			const selection = quill.getSelection();
+			const selection = quill.getSelection()
 
 			if (selection) {
-				cursorIndex.value = selection.index;
+				cursorIndex.value = selection.index
 			}
 
-			refs.value["upload-space"].open();
+			refs.value["upload-space"].open()
 		}
 
 		// 文件确认
@@ -57,31 +57,31 @@ export default defineComponent({
 			if (files.length > 0) {
 				// 批量插入图片
 				files.forEach((file, i) => {
-					const [type] = file.type.split("/");
+					const [type] = file.type.split("/")
 
-					quill.insertEmbed(cursorIndex.value + i, type, file.url, Quill.sources.USER);
-				});
+					quill.insertEmbed(cursorIndex.value + i, type, file.url, Quill.sources.USER)
+				})
 
 				// 移动光标到图片后一位
-				quill.setSelection(cursorIndex.value + files.length);
+				quill.setSelection(cursorIndex.value + files.length)
 			}
 		}
 
 		// 设置内容
 		function setContent(val: string) {
-			quill.root.innerHTML = val || "";
+			quill.root.innerHTML = val || ""
 		}
 
 		// 编辑框样式
 		const style = computed<any>(() => {
-			const height = isNumber(props.height) ? props.height + "px" : props.height;
-			const width = isNumber(props.width) ? props.width + "px" : props.width;
+			const height = isNumber(props.height) ? props.height + "px" : props.height
+			const width = isNumber(props.width) ? props.width + "px" : props.width
 
 			return {
 				height,
 				width
-			};
-		});
+			}
+		})
 
 		// 监听绑定值
 		watch(
@@ -89,13 +89,13 @@ export default defineComponent({
 			(val: string) => {
 				if (val) {
 					if (val !== content.value) {
-						setContent(val);
+						setContent(val)
 					}
 				} else {
-					setContent("");
+					setContent("")
 				}
 			}
-		);
+		)
 
 		onMounted(function () {
 			// 实例化
@@ -121,23 +121,23 @@ export default defineComponent({
 					]
 				},
 				...props.options
-			});
+			})
 
 			// 添加图片工具
-			quill.getModule("toolbar").addHandler("image", uploadFileHandler);
+			quill.getModule("toolbar").addHandler("image", uploadFileHandler)
 
 			// 监听输入
 			quill.on("text-change", () => {
-				content.value = quill.root.innerHTML;
-				emit("update:modelValue", content.value);
-			});
+				content.value = quill.root.innerHTML
+				emit("update:modelValue", content.value)
+			})
 
 			// 设置内容
-			setContent(props.modelValue);
+			setContent(props.modelValue)
 
 			// 加载回调
-			emit("load", quill);
-		});
+			emit("load", quill)
+		})
 
 		return {
 			refs,
@@ -148,9 +148,9 @@ export default defineComponent({
 			setRefs,
 			setContent,
 			onUploadSpaceConfirm
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss">

@@ -23,9 +23,9 @@
 </template>
 
 <script lang="ts">
-import { ElMessage } from "element-plus";
-import { defineComponent, inject, reactive, ref } from "vue";
-import { useStore } from "vuex";
+import { ElMessage } from "element-plus"
+import { defineComponent, inject, reactive, ref } from "vue"
+import { useStore } from "vuex"
 
 export default defineComponent({
 	name: "sys-info",
@@ -40,20 +40,20 @@ export default defineComponent({
 	},
 
 	setup() {
-		const store = useStore();
-		const service = inject<any>("service");
+		const store = useStore()
+		const service = inject<any>("service")
 
 		// 表单数据
-		const form = reactive<any>(store.getters.userInfo);
+		const form = reactive<any>(store.getters.userInfo)
 
 		// 保存状态
-		const saving = ref<boolean>(false);
+		const saving = ref<boolean>(false)
 
 		// 保存
 		async function save() {
-			const { headImg, nickName, password } = form;
+			const { headImg, nickName, password } = form
 
-			saving.value = true;
+			saving.value = true
 
 			await service.base.common
 				.userUpdate({
@@ -62,24 +62,24 @@ export default defineComponent({
 					password
 				})
 				.then(() => {
-					form.password = "";
-					ElMessage.success("修改成功");
-					store.dispatch("userInfo");
+					form.password = ""
+					ElMessage.success("修改成功")
+					store.dispatch("userInfo")
 				})
 				.catch((err: string) => {
-					ElMessage.error(err);
-				});
+					ElMessage.error(err)
+				})
 
-			saving.value = false;
+			saving.value = false
 		}
 
 		return {
 			form,
 			saving,
 			save
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss">

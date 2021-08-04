@@ -1,7 +1,7 @@
-import { export_json_to_excel } from "./export2excel";
+import { export_json_to_excel } from "./export2excel"
 
 function currentDate() {
-	const d: Date = new Date();
+	const d: Date = new Date()
 
 	return {
 		year: d.getFullYear(),
@@ -10,7 +10,7 @@ function currentDate() {
 		hour: d.getHours(),
 		minu: d.getMinutes(),
 		sec: d.getSeconds()
-	};
+	}
 }
 
-export { export_json_to_excel, currentDate };
+export { export_json_to_excel, currentDate }

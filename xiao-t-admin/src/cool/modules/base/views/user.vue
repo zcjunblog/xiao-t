@@ -102,30 +102,30 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, reactive, ref, watch } from "vue";
-import { useStore } from "vuex";
-import { useRefs } from "/@/core";
-import { Table, Upsert } from "cl-admin-crud-vue3/types";
+import { computed, defineComponent, inject, reactive, ref, watch } from "vue"
+import { useStore } from "vuex"
+import { useRefs } from "/@/core"
+import { Table, Upsert } from "cl-admin-crud-vue3/types"
 
 export default defineComponent({
 	name: "sys-user",
 
 	setup() {
-		const service = inject<any>("service");
-		const store = useStore();
-		const { refs, setRefs } = useRefs();
+		const service = inject<any>("service")
+		const store = useStore()
+		const { refs, setRefs } = useRefs()
 
 		// 是否展开
-		const isExpand = ref<boolean>(true);
+		const isExpand = ref<boolean>(true)
 
 		// 选择项
 		const selects = reactive<any>({
 			dept: {},
 			ids: []
-		});
+		})
 
 		// 部门列表
-		const dept = ref<any[]>([]);
+		const dept = ref<any[]>([])
 
 		// 表格配置
 		const table = reactive<Table>({
@@ -209,7 +209,7 @@ export default defineComponent({
 					width: 160
 				}
 			]
-		});
+		})
 
 		// 新增、编辑配置
 		const upsert = reactive<Upsert>({
@@ -364,85 +364,85 @@ export default defineComponent({
 					}
 				}
 			]
-		});
+		})
 
 		// 浏览器信息
-		const browser = computed(() => store.getters.browser);
+		const browser = computed(() => store.getters.browser)
 
 		// 监听屏幕大小变化
 		watch(
 			() => browser.value.isMini,
 			(val: boolean) => {
-				isExpand.value = !val;
+				isExpand.value = !val
 			},
 			{
 				immediate: true
 			}
-		);
+		)
 
 		// crud 加载
 		function onLoad({ ctx, app }: any) {
-			ctx.service(service.base.system.user).done();
-			app.refresh();
+			ctx.service(service.base.system.user).done()
+			app.refresh()
 		}
 
 		// 刷新列表
 		function refresh(params: any) {
-			refs.value.crud.refresh(params);
+			refs.value.crud.refresh(params)
 		}
 
 		// 刷新监听
 		async function onRefresh(params: any, { next, render }: any) {
-			const { list } = await next(params);
+			const { list } = await next(params)
 
 			render(
 				list.map((e: any) => {
 					if (e.roleName) {
-						e.roleNameList = e.roleName.split(",");
+						e.roleNameList = e.roleName.split(",")
 					}
 
-					e.status = Boolean(e.status);
+					e.status = Boolean(e.status)
 
-					return e;
+					return e
 				})
-			);
+			)
 		}
 
 		// 提交钩子
 		function onUpsertSubmit(_: boolean, data: any, { next }: any) {
-			let departmentId = data.departmentId;
+			let departmentId = data.departmentId
 
 			if (!departmentId) {
-				departmentId = selects.dept.id;
+				departmentId = selects.dept.id
 
 				if (!departmentId) {
-					departmentId = dept.value[0].id;
+					departmentId = dept.value[0].id
 				}
 			}
 
 			next({
 				...data,
 				departmentId
-			});
+			})
 		}
 
 		// 多选监听
 		function onSelectionChange(selection: any[]) {
-			selects.ids = selection.map((e) => e.id);
+			selects.ids = selection.map((e) => e.id)
 		}
 
 		// 部门选择监听
 		function onDeptRowClick({ item, ids }: any) {
-			selects.dept = item;
+			selects.dept = item
 
 			refresh({
 				page: 1,
 				departmentIds: ids
-			});
+			})
 
 			// 收起
 			if (browser.value.isMini) {
-				isExpand.value = false;
+				isExpand.value = false
 			}
 		}
 
@@ -450,30 +450,30 @@ export default defineComponent({
 		function onDeptUserAdd(item: any) {
 			refs.value.crud.rowAppend({
 				departmentId: item.id
-			});
+			})
 		}
 
 		// 部门列表监听
 		function onDeptListChange(list: any[]) {
-			dept.value = list;
+			dept.value = list
 		}
 
 		// 是否显示部门
 		function deptExpand() {
-			isExpand.value = !isExpand.value;
+			isExpand.value = !isExpand.value
 		}
 
 		// 移动成员
 		async function toMove(e?: any) {
-			let ids = [];
+			let ids = []
 
 			if (!e) {
-				ids = selects.ids;
+				ids = selects.ids
 			} else {
-				ids = [e.id];
+				ids = [e.id]
 			}
 
-			refs.value["dept-move"].toMove(ids);
+			refs.value["dept-move"].toMove(ids)
 		}
 
 		return {
@@ -496,9 +496,9 @@ export default defineComponent({
 			onDeptListChange,
 			deptExpand,
 			toMove
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

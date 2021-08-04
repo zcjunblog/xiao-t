@@ -12,22 +12,22 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, watch } from "vue"
 
 // 扫描文件
 function findFiles() {
-	const files = import.meta.globEager("/**/views/**/*.vue");
-	let list = [];
+	const files = import.meta.globEager("/**/views/**/*.vue")
+	let list = []
 
 	for (const i in files) {
 		if (!i.includes("components")) {
 			list.push({
 				value: i.substr(5)
-			});
+			})
 		}
 	}
 
-	return list;
+	return list
 }
 
 export default defineComponent({
@@ -44,28 +44,28 @@ export default defineComponent({
 
 	setup(props, { emit }) {
 		// 路径
-		const path = ref<string>(props.modelValue);
+		const path = ref<string>(props.modelValue)
 
 		// 数据列表
-		const list = ref<any[]>(findFiles());
+		const list = ref<any[]>(findFiles())
 
 		watch(
 			() => props.modelValue,
 			(val) => {
-				path.value = val || "";
+				path.value = val || ""
 			}
-		);
+		)
 
 		watch(path, (val) => {
-			emit("update:modelValue", val);
-		});
+			emit("update:modelValue", val)
+		})
 
 		return {
 			path,
 			list
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

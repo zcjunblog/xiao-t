@@ -1,11 +1,11 @@
-import path from "path";
-import type { UserConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import vueJsx from "@vitejs/plugin-vue-jsx";
-import { svgBuilder } from "./src/core/utils/svg";
+const path = require("path")
+import type { UserConfig } from "vite"
+import vue from "@vitejs/plugin-vue"
+import vueJsx from "@vitejs/plugin-vue-jsx"
+import { svgBuilder } from "./src/core/utils/svg"
 
 function resolve(dir: string) {
-	return path.resolve(__dirname, ".", dir);
+	return path.resolve(__dirname, ".", dir)
 }
 
 // https://vitejs.dev/config/
@@ -35,7 +35,7 @@ export default (): UserConfig => {
 			},
 			proxy: {
 				"/dev": {
-					target: "http://127.0.0.1:8001",
+					target: "http://127.0.0.1:8848",
 					changeOrigin: true,
 					rewrite: (path) => path.replace(/^\/dev/, "")
 				},
@@ -54,5 +54,5 @@ export default (): UserConfig => {
 		optimizeDeps: {
 			exclude: ["vue-demi"]
 		}
-	};
+	}
 };

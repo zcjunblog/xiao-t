@@ -1,4 +1,4 @@
-import { BaseService, Service } from "/@/core";
+import { BaseService, Service } from "/@/core"
 
 @Service("base/comm")
 class Common extends BaseService {
@@ -8,7 +8,7 @@ class Common extends BaseService {
 	uploadMode() {
 		return this.request({
 			url: "/uploadMode"
-		});
+		})
 	}
 
 	/**
@@ -22,7 +22,7 @@ class Common extends BaseService {
 			url: "/upload",
 			method: "POST",
 			params
-		});
+		})
 	}
 
 	/**
@@ -32,7 +32,7 @@ class Common extends BaseService {
 		return this.request({
 			url: "/logout",
 			method: "POST"
-		});
+		})
 	}
 
 	/**
@@ -44,7 +44,7 @@ class Common extends BaseService {
 	userInfo() {
 		return this.request({
 			url: "/person"
-		});
+		})
 	}
 
 	/**
@@ -61,7 +61,7 @@ class Common extends BaseService {
 			data: {
 				...params
 			}
-		});
+		})
 	}
 
 	/**
@@ -73,8 +73,8 @@ class Common extends BaseService {
 	permMenu() {
 		return this.request({
 			url: "/permmenu"
-		});
+		})
 	}
 }
 
-export default Common;
+export default Common

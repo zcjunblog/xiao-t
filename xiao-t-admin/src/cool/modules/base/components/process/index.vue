@@ -31,37 +31,37 @@
 </template>
 
 <script lang="ts">
-import { computed, reactive, watch } from "vue";
-import { useStore } from "vuex";
-import { useRoute, useRouter } from "vue-router";
-import { last } from "/@/core/utils";
-import { useRefs } from "/@/core";
-import { ContextMenu } from "cl-admin-crud-vue3";
+import { computed, reactive, watch } from "vue"
+import { useStore } from "vuex"
+import { useRoute, useRouter } from "vue-router"
+import { last } from "/@/core/utils"
+import { useRefs } from "/@/core"
+import { ContextMenu } from "cl-admin-crud-vue3"
 
 export default {
 	name: "cl-process",
 
 	setup() {
-		const router = useRouter();
-		const route = useRoute();
-		const store = useStore();
-		const { refs, setRefs }: any = useRefs();
+		const router = useRouter()
+		const route = useRoute()
+		const store = useStore()
+		const { refs, setRefs }: any = useRefs()
 
 		// 参数配置
 		const menu = reactive<any>({
 			current: {}
-		});
+		})
 
 		// 数据列表
-		const list = computed(() => store.getters.processList);
+		const list = computed(() => store.getters.processList)
 
 		// 跳转
 		function toPath() {
-			const active = list.value.find((e: any) => e.active);
+			const active = list.value.find((e: any) => e.active)
 
 			if (!active) {
-				const next = last(list.value);
-				router.push(next ? next.value : "/");
+				const next = last(list.value)
+				router.push(next ? next.value : "/")
 			}
 		}
 
@@ -70,33 +70,33 @@ export default {
 			refs.value.scroller.scrollTo({
 				left,
 				behavior: "smooth"
-			});
+			})
 		}
 
 		// 左右移动
 		function toScroll(f: boolean) {
-			scrollTo(refs.value.scroller.scrollLeft + (f ? -100 : 100));
+			scrollTo(refs.value.scroller.scrollLeft + (f ? -100 : 100))
 		}
 
 		// 调整滚动位置
 		function adScroll(index: number) {
-			const el = refs.value[`item-${index}`];
+			const el = refs.value[`item-${index}`]
 
 			if (el) {
-				scrollTo(el.offsetLeft + el.clientWidth - refs.value.scroller.clientWidth);
+				scrollTo(el.offsetLeft + el.clientWidth - refs.value.scroller.clientWidth)
 			}
 		}
 
 		// 选择
 		function onTap(item: any, index: number) {
-			adScroll(index);
-			router.push(item.value);
+			adScroll(index)
+			router.push(item.value)
 		}
 
 		// 删除
 		function onDel(index: number) {
-			store.commit("DEL_PROCESS", index);
-			toPath();
+			store.commit("DEL_PROCESS", index)
+			toPath()
 		}
 
 		// 右键菜单
@@ -107,9 +107,9 @@ export default {
 						label: "关闭当前",
 						hidden: item.value !== route.path,
 						callback: (_: any, done: Function) => {
-							onDel(list.value.findIndex((e: any) => e.value == item.value));
-							done();
-							toPath();
+							onDel(list.value.findIndex((e: any) => e.value == item.value))
+							done()
+							toPath()
 						}
 					},
 					{
@@ -120,9 +120,9 @@ export default {
 								list.value.filter(
 									(e: any) => e.value == item.value || e.value == "/"
 								)
-							);
-							done();
-							toPath();
+							)
+							done()
+							toPath()
 						}
 					},
 					{
@@ -131,21 +131,21 @@ export default {
 							store.commit(
 								"SET_PROCESS",
 								list.value.filter((e: any) => e.value == "/")
-							);
-							done();
-							toPath();
+							)
+							done()
+							toPath()
 						}
 					}
 				]
-			});
+			})
 		}
 
 		watch(
 			() => route.path,
 			function (val) {
-				adScroll(list.value.findIndex((e: any) => e.value === val) || 0);
+				adScroll(list.value.findIndex((e: any) => e.value === val) || 0)
 			}
-		);
+		)
 
 		return {
 			refs,
@@ -159,9 +159,9 @@ export default {
 			adScroll,
 			scrollTo,
 			openCM
-		};
+		}
 	}
-};
+}
 </script>
 
 <style lang="scss" scoped>

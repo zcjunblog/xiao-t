@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import "./chat";
+import "./chat"
 
-const xhr = new window._XMLHttpRequest();
-window.XMLHttpRequest.prototype.upload = xhr.upload;
+const xhr = new window._XMLHttpRequest()
+window.XMLHttpRequest.prototype.upload = xhr.upload

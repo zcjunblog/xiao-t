@@ -16,21 +16,21 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from "vue";
-import { useStore } from "vuex";
-import { useRoute } from "vue-router";
-import _ from "lodash";
-import { isEmpty } from "/@/core/utils";
+import { computed, defineComponent, ref, watch } from "vue"
+import { useStore } from "vuex"
+import { useRoute } from "vue-router"
+import _ from "lodash"
+import { isEmpty } from "/@/core/utils"
 
 export default defineComponent({
 	name: "cl-route-nav",
 
 	setup() {
-		const route = useRoute();
-		const store = useStore();
+		const route = useRoute()
+		const store = useStore()
 
 		// 数据列表
-		const list = ref<any[]>([]);
+		const list = ref<any[]>([])
 
 		// 监听路由变化
 		watch(
@@ -38,53 +38,53 @@ export default defineComponent({
 			(val: any) => {
 				const deep = (item: any) => {
 					if (route.path === "/") {
-						return false;
+						return false
 					}
 
 					if (item.path == route.path) {
-						return item;
+						return item
 					} else {
 						if (item.children) {
-							const ret = item.children.map(deep).find(Boolean);
+							const ret = item.children.map(deep).find(Boolean)
 
 							if (ret) {
-								return [item, ret];
+								return [item, ret]
 							} else {
-								return false;
+								return false
 							}
 						} else {
-							return false;
+							return false
 						}
 					}
-				};
+				}
 
 				list.value = _(store.getters.menuGroup)
 					.map(deep)
 					.filter(Boolean)
 					.flattenDeep()
-					.value();
+					.value()
 
 				if (isEmpty(list.value)) {
-					list.value.push(val);
+					list.value.push(val)
 				}
 			},
 			{
 				immediate: true
 			}
-		);
+		)
 
 		// 最后一个节点名称
-		const lastName = computed(() => _.last(list.value).name);
+		const lastName = computed(() => _.last(list.value).name)
 
-		const browser = computed(() => store.getters.browser);
+		const browser = computed(() => store.getters.browser)
 
 		return {
 			list,
 			lastName,
 			browser
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss">

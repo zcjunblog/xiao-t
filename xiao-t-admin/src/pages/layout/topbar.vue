@@ -49,44 +49,44 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { useRouter } from "vue-router";
-import { useStore } from "vuex";
-import { href } from "/@/core/utils";
+import { computed, defineComponent } from "vue"
+import { useRouter } from "vue-router"
+import { useStore } from "vuex"
+import { href } from "/@/core/utils"
 
 export default defineComponent({
 	setup() {
-		const store = useStore();
-		const router = useRouter();
+		const store = useStore()
+		const router = useRouter()
 
 		// 菜单是否展开
-		const menuCollapse = computed<any>(() => store.getters.menuCollapse);
+		const menuCollapse = computed<any>(() => store.getters.menuCollapse)
 
 		// 模块列表
-		const modules = computed<any>(() => store.getters.modules);
+		const modules = computed<any>(() => store.getters.modules)
 
 		// 应用信息
-		const app = computed<any>(() => store.getters.app);
+		const app = computed<any>(() => store.getters.app)
 
 		// 用户信息
-		const userInfo = computed<any>(() => store.getters.userInfo);
+		const userInfo = computed<any>(() => store.getters.userInfo)
 
 		// 跳转官网
 		async function onCommand(name: string) {
 			switch (name) {
 				case "my":
-					router.push("/my/info");
-					break;
+					router.push("/my/info")
+					break
 				case "exit":
-					await store.dispatch("userLogout");
-					href("/login");
-					break;
+					await store.dispatch("userLogout")
+					href("/login")
+					break
 			}
 		}
 
 		// 展开
 		function collapse() {
-			store.commit("COLLAPSE_MENU", !menuCollapse.value);
+			store.commit("COLLAPSE_MENU", !menuCollapse.value)
 		}
 
 		return {
@@ -96,9 +96,9 @@ export default defineComponent({
 			app,
 			onCommand,
 			collapse
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss">

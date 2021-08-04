@@ -138,13 +138,13 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, provide, reactive, ref, watch } from "vue";
-import { useStore } from "vuex";
-import { ElMessage, ElMessageBox } from "element-plus";
-import { ElFile } from "element-plus/lib/el-upload/src/upload.type";
-import { isEmpty } from "/@/core/utils";
-import Category from "./category.vue";
-import FileItem from "./file-item.vue";
+import { computed, defineComponent, inject, provide, reactive, ref, watch } from "vue"
+import { useStore } from "vuex"
+import { ElMessage, ElMessageBox } from "element-plus"
+import { ElFile } from "element-plus/lib/el-upload/src/upload.type"
+import { isEmpty } from "/@/core/utils"
+import Category from "./category.vue"
+import FileItem from "./file-item.vue"
 
 export default defineComponent({
 	name: "cl-upload-space",
@@ -191,82 +191,82 @@ export default defineComponent({
 	emits: ["update:modelValue", "confirm"],
 
 	setup(props, { emit }) {
-		const store = useStore();
-		const service = inject<any>("service");
+		const store = useStore()
+		const service = inject<any>("service")
 
 		// 是否可见
-		const visible = ref<boolean>(false);
+		const visible = ref<boolean>(false)
 
 		// 是否加载中
-		const loading = ref<boolean>(false);
+		const loading = ref<boolean>(false)
 
 		// 已选列表
-		const selection = ref<any[]>([]);
+		const selection = ref<any[]>([])
 
 		// 文件列表
-		const list = ref<any[]>([]);
+		const list = ref<any[]>([])
 
 		// 类目数据
 		const category = reactive<any>({
 			id: "",
 			visible: true
-		});
+		})
 
 		// 分页信息
 		const pagination = reactive<any>({
 			page: 1,
 			size: 12,
 			total: 0
-		});
+		})
 
 		// 浏览器信息
-		const browser = computed(() => store.getters.browser);
+		const browser = computed(() => store.getters.browser)
 
 		// 监听屏幕大小变化
 		watch(
 			() => browser.value.isMini,
 			(val) => {
-				category.visible = val ? false : true;
+				category.visible = val ? false : true
 			},
 			{
 				immediate: true
 			}
-		);
+		)
 
 		// 提示信息
-		const limitTip = computed(() => selection.value.length + "/" + props.limit);
+		const limitTip = computed(() => selection.value.length + "/" + props.limit)
 
 		// 是否选中
-		const isSelected = computed(() => !isEmpty(selection.value));
+		const isSelected = computed(() => !isEmpty(selection.value))
 
 		// Provide
 		provide("space", {
 			category,
 			selection
-		});
+		})
 
 		// 打开
 		function open() {
-			visible.value = true;
+			visible.value = true
 		}
 
 		// 清空选择
 		function clear() {
-			selection.value = [];
+			selection.value = []
 		}
 
 		// 关闭
 		function close() {
-			visible.value = false;
-			clear();
+			visible.value = false
+			clear()
 		}
 
 		// 上传成功
 		function onSuccess(res: any, file: ElFile) {
-			const item = list.value.find((e: any) => file.uid == e.uid);
+			const item = list.value.find((e: any) => file.uid == e.uid)
 
 			if (item) {
-				item.url = res.data;
+				item.url = res.data
 
 				service.upload.info
 					.add({
@@ -275,22 +275,22 @@ export default defineComponent({
 						classifyId: item.classifyId
 					})
 					.then((res: any) => {
-						item.loading = false;
-						item.id = res.id;
+						item.loading = false
+						item.id = res.id
 					})
 					.catch((err: string) => {
-						ElMessage.error(err);
-					});
+						ElMessage.error(err)
+					})
 			}
 		}
 
 		// 上传失败
 		function onError(err: string, file: ElFile) {
-			const item = list.value.find((e) => file.uid == e.uid);
+			const item = list.value.find((e) => file.uid == e.uid)
 
 			if (item) {
-				item.loading = false;
-				item.error = err;
+				item.loading = false
+				item.error = err
 			}
 		}
 
@@ -303,25 +303,25 @@ export default defineComponent({
 				classifyId: category.id,
 				loading: true,
 				progress: "0%"
-			});
+			})
 		}
 
 		// 上传进度
 		function onProgress({ percent }: any, file: ElFile) {
-			const item = list.value.find(({ uid }: any) => uid == file.uid);
+			const item = list.value.find(({ uid }: any) => uid == file.uid)
 
 			if (item) {
-				item.progress = percent + "%";
+				item.progress = percent + "%"
 			}
 		}
 
 		// 刷新资源文件
 		async function refresh(params: any = {}) {
 			// 清空选择
-			clear();
+			clear()
 
 			// 加载中
-			loading.value = true;
+			loading.value = true
 
 			await service.upload.info
 				.page({
@@ -331,39 +331,39 @@ export default defineComponent({
 					type: props.accept
 				})
 				.then((res: any) => {
-					Object.assign(pagination, res.pagination);
+					Object.assign(pagination, res.pagination)
 
 					list.value = res.list.map((e: any) => {
 						return {
 							...e,
 							loading: false
-						};
-					});
-				});
+						}
+					})
+				})
 
 			// 加载完成
-			loading.value = false;
+			loading.value = false
 		}
 
 		// 确认选中
 		function confirm() {
-			const urls = selection.value.map((e: any) => e.url).join(",");
+			const urls = selection.value.map((e: any) => e.url).join(",")
 
-			emit("update:modelValue", urls);
-			emit("confirm", props.detailData ? selection.value : urls);
+			emit("update:modelValue", urls)
+			emit("confirm", props.detailData ? selection.value : urls)
 
-			close();
+			close()
 		}
 
 		// 选择
 		function select(item: any) {
-			const index = selection.value.findIndex((e: any) => e.id === item.id);
+			const index = selection.value.findIndex((e: any) => e.id === item.id)
 
 			if (index >= 0) {
-				selection.value.splice(index, 1);
+				selection.value.splice(index, 1)
 			} else {
 				if (selection.value.length < props.limit) {
-					selection.value.push(item);
+					selection.value.push(item)
 				}
 			}
 		}
@@ -371,21 +371,21 @@ export default defineComponent({
 		// 删除选中
 		function remove(item?: any) {
 			// 已选文件 id
-			const ids: number[] = item ? [item.id] : selection.value.map((e: any) => e.id);
+			const ids: number[] = item ? [item.id] : selection.value.map((e: any) => e.id)
 
 			ElMessageBox.confirm("此操作将删除文件, 是否继续?", "提示", {
 				type: "warning"
 			})
 				.then(() => {
-					ElMessage.success("删除成功");
+					ElMessage.success("删除成功")
 
 					// 删除文件及选择
 					ids.forEach((id) => {
-						[list.value, selection.value].forEach((list) => {
-							const index = list.findIndex((e: any) => e.id === id);
-							list.splice(index, 1);
-						});
-					});
+						;[list.value, selection.value].forEach((list) => {
+							const index = list.findIndex((e: any) => e.id === id)
+							list.splice(index, 1)
+						})
+					})
 
 					// 删除请求
 					service.upload.info
@@ -393,15 +393,15 @@ export default defineComponent({
 							ids
 						})
 						.catch((err: string) => {
-							ElMessage.error(err);
-						});
+							ElMessage.error(err)
+						})
 				})
-				.catch(() => null);
+				.catch(() => null)
 		}
 
 		// 页面切换
 		function onCurrentChange(page: number) {
-			refresh({ page });
+			refresh({ page })
 		}
 
 		return {
@@ -425,9 +425,9 @@ export default defineComponent({
 			beforeUpload,
 			onProgress,
 			onCurrentChange
-		};
+		}
 	}
-});
+})
 </script>
 
 <style lang="scss">

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/cool/modules/client/service/cli.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1628064659031,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1628064659031,
+            "name": "Commit-0",
+            "content": "/**\n * @Created By zhaozc\n * @date 2021/7/29\n * @Description:\n */\nimport { BaseService, Service } from \"/@/core\"\n\n@Service(\"client/cli\")\nclass ClientCli extends BaseService {}\n\nexport default ClientCli\n"
+        }
+    ]
+}

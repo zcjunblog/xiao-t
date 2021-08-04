@@ -19,8 +19,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
-import * as echarts from "echarts";
+import { defineComponent, reactive } from "vue"
+import * as echarts from "echarts"
 
 export default defineComponent({
 	setup() {
@@ -119,11 +119,11 @@ export default defineComponent({
 					}
 				}
 			]
-		});
+		})
 
-		return { chartOption };
+		return { chartOption }
 	}
-});
+})
 </script>
 
 <style lang="scss" scoped>

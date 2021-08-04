@@ -19,15 +19,15 @@ export default {
 		return {
 			avatar: "",
 			avatar2: ""
-		};
+		}
 	},
 
 	methods: {
 		onSuccess() {
-			this.$message.success("上传成功");
+			this.$message.success("上传成功")
 		}
 	}
-};
+}
 </script>
 
 <style lang="scss" scoped>

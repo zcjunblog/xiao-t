@@ -23,16 +23,16 @@ export default {
 						label: "新增",
 						"suffix-icon": "el-icon-plus",
 						callback: (_, done) => {
-							this.$message.info("点击了新增");
-							done();
+							this.$message.info("点击了新增")
+							done()
 						}
 					},
 					{
 						label: "编辑",
 						"suffix-icon": "el-icon-edit",
 						callback: (_, done) => {
-							this.$message.info("点击了编辑");
-							done();
+							this.$message.info("点击了编辑")
+							done()
 						}
 					},
 					{
@@ -54,17 +54,17 @@ export default {
 							{
 								label: "更多",
 								callback: (_, done) => {
-									this.$message.warning("开发中");
-									done();
+									this.$message.warning("开发中")
+									done()
 								}
 							}
 						]
 					}
 				]
-			});
+			})
 		}
 	}
-};
+}
 </script>
 
 <style lang="scss" scoped>
