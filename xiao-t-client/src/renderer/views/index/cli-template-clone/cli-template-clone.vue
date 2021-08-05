@@ -102,7 +102,6 @@
                         name: 'Uni-app + uView',
                         desc: '内置了Vuex,uView,小程序更新机制,各种常用函数....',
                         type: 'mobile',
-                        git: 'git@github.com:zcjunblog/uni-app-uView-template.git',
                         url: 'https://github.com/zcjunblog/uni-app-uView-template',
                         remote: {
                             host: 'github.com',
