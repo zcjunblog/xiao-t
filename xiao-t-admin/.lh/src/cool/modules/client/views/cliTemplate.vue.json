@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 85,
+            "activePatchIndex": 93,
             "patches": [
                 {
                     "date": 1628060007937,
@@ -348,6 +348,38 @@
                 {
                     "date": 1628158310478,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -145,9 +145,12 @@\n \t\t\t\t\tlabel: \"仓库作者\",\n \t\t\t\t\tprop: \"userName\",\n \t\t\t\t\tspan: 12,\n \t\t\t\t\tcomponent: {\n-\t\t\t\t\t\tname: \"el-input\"\n+\t\t\t\t\t\tname: \"el-input\",\n+\t\t\t\t\t\tprops: {\n+\t\t\t\t\t\t\tplaceholder: \"请填写仓库作者\"\n+\t\t\t\t\t\t}\n \t\t\t\t\t},\n \t\t\t\t\trules: {\n \t\t\t\t\t\trequired: true,\n \t\t\t\t\t\tmessage: \"仓库作者不能为空\"\n@@ -181,9 +184,12 @@\n \t\t\t\t\tlabel: \"仓库名称\",\n \t\t\t\t\tprop: \"repo\",\n \t\t\t\t\tspan: 12,\n \t\t\t\t\tcomponent: {\n-\t\t\t\t\t\tname: \"el-input\"\n+\t\t\t\t\t\tname: \"el-input\",\n+\t\t\t\t\t\tprops: {\n+\t\t\t\t\t\t\tplaceholder: \"请填写仓库名称\"\n+\t\t\t\t\t\t}\n \t\t\t\t\t},\n \t\t\t\t\trules: {\n \t\t\t\t\t\trequired: true,\n \t\t\t\t\t\tmessage: \"仓库名称不能为空\"\n@@ -194,9 +200,12 @@\n \t\t\t\t\tlabel: \"分支名称\",\n \t\t\t\t\tprop: \"branch\",\n \t\t\t\t\tspan: 12,\n \t\t\t\t\tcomponent: {\n-\t\t\t\t\t\tname: \"el-input\"\n+\t\t\t\t\t\tname: \"el-input\",\n+\t\t\t\t\t\tprops: {\n+\t\t\t\t\t\t\tplaceholder: \"请填写分支名称\"\n+\t\t\t\t\t\t}\n \t\t\t\t\t},\n \t\t\t\t\trules: {\n \t\t\t\t\t\trequired: true,\n \t\t\t\t\t\tmessage: \"分支名称不能为空\"\n"
+                },
+                {
+                    "date": 1628220433128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -194,9 +194,8 @@\n \t\t\t\t\t\trequired: true,\n \t\t\t\t\t\tmessage: \"仓库名称不能为空\"\n \t\t\t\t\t}\n \t\t\t\t},\n-\n \t\t\t\t{\n \t\t\t\t\tlabel: \"分支名称\",\n \t\t\t\t\tprop: \"branch\",\n \t\t\t\t\tspan: 12,\n"
+                },
+                {
+                    "date": 1628489546297,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -265,9 +265,10 @@\n \t\t\t\t\tprop: \"git\"\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tlabel: \"相关描述\",\n-\t\t\t\t\tprop: \"desc\"\n+\t\t\t\t\tprop: \"desc\",\n+\t\t\t\t\tminWidth: 180\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tlabel: \"host\",\n \t\t\t\t\tprop: \"host\"\n"
+                },
+                {
+                    "date": 1628489569800,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -236,9 +236,10 @@\n \t\t\t},\n \t\t\tcolumns: [\n \t\t\t\t{\n \t\t\t\t\tlabel: \"名称\",\n-\t\t\t\t\tprop: \"name\"\n+\t\t\t\t\tprop: \"name\",\n+\t\t\t\t\tminWidth: 150\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tprop: \"type\",\n \t\t\t\t\tlabel: \"类型\",\n@@ -257,9 +258,10 @@\n \t\t\t\t\t]\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tlabel: \"仓库地址\",\n-\t\t\t\t\tprop: \"url\"\n+\t\t\t\t\tprop: \"url\",\n+\t\t\t\t\tminWidth: 180\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tlabel: \"克隆地址\",\n \t\t\t\t\tprop: \"git\"\n"
+                },
+                {
+                    "date": 1628489593884,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -290,9 +290,10 @@\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tlabel: \"创建时间\",\n \t\t\t\t\tprop: \"createTime\",\n-\t\t\t\t\tsortable: \"true\"\n+\t\t\t\t\tsortable: \"true\",\n+\t\t\t\t\tminWidth: 120\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\t// 操作栏\n \t\t\t\t\ttype: \"op\",\n"
+                },
+                {
+                    "date": 1628489599864,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -291,9 +291,9 @@\n \t\t\t\t{\n \t\t\t\t\tlabel: \"创建时间\",\n \t\t\t\t\tprop: \"createTime\",\n \t\t\t\t\tsortable: \"true\",\n-\t\t\t\t\tminWidth: 120\n+\t\t\t\t\tminWidth: 140\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\t// 操作栏\n \t\t\t\t\ttype: \"op\",\n"
+                },
+                {
+                    "date": 1628489849316,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -313,9 +313,10 @@\n \n \t\t// 提交钩子\n \t\tfunction onUpsertSubmit(_: boolean, data: any, { next }: any) {\n \t\t\tconsole.log(data)\n-\n+\t\t\tdelete data.createTime\n+\t\t\tdelete data.updateTime\n \t\t\tnext({\n \t\t\t\t...data\n \t\t\t})\n \t\t}\n"
+                },
+                {
+                    "date": 1628489855283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -312,11 +312,11 @@\n \t\t}\n \n \t\t// 提交钩子\n \t\tfunction onUpsertSubmit(_: boolean, data: any, { next }: any) {\n-\t\t\tconsole.log(data)\n \t\t\tdelete data.createTime\n \t\t\tdelete data.updateTime\n+\t\t\tconsole.log(data)\n \t\t\tnext({\n \t\t\t\t...data\n \t\t\t})\n \t\t}\n"
+                },
+                {
+                    "date": 1628490444496,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -235,15 +235,15 @@\n \t\t\t\t}\n \t\t\t},\n \t\t\tcolumns: [\n \t\t\t\t{\n-\t\t\t\t\tlabel: \"名称\",\n+\t\t\t\t\tlabel: \"模板名称\",\n \t\t\t\t\tprop: \"name\",\n \t\t\t\t\tminWidth: 150\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tprop: \"type\",\n-\t\t\t\t\tlabel: \"类型\",\n+\t\t\t\t\tlabel: \"模板类型\",\n \t\t\t\t\tminWidth: 120,\n \t\t\t\t\tdict: [\n \t\t\t\t\t\t{\n \t\t\t\t\t\t\tlabel: \"移动\",\n@@ -275,14 +275,14 @@\n \t\t\t\t\tlabel: \"host\",\n \t\t\t\t\tprop: \"host\"\n \t\t\t\t},\n \t\t\t\t{\n-\t\t\t\t\tlabel: \"用户名\",\n+\t\t\t\t\tlabel: \"仓库作者\",\n \t\t\t\t\tprop: \"userName\"\n \t\t\t\t},\n \n \t\t\t\t{\n-\t\t\t\t\tlabel: \"仓库作者\",\n+\t\t\t\t\tlabel: \"仓库名称\",\n \t\t\t\t\tprop: \"repo\"\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tlabel: \"分支名称\",\n@@ -304,9 +304,8 @@\n \t\t})\n \n \t\t// crud 加载\n \t\tfunction onLoad({ ctx, app }: CrudLoad) {\n-\t\t\tconsole.log(\"service.client.cli\", service.client.cli)\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cli).done()\n \t\t\tapp.refresh()\n \t\t}\n"
                 }
             ],
             "date": 1628060007937,

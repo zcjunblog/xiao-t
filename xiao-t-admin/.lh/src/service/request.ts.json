@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1628065614166,
@@ -24,6 +24,10 @@
                 {
                     "date": 1628066195431,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,8 @@\n \t\t\tif (!ignore.NProgress.some((e) => config.url.includes(e))) {\n \t\t\t\tNProgress.start()\n \t\t\t}\n \t\t}\n-\t\tconsole.log(\"config:\", config)\n \t\t// 请求信息\n \t\tif (isDev) {\n \t\t\tconsole.group(config.url)\n \t\t\tconsole.log(\"method:\", config.method)\n@@ -83,8 +82,9 @@\n \t\t\t\t\t})\n \t\t\t\t})\n \t\t\t}\n \t\t}\n+\t\tconsole.log(\"config:\", config)\n \n \t\treturn config\n \t},\n \t(error) => {\n"
+                },
+                {
+                    "date": 1628489883350,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,8 @@\n \t\t\t\t\t})\n \t\t\t\t})\n \t\t\t}\n \t\t}\n-\t\tconsole.log(\"config:\", config)\n \n \t\treturn config\n \t},\n \t(error) => {\n"
                 }
             ],
             "date": 1628065614166,

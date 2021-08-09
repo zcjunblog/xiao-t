@@ -21,7 +21,16 @@ export class ClientCliEntity extends BaseEntity {
 
   @Column({ comment: '仓库地址', default: null })
   url: string;
-  // 需要序列化处理
-  @Column({ comment: '分支参数', default: null })
-  remote: string;
+
+  @Column({ comment: '仓库作者', default: null })
+  userName: string;
+
+  @Column({ comment: '仓库名称', default: null })
+  repo: string;
+
+  @Column({ comment: '分支作者', default: null })
+  branch: string;
+
+  @Column({ comment: '托管平台', default: null })
+  host: string;
 }

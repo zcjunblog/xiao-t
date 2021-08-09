@@ -55,6 +55,8 @@
 </template>
 
 <script lang="ts">
+    import {getCliTemplateList} from "@renderer/api/cli";
+
     const fs = require('fs');
     const path = require('path');
     const {remote, shell} = require('electron')
@@ -202,6 +204,10 @@
 
             // 页面加载时
             onMounted(() => {
+                // 获取cli列表
+                getCliTemplateList().then(res=>{
+                    console.log(res)
+                })
             });
             return {
                 empty,

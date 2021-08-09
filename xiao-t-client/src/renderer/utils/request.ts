@@ -3,6 +3,7 @@ import router from '../router'
 import store from '../store'
 import {ElMessage} from 'element-plus'
 
+console.log('process.env,',process.env)
 const serves = axios.create({
   baseURL: process.env.BASE_API,
   timeout: 10000,

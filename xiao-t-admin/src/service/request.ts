@@ -83,7 +83,6 @@ axios.interceptors.request.use(
 				})
 			}
 		}
-		console.log("config:", config)
 
 		return config
 	},

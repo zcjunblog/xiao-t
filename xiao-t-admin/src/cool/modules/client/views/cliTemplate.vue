@@ -195,7 +195,6 @@ export default defineComponent({
 						message: "仓库名称不能为空"
 					}
 				},
-
 				{
 					label: "分支名称",
 					prop: "branch",
@@ -237,12 +236,13 @@ export default defineComponent({
 			},
 			columns: [
 				{
-					label: "名称",
-					prop: "name"
+					label: "模板名称",
+					prop: "name",
+					minWidth: 150
 				},
 				{
 					prop: "type",
-					label: "类型",
+					label: "模板类型",
 					minWidth: 120,
 					dict: [
 						{
@@ -259,7 +259,8 @@ export default defineComponent({
 				},
 				{
 					label: "仓库地址",
-					prop: "url"
+					prop: "url",
+					minWidth: 180
 				},
 				{
 					label: "克隆地址",
@@ -267,19 +268,20 @@ export default defineComponent({
 				},
 				{
 					label: "相关描述",
-					prop: "desc"
+					prop: "desc",
+					minWidth: 180
 				},
 				{
 					label: "host",
 					prop: "host"
 				},
 				{
-					label: "用户名",
+					label: "仓库作者",
 					prop: "userName"
 				},
 
 				{
-					label: "仓库作者",
+					label: "仓库名称",
 					prop: "repo"
 				},
 				{
@@ -289,7 +291,8 @@ export default defineComponent({
 				{
 					label: "创建时间",
 					prop: "createTime",
-					sortable: "true"
+					sortable: "true",
+					minWidth: 140
 				},
 				{
 					// 操作栏
@@ -302,7 +305,6 @@ export default defineComponent({
 
 		// crud 加载
 		function onLoad({ ctx, app }: CrudLoad) {
-			console.log("service.client.cli", service.client.cli)
 			// 绑定 service
 			ctx.service(service.client.cli).done()
 			app.refresh()
@@ -310,8 +312,9 @@ export default defineComponent({
 
 		// 提交钩子
 		function onUpsertSubmit(_: boolean, data: any, { next }: any) {
+			delete data.createTime
+			delete data.updateTime
 			console.log(data)
-
 			next({
 				...data
 			})
