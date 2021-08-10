@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 93,
+            "activePatchIndex": 124,
             "patches": [
                 {
                     "date": 1628060007937,
@@ -380,6 +380,130 @@
                 {
                     "date": 1628490444496,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -235,15 +235,15 @@\n \t\t\t\t}\n \t\t\t},\n \t\t\tcolumns: [\n \t\t\t\t{\n-\t\t\t\t\tlabel: \"名称\",\n+\t\t\t\t\tlabel: \"模板名称\",\n \t\t\t\t\tprop: \"name\",\n \t\t\t\t\tminWidth: 150\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tprop: \"type\",\n-\t\t\t\t\tlabel: \"类型\",\n+\t\t\t\t\tlabel: \"模板类型\",\n \t\t\t\t\tminWidth: 120,\n \t\t\t\t\tdict: [\n \t\t\t\t\t\t{\n \t\t\t\t\t\t\tlabel: \"移动\",\n@@ -275,14 +275,14 @@\n \t\t\t\t\tlabel: \"host\",\n \t\t\t\t\tprop: \"host\"\n \t\t\t\t},\n \t\t\t\t{\n-\t\t\t\t\tlabel: \"用户名\",\n+\t\t\t\t\tlabel: \"仓库作者\",\n \t\t\t\t\tprop: \"userName\"\n \t\t\t\t},\n \n \t\t\t\t{\n-\t\t\t\t\tlabel: \"仓库作者\",\n+\t\t\t\t\tlabel: \"仓库名称\",\n \t\t\t\t\tprop: \"repo\"\n \t\t\t\t},\n \t\t\t\t{\n \t\t\t\t\tlabel: \"分支名称\",\n@@ -304,9 +304,8 @@\n \t\t})\n \n \t\t// crud 加载\n \t\tfunction onLoad({ ctx, app }: CrudLoad) {\n-\t\t\tconsole.log(\"service.client.cli\", service.client.cli)\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cli).done()\n \t\t\tapp.refresh()\n \t\t}\n"
+                },
+                {
+                    "date": 1628490868492,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,11 @@\n \t\t</el-row>\n \n \t\t<el-row>\n \t\t\t<!-- 数据表格 -->\n-\t\t\t<cl-table :ref=\"setRefs('table')\" v-bind=\"table\" />\n+\t\t\t<cl-table :ref=\"setRefs('table')\" v-bind=\"table\">\n+\t\t\t\t<template #column-name=\"{ scope }\"> {{ scope.row.name }}，你好 </template>\n+\t\t\t</cl-table>\n \t\t</el-row>\n \n \t\t<el-row type=\"flex\">\n \t\t\t<cl-flex1 />\n"
+                },
+                {
+                    "date": 1628490902566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n \n \t\t<el-row>\n \t\t\t<!-- 数据表格 -->\n \t\t\t<cl-table :ref=\"setRefs('table')\" v-bind=\"table\">\n-\t\t\t\t<template #column-name=\"{ scope }\"> {{ scope.row.name }}，你好 </template>\n+\t\t\t\t<!-- <template #column-name=\"{ scope }\"> {{ scope.row.name }}，你好 </template> -->\n \t\t\t</cl-table>\n \t\t</el-row>\n \n \t\t<el-row type=\"flex\">\n"
+                },
+                {
+                    "date": 1628491017452,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -247,16 +247,16 @@\n \t\t\t\t\tlabel: \"模板类型\",\n \t\t\t\t\tminWidth: 120,\n \t\t\t\t\tdict: [\n \t\t\t\t\t\t{\n-\t\t\t\t\t\t\tlabel: \"移动\",\n-\t\t\t\t\t\t\tvalue: 1,\n+\t\t\t\t\t\t\tlabel: \"移动端\",\n+\t\t\t\t\t\t\tvalue: \"mobile\",\n \t\t\t\t\t\t\ttype: \"success\"\n \t\t\t\t\t\t},\n \t\t\t\t\t\t{\n-\t\t\t\t\t\t\tlabel: \"PC\",\n-\t\t\t\t\t\t\tvalue: 0,\n-\t\t\t\t\t\t\ttype: \"danger\"\n+\t\t\t\t\t\t\tlabel: \"客户端\",\n+\t\t\t\t\t\t\tvalue: \"client\",\n+\t\t\t\t\t\t\ttype: \"success\"\n \t\t\t\t\t\t}\n \t\t\t\t\t]\n \t\t\t\t},\n \t\t\t\t{\n"
+                },
+                {
+                    "date": 1628491048825,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -249,9 +249,9 @@\n \t\t\t\t\tdict: [\n \t\t\t\t\t\t{\n \t\t\t\t\t\t\tlabel: \"移动端\",\n \t\t\t\t\t\t\tvalue: \"mobile\",\n-\t\t\t\t\t\t\ttype: \"success\"\n+\t\t\t\t\t\t\ttype: \"primary\"\n \t\t\t\t\t\t},\n \t\t\t\t\t\t{\n \t\t\t\t\t\t\tlabel: \"客户端\",\n \t\t\t\t\t\t\tvalue: \"client\",\n"
+                },
+                {
+                    "date": 1628491151541,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -255,8 +255,18 @@\n \t\t\t\t\t\t{\n \t\t\t\t\t\t\tlabel: \"客户端\",\n \t\t\t\t\t\t\tvalue: \"client\",\n \t\t\t\t\t\t\ttype: \"success\"\n+\t\t\t\t\t\t},\n+\t\t\t\t\t\t{\n+\t\t\t\t\t\t\tlabel: \"网页端\",\n+\t\t\t\t\t\t\tvalue: \"web\",\n+\t\t\t\t\t\t\ttype: \"info\"\n+\t\t\t\t\t\t},\n+\t\t\t\t\t\t{\n+\t\t\t\t\t\t\tlabel: \"服务端\",\n+\t\t\t\t\t\t\tvalue: \"server\",\n+\t\t\t\t\t\t\ttype: \"warning\"\n \t\t\t\t\t\t}\n \t\t\t\t\t]\n \t\t\t\t},\n \t\t\t\t{\n"
+                },
+                {
+                    "date": 1628491517196,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n \t\t\t<!-- 删除按钮 -->\n \t\t\t<cl-multi-delete-btn />\n \t\t\t<cl-flex1 />\n \t\t\t<!-- 关键字搜索 -->\n-\t\t\t<cl-search-key />\n+\t\t\t<cl-search-key placeholder=\"输入框架名称进行搜索\" />\n \t\t</el-row>\n \n \t\t<el-row>\n \t\t\t<!-- 数据表格 -->\n"
+                },
+                {
+                    "date": 1628491687329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,18 @@\n \t\t\t<cl-add-btn />\n \t\t\t<!-- 删除按钮 -->\n \t\t\t<cl-multi-delete-btn />\n \t\t\t<cl-flex1 />\n+\t\t\t<!-- 筛选组件 -->\n+\t\t\t<cl-filter label=\"适用平台\">\n+\t\t\t\t<el-select size=\"mini\" v-model=\"form.status\">\n+\t\t\t\t\t<el-option value=\"\" label=\"全部\" />\n+\t\t\t\t\t<el-option value=\"mobile\" label=\"移动端\" />\n+\t\t\t\t\t<el-option value=\"client\" label=\"客户端\" />\n+\t\t\t\t\t<el-option value=\"web\" label=\"网页端\" />\n+\t\t\t\t\t<el-option value=\"server\" label=\"服务端\" />\n+\t\t\t\t</el-select>\n+\t\t\t</cl-filter>\n \t\t\t<!-- 关键字搜索 -->\n \t\t\t<cl-search-key placeholder=\"输入框架名称进行搜索\" />\n \t\t</el-row>\n \n"
+                },
+                {
+                    "date": 1628491811081,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n \t\t\t<cl-multi-delete-btn />\n \t\t\t<cl-flex1 />\n \t\t\t<!-- 筛选组件 -->\n \t\t\t<cl-filter label=\"适用平台\">\n-\t\t\t\t<el-select size=\"mini\" v-model=\"form.status\">\n+\t\t\t\t<el-select size=\"mini\" v-model=\"upsert.type\">\n \t\t\t\t\t<el-option value=\"\" label=\"全部\" />\n \t\t\t\t\t<el-option value=\"mobile\" label=\"移动端\" />\n \t\t\t\t\t<el-option value=\"client\" label=\"客户端\" />\n \t\t\t\t\t<el-option value=\"web\" label=\"网页端\" />\n"
+                },
+                {
+                    "date": 1628492276718,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n \t\t\t<cl-multi-delete-btn />\n \t\t\t<cl-flex1 />\n \t\t\t<!-- 筛选组件 -->\n \t\t\t<cl-filter label=\"适用平台\">\n-\t\t\t\t<el-select size=\"mini\" v-model=\"upsert.type\">\n+\t\t\t\t<el-select size=\"mini\" v-model=\"form.type\">\n \t\t\t\t\t<el-option value=\"\" label=\"全部\" />\n \t\t\t\t\t<el-option value=\"mobile\" label=\"移动端\" />\n \t\t\t\t\t<el-option value=\"client\" label=\"客户端\" />\n \t\t\t\t\t<el-option value=\"web\" label=\"网页端\" />\n@@ -51,9 +51,9 @@\n \tsetup() {\n \t\tconst { refs, setRefs } = useRefs()\n \t\t// 请求服务\n \t\tconst service = inject<any>(\"service\")\n-\n+\t\tconst state: any = reactive({})\n \t\t// 新增、编辑配置\n \t\tconst upsert = reactive<Upsert>({\n \t\t\titems: [\n \t\t\t\t{\n"
+                },
+                {
+                    "date": 1628492330524,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n \t</cl-crud>\n </template>\n \n <script lang=\"ts\">\n-import { defineComponent, inject, reactive } from \"vue\"\n+import { toRefs, defineComponent, inject, reactive } from \"vue\"\n import { CrudLoad, Upsert, Table } from \"cl-admin-crud-vue3/types\"\n import { useRefs } from \"/@/core\"\n import { ElMessage } from \"element-plus\"\n \n@@ -347,9 +347,10 @@\n \t\t\tsetRefs,\n \t\t\tupsert,\n \t\t\ttable,\n \t\t\tonLoad,\n-\t\t\tonUpsertSubmit\n+\t\t\tonUpsertSubmit,\n+\t\t\t...toRefs(state)\n \t\t}\n \t}\n })\n </script>\n"
+                },
+                {
+                    "date": 1628492347818,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,13 @@\n \tsetup() {\n \t\tconst { refs, setRefs } = useRefs()\n \t\t// 请求服务\n \t\tconst service = inject<any>(\"service\")\n-\t\tconst state: any = reactive({})\n+\t\tconst state: any = reactive({\n+\t\t\tform: {\n+\t\t\t\ttype: \"\"\n+\t\t\t}\n+\t\t})\n \t\t// 新增、编辑配置\n \t\tconst upsert = reactive<Upsert>({\n \t\t\titems: [\n \t\t\t\t{\n"
+                },
+                {
+                    "date": 1628492685459,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n \t\t\t<!-- 删除按钮 -->\n \t\t\t<cl-multi-delete-btn />\n \t\t\t<cl-flex1 />\n \t\t\t<!-- 筛选组件 -->\n-\t\t\t<cl-filter label=\"适用平台\">\n+\t\t\t<cl-filter label=\"适用平台\" @onSearch=\"onFilterSearch\">\n \t\t\t\t<el-select size=\"mini\" v-model=\"form.type\">\n \t\t\t\t\t<el-option value=\"\" label=\"全部\" />\n \t\t\t\t\t<el-option value=\"mobile\" label=\"移动端\" />\n \t\t\t\t\t<el-option value=\"client\" label=\"客户端\" />\n@@ -333,8 +333,12 @@\n \t\tfunction onLoad({ ctx, app }: CrudLoad) {\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cli).done()\n \t\t\tapp.refresh()\n+\t\t}\t\t\n+\t\tfunction onFilterSearch(form, { next }) {\n+\t\tpage: 1,\t\t// 页码置为1\n+\t...form, \t\t// 绑定的表单值\n \t\t}\n \n \t\t// 提交钩子\n \t\tfunction onUpsertSubmit(_: boolean, data: any, { next }: any) {\n"
+                },
+                {
+                    "date": 1628492740016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -333,13 +333,10 @@\n \t\tfunction onLoad({ ctx, app }: CrudLoad) {\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cli).done()\n \t\t\tapp.refresh()\n-\t\t}\t\t\n-\t\tfunction onFilterSearch(form, { next }) {\n-\t\tpage: 1,\t\t// 页码置为1\n-\t...form, \t\t// 绑定的表单值\n \t\t}\n+\t\tfunction onFilterSearch(form, { next }) {}\n \n \t\t// 提交钩子\n \t\tfunction onUpsertSubmit(_: boolean, data: any, { next }: any) {\n \t\t\tdelete data.createTime\n@@ -356,8 +353,9 @@\n \t\t\tupsert,\n \t\t\ttable,\n \t\t\tonLoad,\n \t\t\tonUpsertSubmit,\n+\t\t\tonFilterSearch,\n \t\t\t...toRefs(state)\n \t\t}\n \t}\n })\n"
+                },
+                {
+                    "date": 1628492746141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -334,9 +334,9 @@\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cli).done()\n \t\t\tapp.refresh()\n \t\t}\n-\t\tfunction onFilterSearch(form, { next }) {}\n+\t\tfunction onFilterSearch(e) {}\n \n \t\t// 提交钩子\n \t\tfunction onUpsertSubmit(_: boolean, data: any, { next }: any) {\n \t\t\tdelete data.createTime\n"
+                },
+                {
+                    "date": 1628492758051,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -334,9 +334,11 @@\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cli).done()\n \t\t\tapp.refresh()\n \t\t}\n-\t\tfunction onFilterSearch(e) {}\n+\t\tfunction onFilterSearch(e) {\n+\t\t\tconsole.log(e)\n+\t\t}\n \n \t\t// 提交钩子\n \t\tfunction onUpsertSubmit(_: boolean, data: any, { next }: any) {\n \t\t\tdelete data.createTime\n"
+                },
+                {
+                    "date": 1628493218819,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,10 +8,10 @@\n \t\t\t<!-- 删除按钮 -->\n \t\t\t<cl-multi-delete-btn />\n \t\t\t<cl-flex1 />\n \t\t\t<!-- 筛选组件 -->\n-\t\t\t<cl-filter label=\"适用平台\" @onSearch=\"onFilterSearch\">\n-\t\t\t\t<el-select size=\"mini\" v-model=\"form.type\">\n+\t\t\t<cl-filter label=\"适用平台\">\n+\t\t\t\t<el-select size=\"mini\" @change=\"onFilterSearch\" v-model=\"form.type\">\n \t\t\t\t\t<el-option value=\"\" label=\"全部\" />\n \t\t\t\t\t<el-option value=\"mobile\" label=\"移动端\" />\n \t\t\t\t\t<el-option value=\"client\" label=\"客户端\" />\n \t\t\t\t\t<el-option value=\"web\" label=\"网页端\" />\n"
+                },
+                {
+                    "date": 1628493449004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -334,10 +334,11 @@\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cli).done()\n \t\t\tapp.refresh()\n \t\t}\n-\t\tfunction onFilterSearch(e) {\n+\t\tfunction onFilterSearch(e: any) {\n \t\t\tconsole.log(e)\n+\t\t\trefs.value.crud.refresh({ type: e })\n \t\t}\n \n \t\t// 提交钩子\n \t\tfunction onUpsertSubmit(_: boolean, data: any, { next }: any) {\n"
+                },
+                {
+                    "date": 1628493527973,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -336,9 +336,11 @@\n \t\t\tapp.refresh()\n \t\t}\n \t\tfunction onFilterSearch(e: any) {\n \t\t\tconsole.log(e)\n-\t\t\trefs.value.crud.refresh({ type: e })\n+\t\t\tif (e) {\n+\t\t\t\trefs.value.crud.refresh({ type: e })\n+\t\t\t}\n \t\t}\n \n \t\t// 提交钩子\n \t\tfunction onUpsertSubmit(_: boolean, data: any, { next }: any) {\n"
+                },
+                {
+                    "date": 1628493608531,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -336,11 +336,13 @@\n \t\t\tapp.refresh()\n \t\t}\n \t\tfunction onFilterSearch(e: any) {\n \t\t\tconsole.log(e)\n+\t\t\tlet params: any = {}\n \t\t\tif (e) {\n-\t\t\t\trefs.value.crud.refresh({ type: e })\n+\t\t\t\tparams.type = e\n \t\t\t}\n+\t\t\trefs.value.crud.refresh(params)\n \t\t}\n \n \t\t// 提交钩子\n \t\tfunction onUpsertSubmit(_: boolean, data: any, { next }: any) {\n"
+                },
+                {
+                    "date": 1628493848377,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,18 +7,8 @@\n \t\t\t<cl-add-btn />\n \t\t\t<!-- 删除按钮 -->\n \t\t\t<cl-multi-delete-btn />\n \t\t\t<cl-flex1 />\n-\t\t\t<!-- 筛选组件 -->\n-\t\t\t<cl-filter label=\"适用平台\">\n-\t\t\t\t<el-select size=\"mini\" @change=\"onFilterSearch\" v-model=\"form.type\">\n-\t\t\t\t\t<el-option value=\"\" label=\"全部\" />\n-\t\t\t\t\t<el-option value=\"mobile\" label=\"移动端\" />\n-\t\t\t\t\t<el-option value=\"client\" label=\"客户端\" />\n-\t\t\t\t\t<el-option value=\"web\" label=\"网页端\" />\n-\t\t\t\t\t<el-option value=\"server\" label=\"服务端\" />\n-\t\t\t\t</el-select>\n-\t\t\t</cl-filter>\n \t\t\t<!-- 关键字搜索 -->\n \t\t\t<cl-search-key placeholder=\"输入框架名称进行搜索\" />\n \t\t</el-row>\n \n@@ -334,16 +324,8 @@\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cli).done()\n \t\t\tapp.refresh()\n \t\t}\n-\t\tfunction onFilterSearch(e: any) {\n-\t\t\tconsole.log(e)\n-\t\t\tlet params: any = {}\n-\t\t\tif (e) {\n-\t\t\t\tparams.type = e\n-\t\t\t}\n-\t\t\trefs.value.crud.refresh(params)\n-\t\t}\n \n \t\t// 提交钩子\n \t\tfunction onUpsertSubmit(_: boolean, data: any, { next }: any) {\n \t\t\tdelete data.createTime\n@@ -360,9 +342,8 @@\n \t\t\tupsert,\n \t\t\ttable,\n \t\t\tonLoad,\n \t\t\tonUpsertSubmit,\n-\t\t\tonFilterSearch,\n \t\t\t...toRefs(state)\n \t\t}\n \t}\n })\n"
+                },
+                {
+                    "date": 1628493960471,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,24 @@\n <template>\n-\t<cl-crud :ref=\"setRefs('crud')\" @load=\"onLoad\">\n+\t<cl-crud :ref=\"setRefs('crud')\" @load=\"onLoad\" @refresh=\"onRefresh\">\n \t\t<el-row type=\"flex\" align=\"middle\">\n \t\t\t<!-- 刷新按钮 -->\n \t\t\t<cl-refresh-btn />\n \t\t\t<!-- 新增按钮 -->\n \t\t\t<cl-add-btn />\n \t\t\t<!-- 删除按钮 -->\n \t\t\t<cl-multi-delete-btn />\n \t\t\t<cl-flex1 />\n+\t\t\t<!-- 筛选组件 -->\n+\t\t\t<cl-filter label=\"适用平台\">\n+\t\t\t\t<el-select size=\"mini\" @change=\"onFilterSearch\" v-model=\"form.type\">\n+\t\t\t\t\t<el-option value=\"\" label=\"全部\" />\n+\t\t\t\t\t<el-option value=\"mobile\" label=\"移动端\" />\n+\t\t\t\t\t<el-option value=\"client\" label=\"客户端\" />\n+\t\t\t\t\t<el-option value=\"web\" label=\"网页端\" />\n+\t\t\t\t\t<el-option value=\"server\" label=\"服务端\" />\n+\t\t\t\t</el-select>\n+\t\t\t</cl-filter>\n \t\t\t<!-- 关键字搜索 -->\n \t\t\t<cl-search-key placeholder=\"输入框架名称进行搜索\" />\n \t\t</el-row>\n \n@@ -324,8 +334,22 @@\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cli).done()\n \t\t\tapp.refresh()\n \t\t}\n+\t\tfunction onRefresh(params, { next, done, render }) {\n+\t\t\t// params 是每次请求的参数\n+\t\t\t// next(params) 是继续往下执行 page 的请求\n+\t\t\t// done() 完成请求，关闭loading\n+\t\t\t// render(list, pagination) 渲染列表及分页信息\n+\t\t}\n+\t\tfunction onFilterSearch(e: any) {\n+\t\t\tconsole.log(e)\n+\t\t\tlet params: any = {}\n+\t\t\tif (e) {\n+\t\t\t\tparams.type = e\n+\t\t\t}\n+\t\t\trefs.value.crud.refresh(params)\n+\t\t}\n \n \t\t// 提交钩子\n \t\tfunction onUpsertSubmit(_: boolean, data: any, { next }: any) {\n \t\t\tdelete data.createTime\n@@ -342,8 +366,9 @@\n \t\t\tupsert,\n \t\t\ttable,\n \t\t\tonLoad,\n \t\t\tonUpsertSubmit,\n+\t\t\tonFilterSearch,\n \t\t\t...toRefs(state)\n \t\t}\n \t}\n })\n"
+                },
+                {
+                    "date": 1628493967335,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -367,8 +367,9 @@\n \t\t\ttable,\n \t\t\tonLoad,\n \t\t\tonUpsertSubmit,\n \t\t\tonFilterSearch,\n+\t\t\tonRefresh,\n \t\t\t...toRefs(state)\n \t\t}\n \t}\n })\n"
+                },
+                {
+                    "date": 1628493997839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -339,8 +339,9 @@\n \t\t\t// params 是每次请求的参数\n \t\t\t// next(params) 是继续往下执行 page 的请求\n \t\t\t// done() 完成请求，关闭loading\n \t\t\t// render(list, pagination) 渲染列表及分页信息\n+\t\t\tconsole.log(params)\n \t\t}\n \t\tfunction onFilterSearch(e: any) {\n \t\t\tconsole.log(e)\n \t\t\tlet params: any = {}\n"
+                },
+                {
+                    "date": 1628494006881,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -334,9 +334,9 @@\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cli).done()\n \t\t\tapp.refresh()\n \t\t}\n-\t\tfunction onRefresh(params, { next, done, render }) {\n+\t\tfunction onRefresh(params: any, { next, done, render }: any) {\n \t\t\t// params 是每次请求的参数\n \t\t\t// next(params) 是继续往下执行 page 的请求\n \t\t\t// done() 完成请求，关闭loading\n \t\t\t// render(list, pagination) 渲染列表及分页信息\n"
+                },
+                {
+                    "date": 1628494132083,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -340,8 +340,11 @@\n \t\t\t// next(params) 是继续往下执行 page 的请求\n \t\t\t// done() 完成请求，关闭loading\n \t\t\t// render(list, pagination) 渲染列表及分页信息\n \t\t\tconsole.log(params)\n+\t\t\tif (state.form.type) {\n+\t\t\t\tparams.type = state.form.type\n+\t\t\t}\n \t\t}\n \t\tfunction onFilterSearch(e: any) {\n \t\t\tconsole.log(e)\n \t\t\tlet params: any = {}\n"
+                },
+                {
+                    "date": 1628494149510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -343,8 +343,9 @@\n \t\t\tconsole.log(params)\n \t\t\tif (state.form.type) {\n \t\t\t\tparams.type = state.form.type\n \t\t\t}\n+\t\t\tnext(params)\n \t\t}\n \t\tfunction onFilterSearch(e: any) {\n \t\t\tconsole.log(e)\n \t\t\tlet params: any = {}\n"
+                },
+                {
+                    "date": 1628494200813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -345,15 +345,11 @@\n \t\t\t\tparams.type = state.form.type\n \t\t\t}\n \t\t\tnext(params)\n \t\t}\n-\t\tfunction onFilterSearch(e: any) {\n-\t\t\tconsole.log(e)\n-\t\t\tlet params: any = {}\n-\t\t\tif (e) {\n-\t\t\t\tparams.type = e\n-\t\t\t}\n-\t\t\trefs.value.crud.refresh(params)\n+\t\tfunction onFilterSearch() {\n+\t\t\tconsole.log(state.form.type)\n+\t\t\trefs.value.crud.refresh()\n \t\t}\n \n \t\t// 提交钩子\n \t\tfunction onUpsertSubmit(_: boolean, data: any, { next }: any) {\n"
+                },
+                {
+                    "date": 1628494419268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \t\t\t\t\t<el-option value=\"server\" label=\"服务端\" />\n \t\t\t\t</el-select>\n \t\t\t</cl-filter>\n \t\t\t<!-- 关键字搜索 -->\n-\t\t\t<cl-search-key placeholder=\"输入框架名称进行搜索\" />\n+\t\t\t<cl-search-key @change=\"onSearchKeyChange\" placeholder=\"输入框架名称进行搜索\" />\n \t\t</el-row>\n \n \t\t<el-row>\n \t\t\t<!-- 数据表格 -->\n@@ -349,8 +349,12 @@\n \t\tfunction onFilterSearch() {\n \t\t\tconsole.log(state.form.type)\n \t\t\trefs.value.crud.refresh()\n \t\t}\n+\t\tfunction onSearchKeyChange(e) {\n+\t\t\tconsole.log(e)\n+\t\t\t// refs.value.crud.refresh()\n+\t\t}\n \n \t\t// 提交钩子\n \t\tfunction onUpsertSubmit(_: boolean, data: any, { next }: any) {\n \t\t\tdelete data.createTime\n@@ -368,8 +372,9 @@\n \t\t\ttable,\n \t\t\tonLoad,\n \t\t\tonUpsertSubmit,\n \t\t\tonFilterSearch,\n+\t\t\tonSearchKeyChange,\n \t\t\tonRefresh,\n \t\t\t...toRefs(state)\n \t\t}\n \t}\n"
+                },
+                {
+                    "date": 1628495382066,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -334,9 +334,9 @@\n \t\t\t// 绑定 service\n \t\t\tctx.service(service.client.cli).done()\n \t\t\tapp.refresh()\n \t\t}\n-\t\tfunction onRefresh(params: any, { next, done, render }: any) {\n+\t\tfunction onRefresh(params: any, { next }: any) {\n \t\t\t// params 是每次请求的参数\n \t\t\t// next(params) 是继续往下执行 page 的请求\n \t\t\t// done() 完成请求，关闭loading\n \t\t\t// render(list, pagination) 渲染列表及分页信息\n"
+                },
+                {
+                    "date": 1628495416061,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -337,10 +337,8 @@\n \t\t}\n \t\tfunction onRefresh(params: any, { next }: any) {\n \t\t\t// params 是每次请求的参数\n \t\t\t// next(params) 是继续往下执行 page 的请求\n-\t\t\t// done() 完成请求，关闭loading\n-\t\t\t// render(list, pagination) 渲染列表及分页信息\n \t\t\tconsole.log(params)\n \t\t\tif (state.form.type) {\n \t\t\t\tparams.type = state.form.type\n \t\t\t}\n"
+                },
+                {
+                    "date": 1628495432988,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n \t\t\t\t\t<el-option value=\"server\" label=\"服务端\" />\n \t\t\t\t</el-select>\n \t\t\t</cl-filter>\n \t\t\t<!-- 关键字搜索 -->\n-\t\t\t<cl-search-key @change=\"onSearchKeyChange\" placeholder=\"输入框架名称进行搜索\" />\n+\t\t\t<cl-search-key placeholder=\"输入框架名称进行搜索\" />\n \t\t</el-row>\n \n \t\t<el-row>\n \t\t\t<!-- 数据表格 -->\n@@ -347,12 +347,8 @@\n \t\tfunction onFilterSearch() {\n \t\t\tconsole.log(state.form.type)\n \t\t\trefs.value.crud.refresh()\n \t\t}\n-\t\tfunction onSearchKeyChange(e) {\n-\t\t\tconsole.log(e)\n-\t\t\t// refs.value.crud.refresh()\n-\t\t}\n \n \t\t// 提交钩子\n \t\tfunction onUpsertSubmit(_: boolean, data: any, { next }: any) {\n \t\t\tdelete data.createTime\n@@ -370,9 +366,8 @@\n \t\t\ttable,\n \t\t\tonLoad,\n \t\t\tonUpsertSubmit,\n \t\t\tonFilterSearch,\n-\t\t\tonSearchKeyChange,\n \t\t\tonRefresh,\n \t\t\t...toRefs(state)\n \t\t}\n \t}\n"
                 }
             ],
             "date": 1628060007937,

@@ -1,5 +1,5 @@
 <template>
-	<cl-crud :ref="setRefs('crud')" @load="onLoad">
+	<cl-crud :ref="setRefs('crud')" @load="onLoad" @refresh="onRefresh">
 		<el-row type="flex" align="middle">
 			<!-- 刷新按钮 -->
 			<cl-refresh-btn />
@@ -8,13 +8,25 @@
 			<!-- 删除按钮 -->
 			<cl-multi-delete-btn />
 			<cl-flex1 />
+			<!-- 筛选组件 -->
+			<cl-filter label="适用平台">
+				<el-select size="mini" @change="onFilterSearch" v-model="form.type">
+					<el-option value="" label="全部" />
+					<el-option value="mobile" label="移动端" />
+					<el-option value="client" label="客户端" />
+					<el-option value="web" label="网页端" />
+					<el-option value="server" label="服务端" />
+				</el-select>
+			</cl-filter>
 			<!-- 关键字搜索 -->
-			<cl-search-key />
+			<cl-search-key placeholder="输入框架名称进行搜索" />
 		</el-row>
 
 		<el-row>
 			<!-- 数据表格 -->
-			<cl-table :ref="setRefs('table')" v-bind="table" />
+			<cl-table :ref="setRefs('table')" v-bind="table">
+				<!-- <template #column-name="{ scope }"> {{ scope.row.name }}，你好 </template> -->
+			</cl-table>
 		</el-row>
 
 		<el-row type="flex">
@@ -29,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, reactive } from "vue"
+import { toRefs, defineComponent, inject, reactive } from "vue"
 import { CrudLoad, Upsert, Table } from "cl-admin-crud-vue3/types"
 import { useRefs } from "/@/core"
 import { ElMessage } from "element-plus"
@@ -40,7 +52,11 @@ export default defineComponent({
 		const { refs, setRefs } = useRefs()
 		// 请求服务
 		const service = inject<any>("service")
-
+		const state: any = reactive({
+			form: {
+				type: ""
+			}
+		})
 		// 新增、编辑配置
 		const upsert = reactive<Upsert>({
 			items: [
@@ -246,14 +262,24 @@ export default defineComponent({
 					minWidth: 120,
 					dict: [
 						{
-							label: "移动",
-							value: 1,
+							label: "移动端",
+							value: "mobile",
+							type: "primary"
+						},
+						{
+							label: "客户端",
+							value: "client",
 							type: "success"
 						},
 						{
-							label: "PC",
-							value: 0,
-							type: "danger"
+							label: "网页端",
+							value: "web",
+							type: "info"
+						},
+						{
+							label: "服务端",
+							value: "server",
+							type: "warning"
 						}
 					]
 				},
@@ -309,6 +335,19 @@ export default defineComponent({
 			ctx.service(service.client.cli).done()
 			app.refresh()
 		}
+		function onRefresh(params: any, { next }: any) {
+			// params 是每次请求的参数
+			// next(params) 是继续往下执行 page 的请求
+			console.log(params)
+			if (state.form.type) {
+				params.type = state.form.type
+			}
+			next(params)
+		}
+		function onFilterSearch() {
+			console.log(state.form.type)
+			refs.value.crud.refresh()
+		}
 
 		// 提交钩子
 		function onUpsertSubmit(_: boolean, data: any, { next }: any) {
@@ -326,7 +365,10 @@ export default defineComponent({
 			upsert,
 			table,
 			onLoad,
-			onUpsertSubmit
+			onUpsertSubmit,
+			onFilterSearch,
+			onRefresh,
+			...toRefs(state)
 		}
 	}
 })

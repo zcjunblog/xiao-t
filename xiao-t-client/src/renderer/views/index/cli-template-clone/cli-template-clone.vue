@@ -99,32 +99,7 @@
                         key: 'server'
                     },
                 ],
-                cliTemps: [
-                    {
-                        name: 'Uni-app + uView',
-                        desc: '内置了Vuex,uView,小程序更新机制,各种常用函数....',
-                        type: 'mobile',
-                        url: 'https://github.com/zcjunblog/uni-app-uView-template',
-                        remote: {
-                            host: 'github.com',
-                            userName: 'zcjunblog',
-                            repo: 'uni-app-uView-template',
-                            branch: 'master'
-                        }
-                    },
-                    {
-                        name: 'Electron + Vite + Element',
-                        desc: '基于vue3+vite+electron13的模板',
-                        type: 'client',
-                        url: 'https://github.com/zcjunblog/vue-electron-element-template',
-                        remote: {
-                            host: 'github.com',
-                            userName: 'zcjunblog',
-                            repo: 'vue-electron-element-template',
-                            branch: 'master'
-                        }
-                    },
-                ],
+                cliTemps: [],
                 rules: {
                     name: [
                         {required: true, message: '请输入项目名称', trigger: 'blur'},
@@ -158,7 +133,7 @@
                     if (fs.existsSync(projectPath)) return ElMessage.warning('警告: 文件已存在!');
                     state.loading = true;
                     try {
-                        let remote = state.curItemProject.remote
+                        let remote = state.curItemProject
                         console.log(`${remote.host}:${remote.userName}/${remote.repo}#${remote.branch}`, projectPath, { clone: true })
                         await gitClone(`${remote.host}:${remote.userName}/${remote.repo}#${remote.branch}`, projectPath, { clone: true }).catch(err=>{
                             console.log(err)
@@ -207,6 +182,7 @@
                 // 获取cli列表
                 getCliTemplateList().then(res=>{
                     console.log(res)
+                    state.cliTemps = res.data
                 })
             });
             return {

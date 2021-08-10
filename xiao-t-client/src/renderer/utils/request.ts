@@ -3,7 +3,6 @@ import router from '../router'
 import store from '../store'
 import {ElMessage} from 'element-plus'
 
-console.log('process.env,',process.env)
 const serves = axios.create({
   baseURL: process.env.BASE_API,
   timeout: 10000,
@@ -15,10 +14,8 @@ const serves = axios.create({
 // 设置请求发送之前的拦截器
 serves.interceptors.request.use(config => {
   // 统一在http请求的header都加上toke
-  console.log()
-  const token = store.state.vuex_token;
-  token && (config.headers.Authorization = `Bearer ${token}`);
-  console.log(store.state.vuex_token)
+  // const token = store.state.vuex_token;
+  // token && (config.headers.Authorization = `Bearer ${token}`);
   return config
 }, err => Promise.reject(err))
 
