@@ -3,16 +3,22 @@ import { BaseEntity } from 'midwayjs-cool-core';
 import { Column } from 'typeorm';
 
 /**
- * 商品
+ * 插件
  */
-@EntityModel('client_cli_template')
-export class ClientCliEntity extends BaseEntity {
+@EntityModel('client_plugin')
+export class ClientPluginEntity extends BaseEntity {
   @Column({ comment: '插件名称', default: null })
   name: string;
 
   @Column({ comment: '插件描述', default: null })
   desc: string;
 
-  @Column({ comment: '图标', default: null })
-  type: string;
+  @Column({ comment: '图标链接', default: null })
+  icon: string;
+
+  @Column({ comment: '下载地址', default: null })
+  downloadUrl: string;
+
+  @Column({ comment: '配置文件', default: null })
+  pluginJson: string;
 }

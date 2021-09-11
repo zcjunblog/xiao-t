@@ -23,6 +23,7 @@
                                 <div class="right">
                                     <div class="name">{{plugin.pluginName}}</div>
                                     <div class="desc">{{plugin.description}}</div>
+                                    <!--下载插件-->
                                     <div class="download" v-if="!myPluginNames.includes(plugin.pluginName)">
                                         <span @click.stop="handleDownload(plugin)" class="icon iconfont">&#xe601;</span>
                                     </div>
@@ -67,22 +68,26 @@
 </template>
 
 <script lang="ts">
-    import {toRefs, reactive, onMounted, computed} from 'vue';
+    import {toRefs, reactive, onMounted, computed, getCurrentInstance} from 'vue';
     import empty from "@renderer/assets/empty.png";
     import offline from "@renderer/assets/offline.png";
     import {useStore} from "vuex";
     import {openBrowser} from "@renderer/utils";
     import marked from 'marked';
-    const { ipcRenderer } = require("electron");
+    const { ipcRenderer,remote } = require("electron");
     const rendererMD = new marked.Renderer();
     const fs = require('fs');
     const path = require("path");
     import { useRouter } from 'vue-router'
+    import { getPluginList } from '@renderer/api/plugin';
+    import {ElMessage} from "element-plus";
+    import {getPluginFileByUrl} from '@renderer/utils'
 
     export default {
         setup: function () {
             const store = useStore()
             const router = useRouter()
+            const { $m } = getCurrentInstance().appContext.config.globalProperties
             const state: any = reactive({
                 online: navigator.onLine,
                 activeKey: 'my',
@@ -132,22 +137,23 @@
                 console.time()
                 //fs.readdir读取文件目录
                 fs.readdirSync(pathName).forEach((item, index) => {
-                    let filePath = path.join(pathName, item)
-                    let pluginDetail;
-                    try {
-                        pluginDetail = JSON.parse(fs.readFileSync(filePath + '\\plugin.json', 'utf-8'))
-                        delete pluginDetail.features
-                    }catch (e) {
-                        console.log(e)
-                        pluginDetail = null
+                    if (item  !=='_download'){
+                        let filePath = path.join(pathName, item)
+                        let pluginDetail;
+                        try {
+                            pluginDetail = JSON.parse(fs.readFileSync(filePath + '\\plugin.json', 'utf-8'))
+                            delete pluginDetail.features
+                        }catch (e) {
+                            console.log(e)
+                            pluginDetail = null
+                        }
+                        if (pluginDetail){
+                            pluginDetail.sourceFile = filePath
+                            pluginDetail.icon = path.join(filePath, pluginDetail.logo)
+                            state.myPluginNames.push(pluginDetail.pluginName)
+                            plugins.push(pluginDetail)
+                        }
                     }
-                    if (pluginDetail){
-                        pluginDetail.sourceFile = filePath
-                        pluginDetail.icon = path.join(filePath, pluginDetail.logo)
-                        state.myPluginNames.push(pluginDetail.pluginName)
-                        plugins.push(pluginDetail)
-                    }
-
                 })
                 console.timeEnd();
                 return plugins
@@ -157,10 +163,49 @@
                 state.myPlugins = readDirectory(store.state.vuex_pluginDir)// 由用户选择的插件目录
             }
             const getPlugins = () => {
-
+                getPluginList().then(res=>{
+                    console.log(res)
+                    res.data.forEach(item=>{
+                        let pluginDetail;
+                        try {
+                            pluginDetail = JSON.parse(item.pluginJson)
+                            delete pluginDetail.features
+                        }catch (e) {
+                            console.log(e)
+                            pluginDetail = null
+                        }
+                        if (pluginDetail){
+                            pluginDetail.icon = item.icon
+                            pluginDetail.downloadUrl = item.downloadUrl
+                            state.plugins.push(pluginDetail)
+                        }
+                    })
+                })
             }
             const handleDownload = (e) => {
+                if (!store.state.vuex_pluginDir){
+                    ElMessage.error('请先设置插件目录')
+                    // 让用户选择
+                    remote.dialog
+                        .showOpenDialog({
+                            title: '选择插件目录',
+                            properties: ['openDirectory', 'createDirectory']
+                        })
+                        .then(({filePaths}) => {
+                            console.log('filePaths',filePaths)
+                            if (filePaths[0]) {
+                                $m.vuex('vuex_pluginDir',filePaths[0])
+                            }
+                        });
+                    return
+                }
+                // 下载到插件目录下的_download目录
                 console.log(e)
+                state.loading = true
+                getPluginFileByUrl(e.downloadUrl,e.pluginName + '.zip',store.state.vuex_pluginDir + '\\_download').then(()=>{
+                    console.log(112)
+                    state.loading = false
+                })
             }
             const showPluginDetail = (e) => {
                 if (state.activeKey === 'my'){
@@ -263,8 +308,9 @@
                 .desc {
                     color: #ADADAD;
                     font-size: 12px;
-                    @include text-overflow(1);
+                    @include text-overflow(2);
                     font-weight: 100;
+                    width: 85%;
                 }
 
                 .download {

@@ -75,35 +75,19 @@ export default defineComponent({
                 {label:'快速重启', accelerator: 'F5', role: 'reload'},
                 {label:'插件目录',click : ()=>{
                         // 判断用户是否已选择插件目录
-                        if (store.state.vuex_pluginDir){
-                            // 直接打开
-                            remote.dialog
-                                .showOpenDialog({
-                                    title: '更改插件目录',
-                                    defaultPath: store.state.vuex_pluginDir,
-                                    // filters:(),
-                                    properties: ['openDirectory', 'createDirectory']
-                                })
-                                .then(({filePaths}) => {
-                                    console.log('filePaths',filePaths)
-                                    if (filePaths[0]) {
-
-                                    }
-                                });
-                        }else {
-                            // 让用户选择
-                            remote.dialog
-                                .showOpenDialog({
-                                    title: '选择插件目录',
-                                    properties: ['openDirectory', 'createDirectory']
-                                })
-                                .then(({filePaths}) => {
-                                    console.log('filePaths',filePaths)
-                                    if (filePaths[0]) {
-
-                                    }
-                                });
-                        }
+                        remote.dialog
+                            .showOpenDialog({
+                                title: '更改插件目录',
+                                defaultPath: store.state.vuex_pluginDir ? store.state.vuex_pluginDir : '',
+                                // filters:(),
+                                properties: ['openDirectory', 'createDirectory']
+                            })
+                            .then(({filePaths}) => {
+                                console.log('filePaths',filePaths)
+                                if (filePaths[0]) {
+                                    $m.vuex('vuex_pluginDir',filePaths[0])
+                                }
+                            });
                     }},
 
             ]);

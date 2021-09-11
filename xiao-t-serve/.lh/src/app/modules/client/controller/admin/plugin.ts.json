@@ -1,0 +1,22 @@
+{
+    "sourceFile": "src/app/modules/client/controller/admin/plugin.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1628585800517,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1628585810102,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,24 +1,24 @@\n-import { Provide } from '@midwayjs/decorator';\r\n-import { CoolController, BaseController } from 'midwayjs-cool-core';\r\n-import { ClientPluginEntity } from '../../entity/plugin';\r\n-\r\n-/**\r\n- * 插件\r\n- */\r\n-@Provide()\r\n-@CoolController({\r\n-  api: ['info', 'list', 'page', 'add', 'delete', 'update'],\r\n-  entity: ClientPluginEntity,\r\n-  // 分页查询配置\r\n-  pageQueryOp: {\r\n-    // 让name字段支持模糊查询\r\n-    keyWordLikeFields: ['name'],\r\n-    // 让type字段支持筛选\r\n-    fieldEq: ['type'],\r\n-  },\r\n-})\r\n-export class ClientPluginAdminController extends BaseController {\r\n-  /**\r\n-   * 其他接口\r\n-   */\r\n-}\r\n+import { Provide } from '@midwayjs/decorator';\n+import { CoolController, BaseController } from 'midwayjs-cool-core';\n+import { ClientPluginEntity } from '../../entity/plugin';\n+\n+/**\n+ * 插件\n+ */\n+@Provide()\n+@CoolController({\n+  api: ['info', 'list', 'page', 'add', 'delete', 'update'],\n+  entity: ClientPluginEntity,\n+  // 分页查询配置\n+  pageQueryOp: {\n+    // 让name字段支持模糊查询\n+    keyWordLikeFields: ['name'],\n+    // 让type字段支持筛选\n+    fieldEq: ['type'],\n+  },\n+})\n+export class ClientPluginAdminController extends BaseController {\n+  /**\n+   * 其他接口\n+   */\n+}\n"
+                }
+            ],
+            "date": 1628585800517,
+            "name": "Commit-0",
+            "content": "import { Provide } from '@midwayjs/decorator';\r\nimport { CoolController, BaseController } from 'midwayjs-cool-core';\r\nimport { ClientPluginEntity } from '../../entity/plugin';\r\n\r\n/**\r\n * 插件\r\n */\r\n@Provide()\r\n@CoolController({\r\n  api: ['info', 'list', 'page', 'add', 'delete', 'update'],\r\n  entity: ClientPluginEntity,\r\n  // 分页查询配置\r\n  pageQueryOp: {\r\n    // 让name字段支持模糊查询\r\n    keyWordLikeFields: ['name'],\r\n    // 让type字段支持筛选\r\n    fieldEq: ['type'],\r\n  },\r\n})\r\nexport class ClientPluginAdminController extends BaseController {\r\n  /**\r\n   * 其他接口\r\n   */\r\n}\r\n"
+        }
+    ]
+}

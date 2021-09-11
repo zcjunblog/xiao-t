@@ -181,7 +181,6 @@
             onMounted(() => {
                 // 获取cli列表
                 getCliTemplateList().then(res=>{
-                    console.log(res)
                     state.cliTemps = res.data
                 })
             });
