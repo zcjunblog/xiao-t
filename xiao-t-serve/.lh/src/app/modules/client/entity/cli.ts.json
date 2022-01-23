@@ -1,0 +1,26 @@
+{
+    "sourceFile": "src/app/modules/client/entity/cli.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1628064763048,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1628490096359,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,8 @@\n   git: string;\n \n   @Column({ comment: '仓库地址', default: null })\n   url: string;\n-  // 需要序列化处理\n-  @Column({ comment: '分支参数', default: null })\n-  remote: string;\n+\n+  @Column({ comment: '仓库作者', default: null })\n+  userName: string;\n }\n"
+                },
+                {
+                    "date": 1628490278903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,5 +23,14 @@\n   url: string;\n \n   @Column({ comment: '仓库作者', default: null })\n   userName: string;\n+\n+  @Column({ comment: '仓库名称', default: null })\n+  repo: string;\n+\n+  @Column({ comment: '分支作者', default: null })\n+  branch: string;\n+\n+  @Column({ comment: '托管平台', default: null })\n+  host: string;\n }\n"
+                }
+            ],
+            "date": 1628064763048,
+            "name": "Commit-0",
+            "content": "import { EntityModel } from '@midwayjs/orm';\nimport { BaseEntity } from 'midwayjs-cool-core';\nimport { Column } from 'typeorm';\n\n/**\n * 商品\n */\n@EntityModel('client_cli_template')\nexport class ClientCliEntity extends BaseEntity {\n  @Column({ comment: '项目名称', default: null })\n  name: string;\n\n  @Column({ comment: '项目描述', default: null })\n  desc: string;\n\n  @Column({ comment: '适用平台', default: null })\n  type: string;\n\n  @Column({ comment: '克隆地址', default: null })\n  git: string;\n\n  @Column({ comment: '仓库地址', default: null })\n  url: string;\n  // 需要序列化处理\n  @Column({ comment: '分支参数', default: null })\n  remote: string;\n}\n"
+        }
+    ]
+}

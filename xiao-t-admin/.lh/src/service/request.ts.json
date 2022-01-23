@@ -1,0 +1,38 @@
+{
+    "sourceFile": "src/service/request.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1628065614166,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1628065620938,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,8 +41,9 @@\n \t\t\t}\n \t\t}\n \t\tconsole.log(\"==================\")\n \t\tconsole.log(\"isDev\", isDev)\n+\t\tconsole.log(\"config\", config)\n \t\tconsole.log(\"==================\")\n \t\t// 请求信息\n \t\tif (isDev) {\n \t\t\tconsole.group(config.url)\n"
+                },
+                {
+                    "date": 1628065677264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,12 +39,8 @@\n \t\t\tif (!ignore.NProgress.some((e) => config.url.includes(e))) {\n \t\t\t\tNProgress.start()\n \t\t\t}\n \t\t}\n-\t\tconsole.log(\"==================\")\n-\t\tconsole.log(\"isDev\", isDev)\n-\t\tconsole.log(\"config\", config)\n-\t\tconsole.log(\"==================\")\n \t\t// 请求信息\n \t\tif (isDev) {\n \t\t\tconsole.group(config.url)\n \t\t\tconsole.log(\"method:\", config.method)\n"
+                },
+                {
+                    "date": 1628066124050,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,9 @@\n \t\t\tif (!ignore.NProgress.some((e) => config.url.includes(e))) {\n \t\t\t\tNProgress.start()\n \t\t\t}\n \t\t}\n+\t\tconsole.log(\"config:\", config)\n \t\t// 请求信息\n \t\tif (isDev) {\n \t\t\tconsole.group(config.url)\n \t\t\tconsole.log(\"method:\", config.method)\n"
+                },
+                {
+                    "date": 1628066195431,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,8 @@\n \t\t\tif (!ignore.NProgress.some((e) => config.url.includes(e))) {\n \t\t\t\tNProgress.start()\n \t\t\t}\n \t\t}\n-\t\tconsole.log(\"config:\", config)\n \t\t// 请求信息\n \t\tif (isDev) {\n \t\t\tconsole.group(config.url)\n \t\t\tconsole.log(\"method:\", config.method)\n@@ -83,8 +82,9 @@\n \t\t\t\t\t})\n \t\t\t\t})\n \t\t\t}\n \t\t}\n+\t\tconsole.log(\"config:\", config)\n \n \t\treturn config\n \t},\n \t(error) => {\n"
+                },
+                {
+                    "date": 1628489883350,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -82,9 +82,8 @@\n \t\t\t\t\t})\n \t\t\t\t})\n \t\t\t}\n \t\t}\n-\t\tconsole.log(\"config:\", config)\n \n \t\treturn config\n \t},\n \t(error) => {\n"
+                }
+            ],
+            "date": 1628065614166,
+            "name": "Commit-0",
+            "content": "import axios from \"axios\"\nimport store from \"/@/store\"\nimport { isDev } from \"/@/config/env\"\nimport { href } from \"/@/core/utils\"\nimport storage from \"/@/core/utils/storage\"\nimport NProgress from \"nprogress\"\nimport \"nprogress/nprogress.css\"\nimport { ElMessage } from \"element-plus\"\n\naxios.defaults.timeout = 30000\naxios.defaults.withCredentials = true\n\nNProgress.configure({\n\tshowSpinner: false\n})\n\n// 请求队列\nlet requests: Array<Function> = []\n\n// Token 是否刷新中\nlet isRefreshing = false\n\n// 忽略规则\nconst ignore = {\n\tNProgress: [\"/sys/info/record\"],\n\ttoken: [\"/login\", \"/captcha\"]\n}\n\n// Request\naxios.interceptors.request.use(\n\t(config: any) => {\n\t\tconst token = store.getters.token || \"\"\n\n\t\tif (config.url) {\n\t\t\tif (!ignore.token.some((e) => config.url.includes(e))) {\n\t\t\t\tconfig.headers[\"Authorization\"] = token\n\t\t\t}\n\n\t\t\tif (!ignore.NProgress.some((e) => config.url.includes(e))) {\n\t\t\t\tNProgress.start()\n\t\t\t}\n\t\t}\n\t\tconsole.log(\"==================\")\n\t\tconsole.log(\"isDev\", isDev)\n\t\tconsole.log(\"==================\")\n\t\t// 请求信息\n\t\tif (isDev) {\n\t\t\tconsole.group(config.url)\n\t\t\tconsole.log(\"method:\", config.method)\n\t\t\tconsole.table(\"data:\", config.method == \"get\" ? config.params : config.data)\n\t\t\tconsole.groupEnd()\n\t\t}\n\n\t\t// 验证 token\n\t\tif (token) {\n\t\t\tif (config.url.includes(\"refreshToken\")) {\n\t\t\t\treturn config\n\t\t\t}\n\n\t\t\t// 判断 token 是否过期\n\t\t\tif (storage.isExpired(\"token\")) {\n\t\t\t\t// 判断 refreshToken 是否过期\n\t\t\t\tif (storage.isExpired(\"refreshToken\")) {\n\t\t\t\t\tstore.dispatch(\"userRemove\")\n\t\t\t\t\treturn href(\"/login\")\n\t\t\t\t}\n\n\t\t\t\t// 是否在刷新中\n\t\t\t\tif (!isRefreshing) {\n\t\t\t\t\tisRefreshing = true\n\n\t\t\t\t\tstore.dispatch(\"refreshToken\").then((token: string) => {\n\t\t\t\t\t\trequests.forEach((cb) => cb(token))\n\t\t\t\t\t\trequests = []\n\t\t\t\t\t\tisRefreshing = false\n\t\t\t\t\t})\n\t\t\t\t}\n\n\t\t\t\treturn new Promise((resolve) => {\n\t\t\t\t\t// 继续请求\n\t\t\t\t\trequests.push((token: string) => {\n\t\t\t\t\t\t// 重新设置 token\n\t\t\t\t\t\tconfig.headers[\"Authorization\"] = token\n\t\t\t\t\t\tresolve(config)\n\t\t\t\t\t})\n\t\t\t\t})\n\t\t\t}\n\t\t}\n\n\t\treturn config\n\t},\n\t(error) => {\n\t\treturn Promise.reject(error)\n\t}\n)\n\n// Response\naxios.interceptors.response.use(\n\t(res) => {\n\t\tNProgress.done()\n\t\tconst { code, data, message } = res.data\n\n\t\tif (!res.data) {\n\t\t\treturn res\n\t\t}\n\n\t\tswitch (code) {\n\t\t\tcase 1000:\n\t\t\t\treturn data\n\t\t\tdefault:\n\t\t\t\treturn Promise.reject(message)\n\t\t}\n\t},\n\tasync (error) => {\n\t\tNProgress.done()\n\n\t\tif (error.response) {\n\t\t\tconst { status, config } = error.response\n\n\t\t\tswitch (status) {\n\t\t\t\tcase 401:\n\t\t\t\t\tawait store.dispatch(\"userRemove\")\n\t\t\t\t\thref(\"/login\")\n\t\t\t\t\tbreak\n\n\t\t\t\tcase 403:\n\t\t\t\t\tif (isDev) {\n\t\t\t\t\t\tElMessage.error(`${config.url} 无权限访问！！`)\n\t\t\t\t\t} else {\n\t\t\t\t\t\thref(\"/403\")\n\t\t\t\t\t}\n\t\t\t\t\tbreak\n\n\t\t\t\tcase 404:\n\t\t\t\t\tbreak\n\n\t\t\t\tcase 500:\n\t\t\t\t\tif (!isDev) {\n\t\t\t\t\t\thref(\"/500\")\n\t\t\t\t\t}\n\t\t\t\t\tbreak\n\n\t\t\t\tcase 502:\n\t\t\t\t\tif (isDev) {\n\t\t\t\t\t\tElMessage.error(`${config.url} 服务异常！！`)\n\t\t\t\t\t} else {\n\t\t\t\t\t\thref(\"/502\")\n\t\t\t\t\t}\n\t\t\t\t\tbreak\n\n\t\t\t\tdefault:\n\t\t\t\t\tconsole.error(status, config.url)\n\t\t\t}\n\t\t}\n\n\t\treturn Promise.reject(error.message)\n\t}\n)\n\nexport default axios\n"
+        }
+    ]
+}

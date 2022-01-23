@@ -1,0 +1,18 @@
+{
+    "sourceFile": "src/app/modules/client/controller/app/plugin.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1628585854455,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1628585854455,
+            "name": "Commit-0",
+            "content": "import { Provide } from '@midwayjs/decorator';\nimport { CoolController, BaseController } from 'midwayjs-cool-core';\nimport { ClientPluginEntity } from '../../entity/plugin';\n\n/**\n * 商品\n */\n@Provide()\n@CoolController({\n  api: ['info', 'list', 'page'],\n  entity: ClientPluginEntity,\n})\nexport class ClientPluginAppController extends BaseController {\n  /**\n   * 其他接口\n   */\n}\n"
+        }
+    ]
+}

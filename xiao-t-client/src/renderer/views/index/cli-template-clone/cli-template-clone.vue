@@ -166,8 +166,8 @@
                     state.loading = true;
                     try {
                         let remote = state.curItemProject.remote
-                        console.log(`${remote.host}:${remote.userName}/${remote.repo}#${remote.branch}`, projectPath, { clone: true })
-                        await gitClone(`${remote.host}:${remote.userName}/${remote.repo}#${remote.branch}`, projectPath, { clone: true }).catch(err=>{
+                        console.log(`${remote.host}:${remote.userName}/${remote.repo}#${remote.branch}`, projectPath, {  })
+                        await gitClone(`${remote.host}:${remote.userName}/${remote.repo}#${remote.branch}`, projectPath, {  }).catch(err=>{
                             console.log(err)
                             ElMessage.error('模板下载失败');
                         });

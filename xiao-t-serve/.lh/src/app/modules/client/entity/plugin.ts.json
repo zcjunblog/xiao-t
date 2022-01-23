@@ -1,0 +1,54 @@
+{
+    "sourceFile": "src/app/modules/client/entity/plugin.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1628496802928,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1628496808796,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,18 +1,18 @@\n-import { EntityModel } from '@midwayjs/orm';\r\n-import { BaseEntity } from 'midwayjs-cool-core';\r\n-import { Column } from 'typeorm';\r\n-\r\n-/**\r\n- * 商品\r\n- */\r\n-@EntityModel('client_cli_template')\r\n-export class ClientCliEntity extends BaseEntity {\r\n-  @Column({ comment: '插件名称', default: null })\r\n-  name: string;\r\n-\r\n-  @Column({ comment: '插件描述', default: null })\r\n-  desc: string;\r\n-\r\n-  @Column({ comment: '图标', default: null })\r\n-  type: string;\r\n-}\r\n+import { EntityModel } from '@midwayjs/orm';\n+import { BaseEntity } from 'midwayjs-cool-core';\n+import { Column } from 'typeorm';\n+\n+/**\n+ * 商品\n+ */\n+@EntityModel('client_cli_template')\n+export class ClientCliEntity extends BaseEntity {\n+  @Column({ comment: '插件名称', default: null })\n+  name: string;\n+\n+  @Column({ comment: '插件描述', default: null })\n+  desc: string;\n+\n+  @Column({ comment: '图标', default: null })\n+  type: string;\n+}\n"
+                },
+                {
+                    "date": 1628582374507,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,18 +1,18 @@\n-import { EntityModel } from '@midwayjs/orm';\n-import { BaseEntity } from 'midwayjs-cool-core';\n-import { Column } from 'typeorm';\n+// import { EntityModel } from '@midwayjs/orm';\n+// import { BaseEntity } from 'midwayjs-cool-core';\n+// import { Column } from 'typeorm';\n \n-/**\n- * 商品\n- */\n-@EntityModel('client_cli_template')\n-export class ClientCliEntity extends BaseEntity {\n-  @Column({ comment: '插件名称', default: null })\n-  name: string;\n+// /**\n+//  * 商品\n+//  */\n+// @EntityModel('client_cli_template')\n+// export class ClientCliEntity extends BaseEntity {\n+//   @Column({ comment: '插件名称', default: null })\n+//   name: string;\n \n-  @Column({ comment: '插件描述', default: null })\n-  desc: string;\n+//   @Column({ comment: '插件描述', default: null })\n+//   desc: string;\n \n-  @Column({ comment: '图标', default: null })\n-  type: string;\n-}\n+//   @Column({ comment: '图标', default: null })\n+//   type: string;\n+// }\n"
+                },
+                {
+                    "date": 1628584594533,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,18 +1,18 @@\n-// import { EntityModel } from '@midwayjs/orm';\n-// import { BaseEntity } from 'midwayjs-cool-core';\n-// import { Column } from 'typeorm';\n+import { EntityModel } from '@midwayjs/orm';\n+import { BaseEntity } from 'midwayjs-cool-core';\n+import { Column } from 'typeorm';\n \n-// /**\n-//  * 商品\n-//  */\n-// @EntityModel('client_cli_template')\n-// export class ClientCliEntity extends BaseEntity {\n-//   @Column({ comment: '插件名称', default: null })\n-//   name: string;\n+/**\n+ * 商品\n+ */\n+@EntityModel('client_plugin')\n+export class ClientCliEntity extends BaseEntity {\n+  @Column({ comment: '插件名称', default: null })\n+  name: string;\n \n-//   @Column({ comment: '插件描述', default: null })\n-//   desc: string;\n+  @Column({ comment: '插件描述', default: null })\n+  desc: string;\n \n-//   @Column({ comment: '图标', default: null })\n-//   type: string;\n-// }\n+  @Column({ comment: '图标', default: null })\n+  type: string;\n+}\n"
+                },
+                {
+                    "date": 1628584705011,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n /**\n  * 商品\n  */\n @EntityModel('client_plugin')\n-export class ClientCliEntity extends BaseEntity {\n+export class ClientPluginEntity extends BaseEntity {\n   @Column({ comment: '插件名称', default: null })\n   name: string;\n \n   @Column({ comment: '插件描述', default: null })\n"
+                },
+                {
+                    "date": 1628585403466,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n import { BaseEntity } from 'midwayjs-cool-core';\n import { Column } from 'typeorm';\n \n /**\n- * 商品\n+ * 插件\n  */\n @EntityModel('client_plugin')\n export class ClientPluginEntity extends BaseEntity {\n   @Column({ comment: '插件名称', default: null })\n"
+                },
+                {
+                    "date": 1628585572708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,7 +12,10 @@\n \n   @Column({ comment: '插件描述', default: null })\n   desc: string;\n \n-  @Column({ comment: '图标', default: null })\n+  @Column({ comment: '图标链接', default: null })\n   type: string;\n+\n+  @Column({ comment: '下载地址', default: null })\n+  downloadUrl: string;\n }\n"
+                },
+                {
+                    "date": 1628586350825,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n   @Column({ comment: '插件描述', default: null })\n   desc: string;\n \n   @Column({ comment: '图标链接', default: null })\n-  type: string;\n+  icon: string;\n \n   @Column({ comment: '下载地址', default: null })\n   downloadUrl: string;\n }\n"
+                },
+                {
+                    "date": 1628587804191,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,5 +17,8 @@\n   icon: string;\n \n   @Column({ comment: '下载地址', default: null })\n   downloadUrl: string;\n+\n+  @Column({ comment: 'plugin.json', default: null })\n+  pluginJson: string;\n }\n"
+                },
+                {
+                    "date": 1628587815285,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,7 +18,7 @@\n \n   @Column({ comment: '下载地址', default: null })\n   downloadUrl: string;\n \n-  @Column({ comment: 'plugin.json', default: null })\n+  @Column({ comment: '配置文件', default: null })\n   pluginJson: string;\n }\n"
+                }
+            ],
+            "date": 1628496802928,
+            "name": "Commit-0",
+            "content": "import { EntityModel } from '@midwayjs/orm';\r\nimport { BaseEntity } from 'midwayjs-cool-core';\r\nimport { Column } from 'typeorm';\r\n\r\n/**\r\n * 商品\r\n */\r\n@EntityModel('client_cli_template')\r\nexport class ClientCliEntity extends BaseEntity {\r\n  @Column({ comment: '插件名称', default: null })\r\n  name: string;\r\n\r\n  @Column({ comment: '插件描述', default: null })\r\n  desc: string;\r\n\r\n  @Column({ comment: '图标', default: null })\r\n  type: string;\r\n}\r\n"
+        }
+    ]
+}
